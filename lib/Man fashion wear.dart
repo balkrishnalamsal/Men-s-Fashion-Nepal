@@ -5,6 +5,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+import 'Categories.dart';
 
 class Fashion extends StatefulWidget {
   @override
@@ -142,6 +143,10 @@ class _FashionState extends State<Fashion> {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Categori(category:contact["Value"])));
+
+                                  },
                                   onLongPress: (){
 
                                     showCupertinoModalPopup(
@@ -296,12 +301,15 @@ class _FashionState extends State<Fashion> {
                         child: Padding(
                           padding: const EdgeInsets.all(3.0),
                           child: Center(
-                            child: Text(
-                              "View more",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 10,
-                                fontWeight: FontWeight.normal,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1),
+                              child: Text(
+                                "View more",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                ),
                               ),
                             ),
                           ),
@@ -359,12 +367,15 @@ class _FashionState extends State<Fashion> {
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Center(
-                            child: Text(
-                              "View More",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 10,
-                                fontWeight: FontWeight.normal,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1),
+                              child: Text(
+                                "View More",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                ),
                               ),
                             ),
                           ),

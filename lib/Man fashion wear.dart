@@ -1,5 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_controller.dart';
 
 class Fashion extends StatefulWidget {
   @override
@@ -43,21 +45,46 @@ class _FashionState extends State<Fashion> {
                     ],
                   )),
 
-              Container(
-                margin: EdgeInsets.all(10),
-                height: MediaQuery.of(context).size.height*0.28,
-                width: MediaQuery.of(context).size.width*9,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.redAccent,
-                    boxShadow: [BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(0,1),
-                        blurRadius: 2
-                    )]
+
+              CarouselSlider(items: [
+                Container(
+                  height: MediaQuery.of(context).size.height*0.28,
+                  width: MediaQuery.of(context).size.width*9,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.redAccent,
+                      boxShadow: [BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0,1),
+                          blurRadius: 2
+                      )]
+                  ),
+
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height*0.28,
+                  width: MediaQuery.of(context).size.width*9,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.green,
+                      boxShadow: [BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0,1),
+                          blurRadius: 2
+                      )]
+                  ),
+
                 ),
 
+              ], options:  CarouselOptions(
+                autoPlay: true,
+                enlargeCenterPage: true,
+                viewportFraction: 0.9,
+                aspectRatio: 2.0,
+                initialPage: 2,
               ),
+              ),
+
 
               Container(
                 height: 50,
@@ -237,11 +264,9 @@ class _FashionState extends State<Fashion> {
                       ),),
                     ),
 
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
+                     Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(5),
                             color: Colors.white,
                             boxShadow: [BoxShadow(
                                 color: Colors.grey,
@@ -250,14 +275,14 @@ class _FashionState extends State<Fashion> {
                             )]
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(3.0),
                           child: Center(
-                            child: Text("See More",style: TextStyle(color: Colors.deepOrangeAccent,fontWeight: FontWeight.normal,
+                            child: Text("View more",style: TextStyle(color: Colors.grey,fontSize:10,fontWeight: FontWeight.normal,
                             ),),
                           ),
                         ),
                       ),
-                    ),
+
 
 
                   ],
@@ -296,11 +321,9 @@ class _FashionState extends State<Fashion> {
                         ),),
                       ),
 
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
+                   Container(
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                               color: Colors.white,
                               boxShadow: [BoxShadow(
                                   color: Colors.grey,
@@ -311,12 +334,11 @@ class _FashionState extends State<Fashion> {
                           child: Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Center(
-                              child: Text("See More",style: TextStyle(color: Colors.deepOrangeAccent,fontWeight: FontWeight.normal,
+                              child: Text("View More",style: TextStyle(color: Colors.grey,fontSize: 10,fontWeight: FontWeight.normal,
                               ),),
                             ),
                           ),
                         ),
-                      ),
 
 
                     ],

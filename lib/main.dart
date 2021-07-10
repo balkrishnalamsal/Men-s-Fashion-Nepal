@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         systemNavigationBarColor: Colors.white,
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark,
-        statusBarColor: Colors.redAccent));
+        statusBarColor: Colors.white));
 
   Future.delayed(Duration(seconds: 3),(){
 

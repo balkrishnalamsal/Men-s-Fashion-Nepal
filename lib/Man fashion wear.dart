@@ -48,11 +48,15 @@ class _FashionState extends State<Fashion> {
 
               CarouselSlider(items: [
                 Container(
+                  margin: EdgeInsets.only(top: 5,bottom: 5),
                   height: MediaQuery.of(context).size.height*0.28,
-                  width: MediaQuery.of(context).size.width*9,
+                  width: MediaQuery.of(context).size.width*95,
                   decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("Assets/two.png"),
+                      fit: BoxFit.fill
+                    ),
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.redAccent,
                       boxShadow: [BoxShadow(
                           color: Colors.grey,
                           offset: Offset(0,1),
@@ -62,9 +66,14 @@ class _FashionState extends State<Fashion> {
 
                 ),
                 Container(
+                  margin: EdgeInsets.only(top: 5,bottom: 5),
                   height: MediaQuery.of(context).size.height*0.28,
-                  width: MediaQuery.of(context).size.width*9,
+                  width: MediaQuery.of(context).size.width*95,
                   decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("Assets/one.png"),
+                          fit: BoxFit.fill
+                      ),
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.green,
                       boxShadow: [BoxShadow(
@@ -249,6 +258,7 @@ class _FashionState extends State<Fashion> {
             Align(
                 alignment: Alignment.centerLeft,
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -305,7 +315,7 @@ class _FashionState extends State<Fashion> {
               ),
               Align(
                   alignment: Alignment.centerLeft,
-                  child: Row(
+                  child: Row(crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),

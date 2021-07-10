@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "739634893962",
+    "project_id": "menfashionnepal",
+    "storage_bucket": "menfashionnepal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739634893962:android:f15d259503dea7b59bc973",
+        "android_client_info": {
+          "package_name": "com.menfashionnepal.menfashionnepal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739634893962-eev97rvkl9q85mhdvkd1gtom98uijupb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKWqRKBgBMrN8nEKJmrUN4POn5nTVGDM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739634893962-eev97rvkl9q85mhdvkd1gtom98uijupb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

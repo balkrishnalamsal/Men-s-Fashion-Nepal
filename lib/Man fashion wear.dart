@@ -142,7 +142,7 @@ class _FashionState extends State<Fashion> {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: GestureDetector(
-                                  onTap: (){
+                                  onLongPress: (){
 
                                     showCupertinoModalPopup(
                                         context: context,

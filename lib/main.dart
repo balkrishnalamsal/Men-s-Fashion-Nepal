@@ -66,18 +66,11 @@ class _MyAppState extends State<MyApp> {
 
             Center(
                 child: Text(
-                  "Men's Fashion Nepal",
+                  "Men's Fashion Wear Nepal",
                   style:
                   TextStyle(color: Colors.black87, fontWeight: FontWeight.bold,fontSize: 20),
                 )),
 
-            Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Center(
-                    child: Text(
-                      "Join & Create",
-                      style: TextStyle(color: Colors.black),
-                    ))),
             Padding(
               padding: const EdgeInsets.only(top: 50),
               child: CircularProgressIndicator(

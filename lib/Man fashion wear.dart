@@ -1,10 +1,10 @@
-import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class Fashion extends StatefulWidget {
   @override
@@ -13,23 +13,25 @@ class Fashion extends StatefulWidget {
 
 class _FashionState extends State<Fashion> {
 
-
-  final _random = Random();
-
-
-
-
   TextEditingController? Categories;
-
-
    late Query reference;
-
+   late DatabaseReference valuee;
    value(){
      reference = FirebaseDatabase.instance.reference().child("Collection");
+     valuee = FirebaseDatabase.instance.reference().child("Collection");
      setState(() {
 
      });
    }
+
+   List list = [
+     Colors.red,Colors.blue,Colors.green,Colors.deepOrangeAccent,Colors.deepPurple,Colors.pink,Colors.amber,
+     Colors.red,Colors.blue,Colors.green,Colors.deepOrangeAccent,Colors.deepPurple,Colors.pink,Colors.amber,
+     Colors.red,Colors.blue,Colors.green,Colors.deepOrangeAccent,Colors.deepPurple,Colors.pink,Colors.amber,
+     Colors.red,Colors.blue,Colors.green,Colors.deepOrangeAccent,Colors.deepPurple,Colors.pink,Colors.amber,
+     Colors.red,Colors.blue,Colors.green,Colors.deepOrangeAccent,Colors.deepPurple,Colors.pink,Colors.amber,
+   ];
+
 
   @override
   void initState() {
@@ -139,22 +141,76 @@ class _FashionState extends State<Fashion> {
                               Map contact = snapshot.value;
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Color.fromARGB(_random.nextInt(256), _random.nextInt(256),
-                                            _random.nextInt(256), _random.nextInt(256)),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey,
-                                              offset: Offset(0,1),
-                                              blurRadius: 2)
-                                        ]),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(contact["Value"],
-                                          style: TextStyle(color: Colors.white)),
-                                    )),
+                                child: GestureDetector(
+                                  onTap: (){
+
+                                    showCupertinoModalPopup(
+                                        context: context,
+                                        builder: (BuildContext
+                                        context) =>
+                                            CupertinoActionSheet(
+                                              title: Text(
+                                                  "Men's Fashion Collection "),
+                                              actions: [
+                                                CupertinoActionSheetAction(
+                                                  child: Column(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .center,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                          const EdgeInsets.all(8.0),
+                                                          child:
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                            MainAxisAlignment.center,
+                                                            children: [
+                                                              GestureDetector(
+                                                                onTap: () {
+                                                                  valuee.child(contact["postid"]).remove();
+                                                                  Navigator.pop(context);
+                                                                },
+                                                                child: Row(
+                                                                  children: [
+                                                                    Icon(CupertinoIcons.delete),
+                                                                    const Text('Delete', style: TextStyle(fontSize: 16)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ]),
+                                                  onPressed:
+                                                      () {
+                                                  },
+                                                )
+                                              ],
+                                            ));
+
+
+
+
+
+                                  },
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color:list[index],
+                                        boxShadow: [BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0,1),
+                                          blurRadius: 2
+                                        )]
+                                         ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(contact["Value"],
+                                            style: TextStyle(color: Colors.white)),
+
+                                      )),
+                                ),
                               );
                             }),
                       ),
@@ -169,12 +225,14 @@ class _FashionState extends State<Fashion> {
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
                       onTap: () {
+                        String postid = Uuid().v4();
                         FirebaseDatabase.instance
                             .reference()
                             .child("Collection")
-                            .push()
+                            .child(postid)
                             .set({
                           "Value": Categories!.text,
+                          "postid":postid
                         }).whenComplete(() {
                           setState(() {
                             Categories!.clear();

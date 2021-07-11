@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'Upload Image.dart';
+
 class New extends StatefulWidget {
   String neww;
   New({required this.neww});
@@ -23,19 +25,24 @@ class _NewState extends State<New> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  neww,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    shadows: <Shadow>[
-                      Shadow(
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 1.0,
-                        color: Colors.grey,
-                      ),
-                    ],
+                child: GestureDetector(
+                  onLongPress: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Upload(imagecoming:neww)));
+                  },
+                  child: Text(
+                    neww,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(1.0, 1.0),
+                          blurRadius: 1.0,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

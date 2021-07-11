@@ -24,39 +24,40 @@ class _CategoriState extends State<Categori> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  category,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    shadows: <Shadow>[
-                      Shadow(
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 1.0,
-                        color: Colors.grey,
-                      ),
-                    ],
+                child: GestureDetector(
+                  onLongPress: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Upload(imagecoming:category)));
+                  },
+                  child: Text(
+                    category,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(1.0, 1.0),
+                          blurRadius: 1.0,
+                          color: Colors.grey,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-              GestureDetector(onLongPress: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Upload(image:category)));
-              },
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  height: MediaQuery.of(context).size.height * 0.28,
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(0, 1),
-                            blurRadius: 2)
-                      ]),
-                ),
+              Container(
+                margin: EdgeInsets.all(10),
+                height: MediaQuery.of(context).size.height * 0.28,
+                width: MediaQuery.of(context).size.width * 0.95,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0, 1),
+                          blurRadius: 2)
+                    ]),
               ),
 
             ],

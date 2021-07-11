@@ -4,8 +4,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:menfashionnepal/New%20Section.dart';
 import 'package:uuid/uuid.dart';
 import 'Categories.dart';
+import 'TrendsSection.dart';
 
 class Fashion extends StatefulWidget {
   @override
@@ -49,6 +51,7 @@ class _FashionState extends State<Fashion> {
           width: MediaQuery.of(context).size.width * 1,
           height: MediaQuery.of(context).size.height * 1,
           child: ListView(
+            shrinkWrap: true,
             children: [
               Align(
                   alignment: Alignment.centerLeft,
@@ -288,27 +291,32 @@ class _FashionState extends State<Fashion> {
                           ),
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(0, 1),
-                                  blurRadius: 2)
-                            ]),
-                        child: Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1),
-                              child: Text(
-                                "View more",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.normal,
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Trends(Trend:"Trends",)));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    offset: Offset(0, 1),
+                                    blurRadius: 2)
+                              ]),
+                          child: Padding(
+                            padding: const EdgeInsets.all(3.0),
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 1),
+                                child: Text(
+                                  "View more",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                                 ),
                               ),
                             ),
@@ -354,27 +362,34 @@ class _FashionState extends State<Fashion> {
                           ),
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(0, 1),
-                                  blurRadius: 2)
-                            ]),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1),
-                              child: Text(
-                                "View More",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.normal,
+                      GestureDetector(
+                        onTap: (){
+
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>New(neww:"New",)));
+
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    offset: Offset(0, 1),
+                                    blurRadius: 2)
+                              ]),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 1),
+                                child: Text(
+                                  "View More",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                                 ),
                               ),
                             ),
@@ -397,6 +412,12 @@ class _FashionState extends State<Fashion> {
                           blurRadius: 2)
                     ]),
               ),
+
+
+
+
+
+
             ],
           ),
         ),

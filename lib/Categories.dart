@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'Upload Image.dart';
 
 class Categori extends StatefulWidget {
   String category;
@@ -40,19 +40,23 @@ class _CategoriState extends State<Categori> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.all(10),
-                height: MediaQuery.of(context).size.height * 0.28,
-                width: MediaQuery.of(context).size.width * 0.95,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0, 1),
-                          blurRadius: 2)
-                    ]),
+              GestureDetector(onLongPress: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Upload(image:category)));
+              },
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  height: MediaQuery.of(context).size.height * 0.28,
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0, 1),
+                            blurRadius: 2)
+                      ]),
+                ),
               ),
 
             ],

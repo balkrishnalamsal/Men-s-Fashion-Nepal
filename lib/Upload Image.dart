@@ -25,14 +25,16 @@ class _UploadState extends State<Upload> {
   File ? crop;
   String ? loactionofimage;
   String ? name;
-  String ? value;
+  String ? value = "False";
   String ? imageUrl;
   File ? cropimage;
   FirebaseStorage storage = FirebaseStorage.instance;
+  String ? url;
 
   final picker = ImagePicker();
 
   getImage()async {
+
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       crop = (await ImageCropper.cropImage(
@@ -67,6 +69,7 @@ class _UploadState extends State<Upload> {
     var downloadUrl = await snapshot.ref.getDownloadURL();
     setState(() {
       imageUrl = downloadUrl;
+      url =squadcontroller!.text;
     });
     String post = Uuid().v4();
     FirebaseDatabase.instance
@@ -77,11 +80,27 @@ class _UploadState extends State<Upload> {
       "image": imageUrl,
       "post": post,
       "Time": ServerValue.timestamp,
+      "url":url
     }).whenComplete((){
 
-      setState(() {
-        value="False";
+      String post = Uuid().v4();
+      FirebaseDatabase.instance
+          .reference()
+          .child("allcategories")
+          .child(post)
+          .set({
+        "image": imageUrl,
+        "post": post,
+        "Time": ServerValue.timestamp,
+        "url":url
+      }).whenComplete((){
+
+        setState(() {
+          value="False";
+        });
+
       });
+
 
 
     });

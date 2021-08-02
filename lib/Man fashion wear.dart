@@ -1,9 +1,14 @@
 
+import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:menfashionnepal/New%20Section.dart';
 import 'package:uuid/uuid.dart';
 import 'Categories.dart';
@@ -16,16 +21,87 @@ class Fashion extends StatefulWidget {
 
 class _FashionState extends State<Fashion> {
 
+
+  File ? crop;
+  String ? loactionofimage;
+  String ? name;
+  String ? value = "False";
+  String ? imageUrl;
+  File ? cropimage;
+  FirebaseStorage storage = FirebaseStorage.instance;
+  String ? url;
+  late Query referencevalue;
+
+
+
+  final picker = ImagePicker();
+
+  VValue(){
+    reference = FirebaseDatabase.instance.reference().child("Collection");
+    valuee = FirebaseDatabase.instance.reference().child("Collection");
+    referencevalue = FirebaseDatabase.instance.reference().child("MensFeshion");
+    setState(() {
+
+    });
+  }
+
+
+  getImage()async {
+
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      crop = (await ImageCropper.cropImage(
+          sourcePath: pickedFile.path,
+          aspectRatio: CropAspectRatio(ratioX: 5, ratioY: 4),
+          compressQuality: 50,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: Colors.deepOrangeAccent,
+            toolbarTitle: "Crop",
+            statusBarColor: Colors.deepOrangeAccent,
+          )))!;
+      this.setState(() {
+        cropimage = crop;
+        Controluploading();
+      });
+    }
+  }
+
+  Controluploading() async {
+    if (cropimage == null) {
+      value = "False";
+      Fluttertoast.showToast(msg: "Please select image ");
+    }
+    String postid = Uuid().v4();
+
+    var snapshot = await storage
+        .ref()
+        .child("MainImage")
+        .child('$postid')
+        .putFile(cropimage!);
+    var downloadUrl = await snapshot.ref.getDownloadURL();
+    setState(() {
+      imageUrl = downloadUrl;
+    });
+    String post = Uuid().v4();
+    FirebaseDatabase.instance
+        .reference()
+        .child("MensFeshion")
+        .child(post)
+        .set({
+      "image": imageUrl,
+      "post": post,
+      "Time": ServerValue.timestamp,
+    });
+
+  }
   TextEditingController? Categories;
    late Query reference;
    late DatabaseReference valuee;
-   value(){
-     reference = FirebaseDatabase.instance.reference().child("Collection");
-     valuee = FirebaseDatabase.instance.reference().child("Collection");
-     setState(() {
 
-     });
-   }
+
 
    List list = [
      Colors.red,Colors.blue,Colors.green,Colors.deepOrangeAccent,Colors.deepPurple,Colors.pink,Colors.amber,
@@ -44,8 +120,9 @@ class _FashionState extends State<Fashion> {
 
   @override
   Widget build(BuildContext context) {
-    value();
+    VValue();
     return CupertinoPageScaffold(
+      backgroundColor: Colors.white,
       child: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width * 1,
@@ -59,19 +136,22 @@ class _FashionState extends State<Fashion> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Men's Fashion",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            shadows: <Shadow>[
-                              Shadow(
-                                offset: Offset(1.0, 1.0),
-                                blurRadius: 1.0,
-                                color: Colors.grey,
-                              ),
-                            ],
+                        child: GestureDetector(
+                          onLongPress:getImage,
+                          child: Text(
+                            "Men's Fashion",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              shadows: <Shadow>[
+                                Shadow(
+                                  offset: Offset(1.0, 1.0),
+                                  blurRadius: 1.0,
+                                  color: Colors.grey,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -79,46 +159,35 @@ class _FashionState extends State<Fashion> {
                   )),
               CarouselSlider(
                 items: [
-                  Container(
-                    margin: EdgeInsets.only(top: 5, bottom: 5),
-                    height: MediaQuery.of(context).size.height * 0.28,
-                    width: MediaQuery.of(context).size.width * 95,
+                FirebaseAnimatedList(query: referencevalue,
+                    itemBuilder: (BuildContext context,
+                    DataSnapshot snapshot,
+                    Animation<double> animation,
+                        int index){
+                  Map image = snapshot.value;
+                  return Container(
+                    height: MediaQuery.of(context).size.width*0.5,
+                    width: MediaQuery.of(context).size.width*0.8,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("Assets/two.png"),
-                            fit: BoxFit.fill),
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0, 1),
-                              blurRadius: 2)
-                        ]),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 5, bottom: 5),
-                    height: MediaQuery.of(context).size.height * 0.28,
-                    width: MediaQuery.of(context).size.width * 95,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("Assets/one.png"),
-                            fit: BoxFit.fill),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.green,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0, 1),
-                              blurRadius: 2)
-                        ]),
-                  ),
+                      borderRadius: BorderRadius.circular(5),
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: new NetworkImage(image["image"]),
+                      ),
+                    ),
+
+                  );
+
+                    }
+
+                ),
                 ],
                 options: CarouselOptions(
                   autoPlay: true,
                   enlargeCenterPage: true,
                   viewportFraction: 0.9,
                   aspectRatio: 2.0,
-                  initialPage: 2,
+                  initialPage: 0,
                 ),
               ),
               Container(

@@ -29,6 +29,7 @@ class _FashionState extends State<Fashion> {
   FirebaseStorage storage = FirebaseStorage.instance;
   String? url;
   late Query referencevalue;
+  String ? imageuploadnumber;
 
   final picker = ImagePicker();
 
@@ -183,17 +184,27 @@ class _FashionState extends State<Fashion> {
                             Animation<double> animation,
                             int index) {
                           Map image = snapshot.value;
-                          return Container(
-                            height:
-                                MediaQuery.of(context).size.height * 0.3,
-                            width:
-                                MediaQuery.of(context).size.width * 0.9,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: NetworkImage(image["$i"]),
+                          return GestureDetector(
+                            onTap: (){
+                              imageuploadnumber =i;
+                            },
+                            child: GestureDetector(
+                              onTap: (){
+                                debugPrint("pressed $i");
+                              },
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.3,
+                                width:
+                                    MediaQuery.of(context).size.width * 0.9,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(image["$i"]),
+                                  ),
+                                ),
                               ),
                             ),
                           );

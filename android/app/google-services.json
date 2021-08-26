@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "739634893962",
+    "firebase_url": "https://menfashionnepal-default-rtdb.firebaseio.com",
     "project_id": "menfashionnepal",
     "storage_bucket": "menfashionnepal.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "739634893962-tk9kfr3tlapfjfjo9bhheh1bpakrv2ub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.menfashionnepal.menfashionnepal",
+            "certificate_hash": "3b1089468133df3bcbbe24d484714ecb6fa93d91"
+          }
+        },
         {
           "client_id": "739634893962-eev97rvkl9q85mhdvkd1gtom98uijupb.apps.googleusercontent.com",
           "client_type": 3

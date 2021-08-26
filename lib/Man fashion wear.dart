@@ -6,10 +6,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'Data.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:menfashionnepal/New%20Section.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'Categories.dart';
 import 'TrendsSection.dart';
@@ -20,24 +22,23 @@ class Fashion extends StatefulWidget {
 }
 
 class _FashionState extends State<Fashion> {
-  File? crop;
-  String? loactionofimage;
-  String? name;
+  File ? crop;
   String? value = "False";
   String? imageUrl;
-  File? cropimage;
+  String? updatepostid;
+  File ? cropimage;
   FirebaseStorage storage = FirebaseStorage.instance;
   String? url;
-  late Query referencevalue;
-  String ? imageuploadnumber;
-
+  SharedPreferences ? preferences;
   final picker = ImagePicker();
+
+  List<DataComing> datalist=[];
 
   VValue() {
     reference = FirebaseDatabase.instance.reference().child("Collection");
     valuee = FirebaseDatabase.instance.reference().child("Collection");
-    referencevalue = FirebaseDatabase.instance.reference().child("MensFeshion");
-    setState(() {});
+    setState(() {
+    });
   }
 
   getImage() async {
@@ -80,11 +81,14 @@ class _FashionState extends State<Fashion> {
     });
     String post = Uuid().v4();
     FirebaseDatabase.instance.reference().child("MensFeshion").child(post).set({
-      "one": imageUrl,
-      "two": imageUrl,
-      "three": imageUrl,
+      "image": imageUrl,
+      "postid": post,
     });
   }
+
+
+
+
 
   TextEditingController? Categories;
   late Query reference;
@@ -132,7 +136,30 @@ class _FashionState extends State<Fashion> {
   void initState() {
     Categories = TextEditingController();
     super.initState();
-  }
+    DatabaseReference reference = FirebaseDatabase.instance.reference().child("MensFeshion");
+    reference.once().then((DataSnapshot snapshot){
+      datalist.clear();
+
+      var keys =snapshot.value.keys;
+      var values =snapshot.value;
+
+      for (var key in keys){
+        DataComing dataComing =new DataComing(
+          values [key]["image"],
+          values [key]["postid"],
+        );
+        datalist.add(dataComing);
+
+      }
+      setState(() {
+        //
+      });
+
+    }
+    );
+
+
+}
 
   @override
   Widget build(BuildContext context) {
@@ -172,55 +199,25 @@ class _FashionState extends State<Fashion> {
                 ],
               ),
             ),
-            CarouselSlider(
-              carouselController: CarouselController(),
-              items: ["one", "two", "three"].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return FirebaseAnimatedList(
-                        query: referencevalue,
-                        itemBuilder: (BuildContext context,
-                            DataSnapshot snapshot,
-                            Animation<double> animation,
-                            int index) {
-                          Map image = snapshot.value;
-                          return GestureDetector(
-                            onTap: (){
-                              imageuploadnumber =i;
-                            },
-                            child: GestureDetector(
-                              onTap: (){
-                                debugPrint("pressed $i");
-                              },
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.3,
-                                width:
-                                    MediaQuery.of(context).size.width * 0.9,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: NetworkImage(image["$i"]),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        });
-                  },
-                );
-              }).toList(),
-              options: CarouselOptions(
-                height: MediaQuery.of(context).size.height*0.3,
-                autoPlay: true,
-                enlargeCenterPage: true,
-                viewportFraction: 0.9,
-                aspectRatio: 2.0,
-                initialPage: 0,
-              ),
-            ),
+
+         Container(
+           height: 100,
+           width: 100,
+           child: ListView.builder(
+               itemCount: datalist.length,
+               itemBuilder: (_,index)
+           {
+               return Container(
+                 color: Colors.blue,
+                 height: 50,
+               width: 50,
+               child: Text(datalist[index].image.toString()),
+               );
+           }
+           ),
+         ),
+            
+
             Container(
               height: 50,
               width: MediaQuery.of(context).size.width * 1,
@@ -279,8 +276,8 @@ class _FashionState extends State<Fashion> {
                                                                 GestureDetector(
                                                                   onTap: () {
                                                                     valuee
-                                                                        .child(
-                                                                            contact["postid"])
+                                                                        .child(contact[
+                                                                            "postid"])
                                                                         .remove();
                                                                     Navigator.pop(
                                                                         context);
@@ -307,8 +304,7 @@ class _FashionState extends State<Fashion> {
                                 },
                                 child: Container(
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(10),
                                         color: list[index],
                                         boxShadow: [
                                           BoxShadow(
@@ -443,9 +439,7 @@ class _FashionState extends State<Fashion> {
                   color: Colors.redAccent,
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(0, 1),
-                        blurRadius: 2)
+                        color: Colors.grey, offset: Offset(0, 1), blurRadius: 2)
                   ]),
             ),
             Align(
@@ -519,9 +513,7 @@ class _FashionState extends State<Fashion> {
                   color: Colors.redAccent,
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(0, 1),
-                        blurRadius: 2)
+                        color: Colors.grey, offset: Offset(0, 1), blurRadius: 2)
                   ]),
             ),
           ],

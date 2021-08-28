@@ -178,7 +178,7 @@ class _FashionState extends State<Fashion> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -201,16 +201,24 @@ class _FashionState extends State<Fashion> {
                         ),
                       ),
                     ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Icon(CupertinoIcons.search_circle_fill,size: 40,color: Colors.blueGrey,),
+                    ),
                   ],
                 ),
               ),
+
+
               CarouselSlider(
                 carouselController: CarouselController(),
                 items: [0,1,2].map((i) {
                   return Builder(
                     builder: (BuildContext context) {
                       return ListView.builder(
-                        itemCount: datalist.length,
+                        shrinkWrap: true,
+                        itemCount:1,
                         itemBuilder: (_,index){
                           return GestureDetector(
                             onLongPress: (){
@@ -245,13 +253,13 @@ class _FashionState extends State<Fashion> {
                 options: CarouselOptions(
                   height: MediaQuery.of(context).size.height*0.3,
                   autoPlay: true,
+                  autoPlayAnimationDuration: Duration(seconds:2),
                   enlargeCenterPage: true,
                   viewportFraction: 0.9,
                   aspectRatio: 2.0,
                   initialPage: 0,
                 ),
               ),
-
 
               Container(
                 height: 50,

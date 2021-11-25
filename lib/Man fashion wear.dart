@@ -93,44 +93,6 @@ class _FashionState extends State<Fashion> {
   TextEditingController? Categories;
   late Query reference;
   late DatabaseReference valuee;
-  List list = [
-    Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.deepOrangeAccent,
-    Colors.deepPurple,
-    Colors.pink,
-    Colors.amber,
-    Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.deepOrangeAccent,
-    Colors.deepPurple,
-    Colors.pink,
-    Colors.amber,
-    Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.deepOrangeAccent,
-    Colors.deepPurple,
-    Colors.pink,
-    Colors.amber,
-    Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.deepOrangeAccent,
-    Colors.deepPurple,
-    Colors.pink,
-    Colors.amber,
-    Colors.red,
-    Colors.blue,
-    Colors.green,
-    Colors.deepOrangeAccent,
-    Colors.deepPurple,
-    Colors.pink,
-    Colors.amber,
-  ];
-
   @override
   void initState() {
     Categories = TextEditingController();
@@ -203,13 +165,13 @@ class _FashionState extends State<Fashion> {
               Padding(
                 padding: const EdgeInsets.only(left: 5,right: 5,),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.34,
+                  height: MediaQuery.of(context).size.height * 0.43,
                   width: MediaQuery.of(context).size.width * 95,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: FirebaseAnimatedList(
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.vertical,
                       query: Mensfeshion,
                       itemBuilder: (BuildContext context, DataSnapshot snapshot,
                           Animation<double> animation, int index) {
@@ -217,11 +179,11 @@ class _FashionState extends State<Fashion> {
 
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                              height: MediaQuery.of(context).size.height * 0.34,
-                              width: MediaQuery.of(context).size.width * 0.94,
-                              child: Container(
-
+                          child: Column(
+                            children: [
+                              Container(
+                                height: MediaQuery.of(context).size.height * 0.35,
+                                width: MediaQuery.of(context).size.width * 0.95,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
@@ -231,118 +193,85 @@ class _FashionState extends State<Fashion> {
                                     ),
                                   ),
                                 ),
-                              )),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width*0.95,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        height: 40,
+                                        width: MediaQuery.of(context).size.width*0.47,
+                                        decoration: BoxDecoration(
+                                            color: Colors.deepPurple,
+                                            boxShadow: [BoxShadow(
+                                                color: Colors.grey,
+                                                offset: Offset(0,1),
+                                                blurRadius:1
+                                            )],
+                                            borderRadius: BorderRadius.only(bottomRight:Radius.circular(100),bottomLeft:Radius.circular(10),topLeft: Radius.circular(10))
+                                        ),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(2.0),
+                                                child: Icon(CupertinoIcons.info,color: Colors.white,),
+                                              ),
+                                              Text(
+                                                "View Details"
+                                                ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 40,
+                                        width: MediaQuery.of(context).size.width*0.47,
+                                        decoration: BoxDecoration(
+                                            boxShadow: [BoxShadow(
+                                                color: Colors.grey,
+                                                offset: Offset(0,1),
+                                                blurRadius:1
+                                            )],
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.only(topLeft:Radius.circular(100),topRight:Radius.circular(10),bottomRight:Radius.circular(10),)
+                                        ),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(2.0),
+                                                child: Icon(CupertinoIcons.shopping_cart,color: Colors.white,),
+                                              ),
+                                              Text(
+                                                "Buy Now"
+                                                ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+
+
+
+
+                            ],
+                          ),
                         );
                       }),
-                ),
-              ),
-              Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width * 1,
-                color: Colors.white,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        width: MediaQuery.of(context).size.width * 1,
-                        child: FirebaseAnimatedList(
-                            scrollDirection: Axis.horizontal,
-                            query: reference,
-                            itemBuilder: (BuildContext context,
-                                DataSnapshot snapshot,
-                                Animation<double> animation,
-                                int index) {
-                              Map contact = snapshot.value;
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Categori(
-                                                category: contact["Value"])));
-                                  },
-                                  onLongPress: () {
-                                    showCupertinoModalPopup(
-                                        context: context,
-                                        builder:
-                                            (BuildContext context) =>
-                                                CupertinoActionSheet(
-                                                  title: Text(
-                                                      "Men's Fashion Collection "),
-                                                  actions: [
-                                                    CupertinoActionSheetAction(
-                                                      child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(8.0),
-                                                              child: Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  GestureDetector(
-                                                                    onTap: () {
-                                                                      valuee
-                                                                          .child(
-                                                                              contact["postid"])
-                                                                          .remove();
-                                                                      Navigator.pop(
-                                                                          context);
-                                                                    },
-                                                                    child: Row(
-                                                                      children: [
-                                                                        Icon(CupertinoIcons
-                                                                            .delete),
-                                                                        const Text(
-                                                                            'Delete',
-                                                                            style:
-                                                                                TextStyle(fontSize: 16)),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ]),
-                                                      onPressed: () {},
-                                                    )
-                                                  ],
-                                                ));
-                                  },
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                offset: Offset(0, 1),
-                                                blurRadius: 2)
-                                          ]),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text(contact["Value"],
-                                            style:
-                                                TextStyle(color: list[index],fontWeight: FontWeight.bold),),
-                                      )),
-                                ),
-                              );
-                            }),
-                      ),
-                    ],
-                  ),
                 ),
               ),
               // Container(
@@ -445,7 +374,7 @@ class _FashionState extends State<Fashion> {
                                 child: Text(
                                   "View more",
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.red,
                                     fontSize: 12,
                                     fontWeight: FontWeight.normal,
                                   ),
@@ -457,8 +386,18 @@ class _FashionState extends State<Fashion> {
                       ),
                     ],
                   )),
+
+
+
+
+
+              //Trends
+
+
+
+
               Container(
-                height: MediaQuery.of(context).size.height * 0.42,
+                height: MediaQuery.of(context).size.height * 0.43,
                 width: MediaQuery.of(context).size.width * 0.95,
                 child: FirebaseAnimatedList(
                     scrollDirection: Axis.horizontal,
@@ -472,7 +411,7 @@ class _FashionState extends State<Fashion> {
                         children: [
                           Container(
                             margin: EdgeInsets.all(10),
-                            height: MediaQuery.of(context).size.height * 0.33,
+                            height: MediaQuery.of(context).size.height * 0.35,
                             width: MediaQuery.of(context).size.width * 0.95,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
@@ -502,7 +441,7 @@ class _FashionState extends State<Fashion> {
                                       offset: Offset(0,1),
                                       blurRadius:1
                                     )],
-                                      borderRadius: BorderRadius.only(bottomRight:Radius.circular(100),bottomLeft:Radius.circular(10),)
+                                      borderRadius: BorderRadius.only(bottomRight:Radius.circular(100),bottomLeft:Radius.circular(10),topLeft: Radius.circular(10))
                                   ),
                                   child: Center(
                                     child: Row(
@@ -511,10 +450,10 @@ class _FashionState extends State<Fashion> {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(2.0),
-                                          child: Icon(CupertinoIcons.photo_on_rectangle,color: Colors.white,),
+                                          child: Icon(CupertinoIcons.info,color: Colors.white,),
                                         ),
                                         Text(
-                                          "View Images"
+                                          "View Details"
                                           ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                                       ],
                                     ),
@@ -557,6 +496,15 @@ class _FashionState extends State<Fashion> {
                       );
                     }),
               ),
+
+
+
+              // NEW
+
+
+
+
+
               Align(
                   alignment: Alignment.centerLeft,
                   child: Row(
@@ -615,7 +563,7 @@ class _FashionState extends State<Fashion> {
                                 child: Text(
                                   "View More",
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.red,
                                     fontSize: 12,
                                     fontWeight: FontWeight.normal,
                                   ),
@@ -628,7 +576,7 @@ class _FashionState extends State<Fashion> {
                     ],
                   )),
               Container(
-                height: MediaQuery.of(context).size.height * 0.36,
+                height: MediaQuery.of(context).size.height * 0.42,
                 width: MediaQuery.of(context).size.width * 0.95,
                 child: FirebaseAnimatedList(
                     scrollDirection: Axis.horizontal,
@@ -637,22 +585,92 @@ class _FashionState extends State<Fashion> {
                         Animation<double> animation, int index) {
                       Map newimages = snapshot.value;
 
-                      return Container(
-                        margin: EdgeInsets.all(10),
-                        height: MediaQuery.of(context).size.height * 0.29,
-                        width: MediaQuery.of(context).size.width * 0.95,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: NetworkImage(newimages["image"])),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.redAccent,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(0, 1),
-                                  blurRadius: 2)
-                            ]),
+                      return Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            height: MediaQuery.of(context).size.height * 0.34,
+                            width: MediaQuery.of(context).size.width * 0.95,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(newimages["image"])),
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.redAccent,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey,
+                                      offset: Offset(0, 1),
+                                      blurRadius: 2)
+                                ]),
+                          ),
+
+                          Container(
+                            width: MediaQuery.of(context).size.width*0.95,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 40,
+                                  width: MediaQuery.of(context).size.width*0.47,
+                                  decoration: BoxDecoration(
+                                      color: Colors.deepPurple,
+                                      boxShadow: [BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0,1),
+                                          blurRadius:1
+                                      )],
+                                      borderRadius: BorderRadius.only(bottomRight:Radius.circular(100),bottomLeft:Radius.circular(10),topLeft: Radius.circular(10))
+                                  ),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Icon(CupertinoIcons.info,color: Colors.white,),
+                                        ),
+                                        Text(
+                                          "View Details"
+                                          ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 40,
+                                  width: MediaQuery.of(context).size.width*0.47,
+                                  decoration: BoxDecoration(
+                                      boxShadow: [BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0,1),
+                                          blurRadius:1
+                                      )],
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.only(topLeft:Radius.circular(100),topRight:Radius.circular(10),bottomRight:Radius.circular(10),)
+                                  ),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Icon(CupertinoIcons.shopping_cart,color: Colors.white,),
+                                        ),
+                                        Text(
+                                          "Buy Now"
+                                          ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ],
                       );
                     }),
               ),

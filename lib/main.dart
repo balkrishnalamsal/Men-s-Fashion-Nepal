@@ -8,6 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(CupertinoApp(
+    color: Colors.blueAccent,
     debugShowCheckedModeBanner: false,
     home: MyApp(),
   ));

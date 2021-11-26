@@ -15,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'Categories.dart';
 import 'TrendsSection.dart';
+import 'ViewDetails.dart';
 
 class Fashion extends StatefulWidget {
   @override
@@ -171,7 +172,7 @@ class _FashionState extends State<Fashion> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: FirebaseAnimatedList(
-                    scrollDirection: Axis.vertical,
+                    scrollDirection: Axis.horizontal,
                       query: Mensfeshion,
                       itemBuilder: (BuildContext context, DataSnapshot snapshot,
                           Animation<double> animation, int index) {
@@ -202,31 +203,36 @@ class _FashionState extends State<Fashion> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        height: 40,
-                                        width: MediaQuery.of(context).size.width*0.47,
-                                        decoration: BoxDecoration(
-                                            color: Colors.deepPurple,
-                                            boxShadow: [BoxShadow(
-                                                color: Colors.grey,
-                                                offset: Offset(0,1),
-                                                blurRadius:1
-                                            )],
-                                            borderRadius: BorderRadius.only(bottomRight:Radius.circular(100),bottomLeft:Radius.circular(10),topLeft: Radius.circular(10))
-                                        ),
-                                        child: Center(
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                      GestureDetector(
+                                        onTap:(){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewDetails()));
+                                },
+                                        child: Container(
+                                          height: 40,
+                                          width: MediaQuery.of(context).size.width*0.47,
+                                          decoration: BoxDecoration(
+                                              color: Colors.deepPurple,
+                                              boxShadow: [BoxShadow(
+                                                  color: Colors.grey,
+                                                  offset: Offset(0,1),
+                                                  blurRadius:1
+                                              )],
+                                              borderRadius: BorderRadius.only(bottomRight:Radius.circular(100),bottomLeft:Radius.circular(10),topLeft: Radius.circular(10))
+                                          ),
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
 
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.all(2.0),
-                                                child: Icon(CupertinoIcons.info,color: Colors.white,),
-                                              ),
-                                              Text(
-                                                "View Details"
-                                                ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                                            ],
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(2.0),
+                                                  child: Icon(CupertinoIcons.info,color: Colors.white,),
+                                                ),
+                                                Text(
+                                                  "View Details"
+                                                  ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -431,31 +437,36 @@ class _FashionState extends State<Fashion> {
                             child: Row(
                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                  height: 40,
-                                  width: MediaQuery.of(context).size.width*0.47,
-                                  decoration: BoxDecoration(
-                                    color: Colors.deepPurple,
-                                    boxShadow: [BoxShadow(
-                                      color: Colors.grey,
-                                      offset: Offset(0,1),
-                                      blurRadius:1
-                                    )],
-                                      borderRadius: BorderRadius.only(bottomRight:Radius.circular(100),bottomLeft:Radius.circular(10),topLeft: Radius.circular(10))
-                                  ),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewDetails()));
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    width: MediaQuery.of(context).size.width*0.47,
+                                    decoration: BoxDecoration(
+                                      color: Colors.deepPurple,
+                                      boxShadow: [BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0,1),
+                                        blurRadius:1
+                                      )],
+                                        borderRadius: BorderRadius.only(bottomRight:Radius.circular(100),bottomLeft:Radius.circular(10),topLeft: Radius.circular(10))
+                                    ),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
 
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: Icon(CupertinoIcons.info,color: Colors.white,),
-                                        ),
-                                        Text(
-                                          "View Details"
-                                          ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                                      ],
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(2.0),
+                                            child: Icon(CupertinoIcons.info,color: Colors.white,),
+                                          ),
+                                          Text(
+                                            "View Details"
+                                            ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -610,31 +621,36 @@ class _FashionState extends State<Fashion> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                  height: 40,
-                                  width: MediaQuery.of(context).size.width*0.47,
-                                  decoration: BoxDecoration(
-                                      color: Colors.deepPurple,
-                                      boxShadow: [BoxShadow(
-                                          color: Colors.grey,
-                                          offset: Offset(0,1),
-                                          blurRadius:1
-                                      )],
-                                      borderRadius: BorderRadius.only(bottomRight:Radius.circular(100),bottomLeft:Radius.circular(10),topLeft: Radius.circular(10))
-                                  ),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewDetails()));
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    width: MediaQuery.of(context).size.width*0.47,
+                                    decoration: BoxDecoration(
+                                        color: Colors.deepPurple,
+                                        boxShadow: [BoxShadow(
+                                            color: Colors.grey,
+                                            offset: Offset(0,1),
+                                            blurRadius:1
+                                        )],
+                                        borderRadius: BorderRadius.only(bottomRight:Radius.circular(100),bottomLeft:Radius.circular(10),topLeft: Radius.circular(10))
+                                    ),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
 
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: Icon(CupertinoIcons.info,color: Colors.white,),
-                                        ),
-                                        Text(
-                                          "View Details"
-                                          ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                                      ],
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(2.0),
+                                            child: Icon(CupertinoIcons.info,color: Colors.white,),
+                                          ),
+                                          Text(
+                                            "View Details"
+                                            ,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

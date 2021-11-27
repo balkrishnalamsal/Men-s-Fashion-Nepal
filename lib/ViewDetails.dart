@@ -27,19 +27,17 @@ class _ViewDetailsState extends State<ViewDetails> {
       backgroundColor:(color=="Blue")?Colors.blueAccent:(color=="Red")?Colors.red:Colors.green,
         body: ListView(
           children: [
-            GestureDetector(
-              onTap: (){
-               Navigator.pop(context);
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15.0,top: 10,right: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(CupertinoIcons.arrow_left,color: Colors.white,size: 30,),
-                    Icon(CupertinoIcons.cart,color: Colors.white,size: 30,)
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0,top: 10,right: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(onTap: (){
+                    Navigator.pop(context);
+                  },
+                      child: Icon(CupertinoIcons.arrow_left,color: Colors.white,size: 30,)),
+                  Icon(CupertinoIcons.cart,color: Colors.white,size: 30,)
+                ],
               ),
             ),
 
@@ -210,7 +208,6 @@ class _ViewDetailsState extends State<ViewDetails> {
                     height: MediaQuery.of(context).size.height
                     *0.2,
                     decoration: BoxDecoration(
-                      color:Colors.red
                     ),
                   ),
 

@@ -4,27 +4,29 @@ import 'package:flutter/services.dart';
 
 
 class ViewDetails extends StatefulWidget {
+
+  String ?  price;
+  String ? images;
+  ViewDetails({this.price,this.images});
+
+
   @override
-  State<ViewDetails> createState() => _ViewDetailsState();
+  State<ViewDetails> createState() => _ViewDetailsState(price!,images);
 }
 
 class _ViewDetailsState extends State<ViewDetails> {
 
   String ? color= "Blue";
   int ? value =01;
-
-  colorchanger(){
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: (color=="Blue")?Colors.blueAccent:(color=="Red")?Colors.red:Colors.green,
-    ));
-  }
+  String price;
+  var images;
+  _ViewDetailsState(this.price,this.images);
 
 
   @override
   Widget build(BuildContext context) {
-    colorchanger();
     return Scaffold(
-      backgroundColor:(color=="Blue")?Colors.blueAccent:(color=="Red")?Colors.red:Colors.green,
+      backgroundColor:Colors.white,
         body: ListView(
           children: [
             Padding(
@@ -45,27 +47,32 @@ class _ViewDetailsState extends State<ViewDetails> {
             ),
 
         Container(
-          color: (color=="Blue")?Colors.blueAccent:(color=="Red")?Colors.red:Colors.green,
+          color:Colors.white,
           height: MediaQuery.of(context).size.height*0.4,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20,bottom: 10),
-                child: Text("Office",style: TextStyle(color: Colors.white,fontSize: 25),),
+
+              Container(
+                height:MediaQuery.of(context).size.height*0.2,
+                width: MediaQuery.of(context).size.width*0.5,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(images)
+                    )
+                ),
               ),
+
+
 
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text("Price",style: TextStyle(color: Colors.white,fontSize: 15),),
-                  ),
-                  Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("Rs.100",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
+                    child: Text(price,style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),),
                   ),
                 ],
               )
@@ -74,13 +81,14 @@ class _ViewDetailsState extends State<ViewDetails> {
         ),
             Container(
               decoration: BoxDecoration(
-                color :Color(0XFFEEF3F7),
+                color :Colors.white,
                 borderRadius: BorderRadius.circular(30)
               ),
               height: MediaQuery.of(context).size.height*0.7,
               
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 15.0,left: 25),
@@ -90,119 +98,131 @@ class _ViewDetailsState extends State<ViewDetails> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap: (){
-                            setState(() {
-                              color="Blue";
-                            });
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: (){
+                                setState(() {
+                                  color="Blue";
+                                });
 
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 15.0),
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                           decoration:(color=="Blue")?BoxDecoration(
-                                boxShadow: [BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 1,
-                                  offset: Offset(
-                                    0,1
-                                  )
-                                )],
-                                border: Border.all(
-                                  width: 2,color: Colors.white
-                                ),
-                              shape: BoxShape.circle,
-                              color: Colors.white
-                              ):BoxDecoration(
-                             border: Border.all(width: 2,color: Colors.white),
-                             shape: BoxShape.circle,
-                           ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.blue
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          child: GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                color="Green";
-                              });
-                            },
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                              decoration:(color=="Green")?BoxDecoration(
-                                  boxShadow: [BoxShadow(
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                               decoration:(color=="Blue")?BoxDecoration(
+                                    boxShadow: [BoxShadow(
                                       color: Colors.grey,
                                       blurRadius: 1,
                                       offset: Offset(
-                                          0,1
+                                        0,1
                                       )
-                                  )],
-                                  border: Border.all(
+                                    )],
+                                    border: Border.all(
                                       width: 2,color: Colors.white
-                                  ),
+                                    ),
                                   shape: BoxShape.circle,
                                   color: Colors.white
-                              ):BoxDecoration(
-                                border: Border.all(width: 2,color: Colors.white),
-                                  shape: BoxShape.circle,
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.green
+                                  ):BoxDecoration(
+                                 border: Border.all(width: 2,color: Colors.white),
+                                 shape: BoxShape.circle,
+                               ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.blue
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          child: GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                color="Red";
-                              });
-                            },
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                              decoration:(color=="Red")?BoxDecoration(
-                                  boxShadow: [BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 1,
-                                      offset: Offset(
-                                          0,1
-                                      )
-                                  )],
-                                  border: Border.all(
-                                      width: 2,color: Colors.white
-                                  ),
-                                  shape: BoxShape.circle,
-                                  color: Colors.white
-                              ):BoxDecoration(
-                                border: Border.all(width: 2,color: Colors.white),
-                                  shape: BoxShape.circle,
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
+
+
+
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0),
+                              child: GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    color="Green";
+                                  });
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration:(color=="Green")?BoxDecoration(
+                                      boxShadow: [BoxShadow(
+                                          color: Colors.grey,
+                                          blurRadius: 1,
+                                          offset: Offset(
+                                              0,1
+                                          )
+                                      )],
+                                      border: Border.all(
+                                          width: 2,color: Colors.white
+                                      ),
+                                      shape: BoxShape.circle,
+                                      color: Colors.white
+                                  ):BoxDecoration(
+                                    border: Border.all(width: 2,color: Colors.white),
                                     shape: BoxShape.circle,
-                                    color: Colors.red
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.green
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15.0),
+                              child: GestureDetector(
+                                onTap: (){
+                                  setState(() {
+                                    color="Red";
+                                  });
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration:(color=="Red")?BoxDecoration(
+                                      boxShadow: [BoxShadow(
+                                          color: Colors.grey,
+                                          blurRadius: 1,
+                                          offset: Offset(
+                                              0,1
+                                          )
+                                      )],
+                                      border: Border.all(
+                                          width: 2,color: Colors.white
+                                      ),
+                                      shape: BoxShape.circle,
+                                      color: Colors.white
+                                  ):BoxDecoration(
+                                    border: Border.all(width: 2,color: Colors.white),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.red
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+
+                          ],
                         ),
+
                       ],
                     ),
                   ),

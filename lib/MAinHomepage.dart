@@ -20,6 +20,14 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => _HomepageState();
 }
 class _HomepageState extends State<Homepage> {
+
+
+
+
+
+
+
+
   File? crop;
   String? value = "False";
   String? imageUrl;
@@ -33,7 +41,22 @@ class _HomepageState extends State<Homepage> {
   late Query imagereference;
   late Query Mensfeshion;
   List<Color> colour = [Colors.red, Colors.blue];
+  TextEditingController? Categories;
+  late Query reference;
+  late DatabaseReference valuee;
+  Color green = Colors.deepPurple;
+  Color red = Colors.redAccent;
   Color mainColor = Color(0XFFEEF3F7);
+
+
+
+
+
+
+
+
+
+
 
   VValue() {
     reference = FirebaseDatabase.instance.reference().child("Collection");
@@ -42,6 +65,10 @@ class _HomepageState extends State<Homepage> {
     Mensfeshion = FirebaseDatabase.instance.reference().child("MensFeshion");
     setState(() {});
   }
+
+
+
+
 
   getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -89,9 +116,8 @@ class _HomepageState extends State<Homepage> {
         .set({"image": imageUrl, "postid": post});
   }
 
-  TextEditingController? Categories;
-  late Query reference;
-  late DatabaseReference valuee;
+
+
   @override
   void initState() {
     Categories = TextEditingController();
@@ -103,6 +129,7 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     VValue();
     return Scaffold(
+      backgroundColor: Colors.white,
         body:ListView(
           children: [
             Padding(
@@ -167,48 +194,6 @@ class _HomepageState extends State<Homepage> {
               color: Colors.red,
               height: MediaQuery.of(context).size.height*0.3,
             ),
-            // Container(
-            //   margin: EdgeInsets.only(left: 10, right: 10),
-            //   child: CupertinoTextField(
-            //     suffix: Padding(
-            //       padding: const EdgeInsets.all(8.0),
-            //       child: GestureDetector(
-            //         onTap: () {
-            //           String postid = Uuid().v4();
-            //           FirebaseDatabase.instance
-            //               .reference()
-            //               .child("Collection")
-            //               .child(postid)
-            //               .set({
-            //             "Value": Categories!.text,
-            //             "postid": postid
-            //           }).whenComplete(() {
-            //             setState(() {
-            //               Categories!.clear();
-            //             });
-            //           });
-            //         },
-            //         child: Container(
-            //             decoration: BoxDecoration(
-            //                 borderRadius: BorderRadius.circular(10),
-            //                 color: Colors.redAccent,
-            //                 boxShadow: [
-            //                   BoxShadow(
-            //                       color: Colors.grey,
-            //                       offset: Offset(0, 1),
-            //                       blurRadius: 2)
-            //                 ]),
-            //             child: Padding(
-            //               padding: const EdgeInsets.all(5.0),
-            //               child: Text("Add",
-            //                   style: TextStyle(color: Colors.white)),
-            //             )),
-            //       ),
-            //     ),
-            //     controller: Categories,
-            //     placeholder: "Categories",
-            //   ),
-            // ),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Row(
@@ -328,7 +313,7 @@ class _HomepageState extends State<Homepage> {
                                   height: 50,
                                   width: 50,
                                   decoration: BoxDecoration(
-                                      color: Colors.red,
+                                      color: green,
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey,
@@ -358,13 +343,13 @@ class _HomepageState extends State<Homepage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ViewDetails()));
+                                              ViewDetails(images: menfeshonimage["image"],price:"Rs.20",)));
                                 },
                                 child: Container(
                                   height:30,
                                   width: MediaQuery.of(context).size.width * 0.25,
                                   decoration: BoxDecoration(
-                                      color: Colors.deepPurple,
+                                      color: red,
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey,
@@ -405,7 +390,7 @@ class _HomepageState extends State<Homepage> {
                                           offset: Offset(0, 1),
                                           blurRadius: 1)
                                     ],
-                                    color: Colors.red,
+                                    color: green,
                                     borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(100),
                                       topRight: Radius.circular(10),
@@ -513,7 +498,7 @@ class _HomepageState extends State<Homepage> {
                   ],
                 )),
             Container(
-              height: MediaQuery.of(context).size.height * 0.42,
+              height: MediaQuery.of(context).size.height * 0.28,
               width: MediaQuery.of(context).size.width * 0.95,
               child: FirebaseAnimatedList(
                   scrollDirection: Axis.horizontal,
@@ -545,12 +530,12 @@ class _HomepageState extends State<Homepage> {
                                 height: 50,
                                 width: 50,
                                 decoration: BoxDecoration(
-                                    color: Colors.red,
+                                    color: green,
                                     boxShadow: [
                                       BoxShadow(
                                           color: Colors.grey,
                                           offset: Offset(0, 1),
-                                          blurRadius: 1)
+                                          blurRadius: 2)
                                     ],
                                     borderRadius: BorderRadius.only(
                                         bottomLeft: Radius.circular(10),
@@ -580,7 +565,7 @@ class _HomepageState extends State<Homepage> {
                                   height:30,
                                   width: MediaQuery.of(context).size.width * 0.25,
                                   decoration: BoxDecoration(
-                                      color: Colors.deepPurple,
+                                      color: red,
                                       boxShadow: [
                                         BoxShadow(
                                             color: Colors.grey,
@@ -621,7 +606,7 @@ class _HomepageState extends State<Homepage> {
                                           offset: Offset(0, 1),
                                           blurRadius: 1)
                                     ],
-                                    color: Colors.red,
+                                    color: green,
                                     borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(100),
                                       topRight: Radius.circular(10),
@@ -655,6 +640,222 @@ class _HomepageState extends State<Homepage> {
                     );
                   }),
             ),
+
+
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onLongPress: () {
+                          setState(() {
+                            imageloaction = "NIKE";
+                          });
+                          getImage();
+                        },
+                        child: Text(
+                          "NIKE",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            shadows: <Shadow>[
+                              Shadow(
+                                offset: Offset(1.0, 1.0),
+                                blurRadius: 1.0,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => New(
+                                  neww: "NIKE",
+                                )));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(0, 1),
+                                  blurRadius: 2)
+                            ]),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 1),
+                              child: Text(
+                                "View More",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.42,
+              width: MediaQuery.of(context).size.width * 0.95,
+              child: FirebaseAnimatedList(
+                  scrollDirection: Axis.horizontal,
+                  query: FirebaseDatabase.instance.reference().child("NIKE"),
+                  itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                      Animation<double> animation, int index) {
+                    Map newimages = snapshot.value;
+
+                    return Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: NetworkImage(newimages["image"])),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey,
+                                    offset: Offset(0, 1),
+                                    blurRadius: 1)
+                              ]),
+                          child:  Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                    color: green,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0, 1),
+                                          blurRadius: 2)
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        topRight: Radius.circular(100))),
+
+                                child:Padding(
+                                  padding: const EdgeInsets.only(top: 25,left: 5),
+                                  child: Text("Rs.100",style: TextStyle(color: Colors.white,fontSize: 10,fontWeight: FontWeight.bold),),
+                                )
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ViewDetails()));
+                                },
+                                child: Container(
+                                  height:30,
+                                  width: MediaQuery.of(context).size.width * 0.25,
+                                  decoration: BoxDecoration(
+                                      color: red,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey,
+                                            offset: Offset(0, 1),
+                                            blurRadius: 1)
+                                      ],
+                                      borderRadius: BorderRadius.only(
+                                          bottomRight: Radius.circular(100),
+                                          bottomLeft: Radius.circular(10),
+                                          topLeft: Radius.circular(10))),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+
+                                        Icon(
+                                          CupertinoIcons.info,
+                                          color: Colors.white,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Text("Details",style: TextStyle(color: Colors.white,fontSize: 12),),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: 30,
+                                width:
+                                MediaQuery.of(context).size.width * 0.25,
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0, 1),
+                                          blurRadius: 1)
+                                    ],
+                                    color: green,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(100),
+                                      topRight: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
+                                    )),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0),
+                                        child: Icon(
+                                          CupertinoIcons.cart_fill_badge_plus,
+                                          color: Colors.white,
+                                          size: 20,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: Text("Add to cart",style: TextStyle(color: Colors.white,fontSize: 12),),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+            ),
+
           ],
         ),
     );

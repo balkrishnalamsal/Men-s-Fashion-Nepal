@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:menfashionnepal/New%20Section.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
-import 'Categories.dart';
 import 'TrendsSection.dart';
 import 'ViewDetails.dart';
 
@@ -36,6 +36,7 @@ class _FashionState extends State<Fashion> {
   late Query imagereference;
   late Query Mensfeshion;
   List<Color> colour = [Colors.red, Colors.blue];
+  Color mainColor = Color(0XFFEEF3F7);
 
   VValue() {
     reference = FirebaseDatabase.instance.reference().child("Collection");
@@ -106,7 +107,7 @@ class _FashionState extends State<Fashion> {
     return WillPopScope(
       onWillPop: (() => SystemNavigator.pop().then((value) => value as bool)),
       child: CupertinoPageScaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: mainColor,
         child: Container(
           width: MediaQuery.of(context).size.width * 1,
           height: MediaQuery.of(context).size.height * 1,
@@ -169,150 +170,10 @@ class _FashionState extends State<Fashion> {
                   ],
                 ),
               ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.43,
-                width: MediaQuery.of(context).size.width * 95,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: FirebaseAnimatedList(
-                    shrinkWrap: true,
-                    physics: PageScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    query: Mensfeshion,
-                    itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                        Animation<double> animation, int index) {
-                      Map menfeshonimage = snapshot.value;
 
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            height:
-                                MediaQuery.of(context).size.height * 0.35,
-                            width: MediaQuery.of(context).size.width * 1,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: NetworkImage(
-                                  menfeshonimage["image"],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Container(
-                              width:
-                                  MediaQuery.of(context).size.width * 0.95,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ViewDetails()));
-                                    },
-                                    child: Container(
-                                      height: 40,
-                                      width: MediaQuery.of(context)
-                                              .size
-                                              .width *
-                                          0.47,
-                                      decoration: BoxDecoration(
-                                          color: Colors.deepPurple,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                offset: Offset(0, 1),
-                                                blurRadius: 1)
-                                          ],
-                                          borderRadius: BorderRadius.only(
-                                              bottomRight:
-                                                  Radius.circular(100),
-                                              bottomLeft:
-                                                  Radius.circular(10),
-                                              topLeft:
-                                                  Radius.circular(10))),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: Icon(
-                                                CupertinoIcons.info,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            Text(
-                                              "View Details",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight:
-                                                      FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 40,
-                                    width:
-                                        MediaQuery.of(context).size.width *
-                                            0.47,
-                                    decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey,
-                                              offset: Offset(0, 1),
-                                              blurRadius: 1)
-                                        ],
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(100),
-                                          topRight: Radius.circular(10),
-                                          bottomRight: Radius.circular(10),
-                                        )),
-                                    child: Center(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.all(2.0),
-                                            child: Icon(
-                                              CupertinoIcons.shopping_cart,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            "Buy Now",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight:
-                                                    FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
+              Container(
+                color: Colors.red,
+                height: MediaQuery.of(context).size.height*0.3,
               ),
               // Container(
               //   margin: EdgeInsets.only(left: 10, right: 10),
@@ -430,127 +291,39 @@ class _FashionState extends State<Fashion> {
               //Trends
 
               Container(
-                height: MediaQuery.of(context).size.height * 0.43,
-                width: MediaQuery.of(context).size.width * 0.95,
+                height: MediaQuery.of(context).size.height * 0.25,
+                width: MediaQuery.of(context).size.width * 95,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: FirebaseAnimatedList(
+                    shrinkWrap: true,
+                    physics: PageScrollPhysics(),
                     scrollDirection: Axis.horizontal,
-                    query: imagereference,
+                    query: Mensfeshion,
                     itemBuilder: (BuildContext context, DataSnapshot snapshot,
                         Animation<double> animation, int index) {
-                      Map images = snapshot.value;
+                      Map menfeshonimage = snapshot.value;
 
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Container(
-                            margin: EdgeInsets.all(10),
-                            height: MediaQuery.of(context).size.height * 0.35,
-                            width: MediaQuery.of(context).size.width * 0.95,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: NetworkImage(images["image"])),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height:
+                              MediaQuery.of(context).size.height * 0.2,
+                              width: MediaQuery.of(context).size.width *0.5,
+                              decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.redAccent,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey,
-                                      offset: Offset(0, 1),
-                                      blurRadius: 2)
-                                ]),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.95,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ViewDetails()));
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.47,
-                                    decoration: BoxDecoration(
-                                        color: Colors.deepPurple,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.grey,
-                                              offset: Offset(0, 1),
-                                              blurRadius: 1)
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                            bottomRight: Radius.circular(100),
-                                            bottomLeft: Radius.circular(10),
-                                            topLeft: Radius.circular(10))),
-                                    child: Center(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: Icon(
-                                              CupertinoIcons.info,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            "View Details",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: NetworkImage(
+                                    menfeshonimage["image"],
                                   ),
                                 ),
-                                Container(
-                                  height: 40,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.47,
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey,
-                                            offset: Offset(0, 1),
-                                            blurRadius: 1)
-                                      ],
-                                      color: Colors.red,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(100),
-                                        topRight: Radius.circular(10),
-                                        bottomRight: Radius.circular(10),
-                                      )),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: Icon(
-                                            CupertinoIcons.shopping_cart,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        Text(
-                                          "Buy Now",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ],
@@ -558,8 +331,7 @@ class _FashionState extends State<Fashion> {
                     }),
               ),
 
-              // NEW
-
+              // NEw
               Align(
                   alignment: Alignment.centerLeft,
                   child: Row(
@@ -644,8 +416,8 @@ class _FashionState extends State<Fashion> {
                         children: [
                           Container(
                             margin: EdgeInsets.all(10),
-                            height: MediaQuery.of(context).size.height * 0.34,
-                            width: MediaQuery.of(context).size.width * 0.95,
+                            height: MediaQuery.of(context).size.height * 0.2,
+                            width: MediaQuery.of(context).size.width * 0.5,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                                     fit: BoxFit.fill,
@@ -660,7 +432,7 @@ class _FashionState extends State<Fashion> {
                                 ]),
                           ),
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.95,
+                            width: MediaQuery.of(context).size.width * 0.5,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -673,9 +445,8 @@ class _FashionState extends State<Fashion> {
                                                 ViewDetails()));
                                   },
                                   child: Container(
-                                    height: 40,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.47,
+                                    height:30,
+                                    width: MediaQuery.of(context).size.width * 0.25,
                                     decoration: BoxDecoration(
                                         color: Colors.deepPurple,
                                         boxShadow: [
@@ -693,18 +464,14 @@ class _FashionState extends State<Fashion> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
+
+                                          Icon(
+                                            CupertinoIcons.info,
+                                            color: Colors.white,
+                                          ),
                                           Padding(
                                             padding: const EdgeInsets.all(2.0),
-                                            child: Icon(
-                                              CupertinoIcons.info,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Text(
-                                            "View Details",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
+                                            child: Text("Details",style: TextStyle(color: Colors.white,fontSize: 12),),
                                           ),
                                         ],
                                       ),
@@ -712,9 +479,9 @@ class _FashionState extends State<Fashion> {
                                   ),
                                 ),
                                 Container(
-                                  height: 40,
+                                  height: 30,
                                   width:
-                                      MediaQuery.of(context).size.width * 0.47,
+                                      MediaQuery.of(context).size.width * 0.25,
                                   decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
@@ -734,17 +501,16 @@ class _FashionState extends State<Fashion> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.all(2.0),
+                                          padding: const EdgeInsets.only(left: 8.0),
                                           child: Icon(
-                                            CupertinoIcons.shopping_cart,
+                                            CupertinoIcons.cart_fill_badge_plus,
                                             color: Colors.white,
+                                            size: 20,
                                           ),
                                         ),
-                                        Text(
-                                          "Buy Now",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
+                                        Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Text("Add to cart",style: TextStyle(color: Colors.white,fontSize: 12),),
                                         ),
                                       ],
                                     ),

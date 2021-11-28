@@ -36,7 +36,10 @@ class _ViewDetailsState extends State<ViewDetails> {
                     Navigator.pop(context);
                   },
                       child: Icon(CupertinoIcons.arrow_left,color: Colors.white,size: 30,)),
-                  Icon(CupertinoIcons.cart,color: Colors.white,size: 30,)
+                  GestureDetector(
+                      onTap: (){
+                      },
+                      child: Icon(CupertinoIcons.cart,color: Colors.white,size: 30,))
                 ],
               ),
             ),
@@ -71,7 +74,7 @@ class _ViewDetailsState extends State<ViewDetails> {
         ),
             Container(
               decoration: BoxDecoration(
-                color :Colors.white,
+                color :Color(0XFFEEF3F7),
                 borderRadius: BorderRadius.circular(30)
               ),
               height: MediaQuery.of(context).size.height*0.7,

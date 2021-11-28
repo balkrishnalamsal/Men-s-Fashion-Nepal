@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:menfashionnepal/Man%20fashion%20wear.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(CupertinoApp(
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> {
 
 
 
+  Color mainColor = Color(0XFFEEF3F7);
 
 
   SplashScreen(){
@@ -59,7 +61,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     return CupertinoPageScaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: mainColor,
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

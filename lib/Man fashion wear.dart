@@ -3,12 +3,12 @@ import 'dart:ui';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:menfashionnepal/New%20Section.dart';
@@ -101,14 +101,45 @@ class _FashionState extends State<Fashion> {
     super.initState();
   }
 
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     VValue();
     return WillPopScope(
       onWillPop: (() => SystemNavigator.pop().then((value) => value as bool)),
-      child: CupertinoPageScaffold(
+      child: Scaffold(
         backgroundColor: mainColor,
-        child: Container(
+        bottomNavigationBar: FlashyTabBar(
+          selectedIndex: _selectedIndex,
+          showElevation: true,
+          onItemSelected: (index) => setState(() {
+            _selectedIndex = index;
+          }),
+          items: [
+            FlashyTabBarItem(
+              icon: Icon(Icons.event),
+              title: Text('Events'),
+            ),
+            FlashyTabBarItem(
+              icon: Icon(Icons.search),
+              title: Text('Search'),
+            ),
+            FlashyTabBarItem(
+              icon: Icon(Icons.highlight),
+              title: Text('Highlights'),
+            ),
+            FlashyTabBarItem(
+              icon: Icon(Icons.settings),
+              title: Text('Settings'),
+            ),
+            FlashyTabBarItem(
+              icon: Icon(Icons.settings),
+              title: Text('Profile'),
+            ),
+          ],
+        ),
+        body: Container(
           width: MediaQuery.of(context).size.width * 1,
           height: MediaQuery.of(context).size.height * 1,
           child: ListView(
@@ -291,7 +322,7 @@ class _FashionState extends State<Fashion> {
               //Trends
 
               Container(
-                height: MediaQuery.of(context).size.height * 0.25,
+                height: MediaQuery.of(context).size.height * 0.28,
                 width: MediaQuery.of(context).size.width * 95,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -300,7 +331,7 @@ class _FashionState extends State<Fashion> {
                     shrinkWrap: true,
                     physics: PageScrollPhysics(),
                     scrollDirection: Axis.horizontal,
-                    query: Mensfeshion,
+                    query:FirebaseDatabase.instance.reference().child("Trends"),
                     itemBuilder: (BuildContext context, DataSnapshot snapshot,
                         Animation<double> animation, int index) {
                       Map menfeshonimage = snapshot.value;
@@ -326,6 +357,95 @@ class _FashionState extends State<Fashion> {
                               ),
                             ),
                           ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ViewDetails()));
+                                  },
+                                  child: Container(
+                                    height:30,
+                                    width: MediaQuery.of(context).size.width * 0.25,
+                                    decoration: BoxDecoration(
+                                        color: Colors.deepPurple,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.grey,
+                                              offset: Offset(0, 1),
+                                              blurRadius: 1)
+                                        ],
+                                        borderRadius: BorderRadius.only(
+                                            bottomRight: Radius.circular(100),
+                                            bottomLeft: Radius.circular(10),
+                                            topLeft: Radius.circular(10))),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                        children: [
+
+                                          Icon(
+                                            CupertinoIcons.info,
+                                            color: Colors.white,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(2.0),
+                                            child: Text("Details",style: TextStyle(color: Colors.white,fontSize: 12),),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 30,
+                                  width:
+                                  MediaQuery.of(context).size.width * 0.25,
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey,
+                                            offset: Offset(0, 1),
+                                            blurRadius: 1)
+                                      ],
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(100),
+                                        topRight: Radius.circular(10),
+                                        bottomRight: Radius.circular(10),
+                                      )),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 8.0),
+                                          child: Icon(
+                                            CupertinoIcons.cart_fill_badge_plus,
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Text("Add to cart",style: TextStyle(color: Colors.white,fontSize: 12),),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
                         ],
                       );
                     }),
@@ -423,7 +543,6 @@ class _FashionState extends State<Fashion> {
                                     fit: BoxFit.fill,
                                     image: NetworkImage(newimages["image"])),
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.redAccent,
                                 boxShadow: [
                                   BoxShadow(
                                       color: Colors.grey,

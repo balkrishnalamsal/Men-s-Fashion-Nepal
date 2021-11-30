@@ -15,19 +15,13 @@ import 'package:uuid/uuid.dart';
 import 'New Section.dart';
 import 'TrendsSection.dart';
 import 'ViewDetails.dart';
+
 class Homepage extends StatefulWidget {
   @override
   State<Homepage> createState() => _HomepageState();
 }
+
 class _HomepageState extends State<Homepage> {
-
-
-
-
-
-
-
-
   File? crop;
   String? value = "False";
   String? imageUrl;
@@ -48,16 +42,6 @@ class _HomepageState extends State<Homepage> {
   Color red = Colors.redAccent;
   Color mainColor = Color(0XFFEEF3F7);
 
-
-
-
-
-
-
-
-
-
-
   VValue() {
     reference = FirebaseDatabase.instance.reference().child("Collection");
     imagereference = FirebaseDatabase.instance.reference().child("Trends");
@@ -65,10 +49,6 @@ class _HomepageState extends State<Homepage> {
     Mensfeshion = FirebaseDatabase.instance.reference().child("MensFeshion");
     setState(() {});
   }
-
-
-
-
 
   getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -116,748 +96,787 @@ class _HomepageState extends State<Homepage> {
         .set({"image": imageUrl, "postid": post});
   }
 
-
-
   @override
   void initState() {
     Categories = TextEditingController();
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     VValue();
     return Scaffold(
       backgroundColor: Colors.white,
-        body:ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                      onLongPress: () {
+                        setState(() {
+                          imageloaction = "MensFeshion";
+                        });
+                        getImage();
+                      },
+                      child: RichText(
+                        softWrap: true,
+                        text: TextSpan(children: <TextSpan>[
+                          TextSpan(
+                              text: "M",
+                              style: TextStyle(
+                                color: Colors.deepOrange,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          TextSpan(
+                              text: "en's ",
+                              style: TextStyle(
+                                  color: Colors.deepOrange,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold)),
+                          TextSpan(
+                              text: "F",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold)),
+                          TextSpan(
+                              text: "ashion",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold))
+                        ]),
+                      )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Icon(
+                    CupertinoIcons.text_alignleft,
+                    size: 25,
+                    color: Colors.deepOrangeAccent,
+                    semanticLabel: "Menu",
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CupertinoTextField(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: Colors.white,
+              boxShadow: [BoxShadow(
+                color: Colors.grey,
+                offset: Offset(0,1),
+                blurRadius: 1,
+                spreadRadius: 0.5
+              )]
+              ),
+              placeholder: "Search",
+            ),
+          ),
+
+          Container(
+            color: Colors.red,
+            height: MediaQuery.of(context).size.height * 0.3,
+          ),
+          Align(
+              alignment: Alignment.centerLeft,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
-                        onLongPress: () {
-                          setState(() {
-                            imageloaction = "MensFeshion";
-                          });
-                          getImage();
-                        },
-                        child: RichText(
-                          softWrap: true,
-                          text: TextSpan(children: <TextSpan>[
-                            TextSpan(
-                                text: "M",
-                                style: TextStyle(
-                                  color: Colors.deepOrange,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            TextSpan(
-                                text: "en's ",
-                                style: TextStyle(
-                                    color: Colors.deepOrange,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold)),
-                            TextSpan(
-                                text: "F",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold)),
-                            TextSpan(
-                                text: "ashion",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold))
-                          ]),
-                        )),
+                      onLongPress: () {
+                        setState(() {
+                          imageloaction = "Trends";
+                        });
+                        getImage();
+                      },
+                      child: Text(
+                        "Trends",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 1.0,
+                              color: Colors.grey,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: Icon(
-                      CupertinoIcons.text_alignleft,
-                      size: 25,
-                      color: Colors.deepOrangeAccent,
-                      semanticLabel: "Menu",
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Trends(
+                                    Trend: "Trends",
+                                  )));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(0, 1),
+                                blurRadius: 2)
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 1),
+                            child: Text(
+                              "View more",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 12,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],
-              ),
-            ),
+              )),
 
-            Container(
-              color: Colors.red,
-              height: MediaQuery.of(context).size.height*0.3,
+          //Trends
+
+          Container(
+            height: MediaQuery.of(context).size.height * 0.28,
+            width: MediaQuery.of(context).size.width * 95,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
             ),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onLongPress: () {
-                          setState(() {
-                            imageloaction = "Trends";
-                          });
-                          getImage();
-                        },
-                        child: Text(
-                          "Trends",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            shadows: <Shadow>[
-                              Shadow(
-                                offset: Offset(1.0, 1.0),
-                                blurRadius: 1.0,
-                                color: Colors.grey,
+            child: FirebaseAnimatedList(
+                shrinkWrap: true,
+                physics: PageScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                query: FirebaseDatabase.instance.reference().child("Trends"),
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
+                  Map menfeshonimage = snapshot.value;
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage(
+                                menfeshonimage["image"],
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Trends(
-                                  Trend: "Trends",
-                                )));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white,
+                            ),
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.grey,
                                   offset: Offset(0, 1),
-                                  blurRadius: 2)
-                            ]),
-                        child: Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1),
-                              child: Text(
-                                "View more",
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ),
+                                  blurRadius: 1)
+                            ],
+                          ),
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Container(
+                                height: 50,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                    color: green,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0, 1),
+                                          blurRadius: 1)
+                                    ],
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        topRight: Radius.circular(100))),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 25, left: 5),
+                                  child: Text(
+                                    "Rs.100",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                )),
-
-            //Trends
-
-            Container(
-              height: MediaQuery.of(context).size.height * 0.28,
-              width: MediaQuery.of(context).size.width * 95,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: FirebaseAnimatedList(
-                  shrinkWrap: true,
-                  physics: PageScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  query:FirebaseDatabase.instance.reference().child("Trends"),
-                  itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                      Animation<double> animation, int index) {
-                    Map menfeshonimage = snapshot.value;
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height:
-                            MediaQuery.of(context).size.height * 0.2,
-                            width: MediaQuery.of(context).size.width *0.5,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: NetworkImage(
-                                  menfeshonimage["image"],
-                                ),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    offset: Offset(0, 1),
-                                    blurRadius: 1)
-                              ],
-                            ),
-                            child: Align(
-                              alignment: Alignment.bottomLeft,
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ViewDetails(
+                                              images: menfeshonimage["image"],
+                                              price: "Rs.20",
+                                            )));
+                              },
                               child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                      color: green,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey,
-                                            offset: Offset(0, 1),
-                                            blurRadius: 1)
-                                      ],
-                                      borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(10),
-                                          topRight: Radius.circular(100))),
-
-                                  child:Padding(
-                                    padding: const EdgeInsets.only(top: 25,left: 5),
-                                    child: Text("Rs.100",style: TextStyle(color: Colors.white,fontSize: 10,fontWeight: FontWeight.bold),),
-                                  )
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ViewDetails(images: menfeshonimage["image"],price:"Rs.20",)));
-                                },
-                                child: Container(
-                                  height:30,
-                                  width: MediaQuery.of(context).size.width * 0.25,
-                                  decoration: BoxDecoration(
-                                      color: red,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey,
-                                            offset: Offset(0, 1),
-                                            blurRadius: 1)
-                                      ],
-                                      borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(100),
-                                          bottomLeft: Radius.circular(10),
-                                          topLeft: Radius.circular(10))),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-
-                                        Icon(
-                                          CupertinoIcons.info,
-                                          color: Colors.white,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: Text("Details",style: TextStyle(color: Colors.white,fontSize: 12),),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
                                 height: 30,
-                                width:
-                                MediaQuery.of(context).size.width * 0.25,
+                                width: MediaQuery.of(context).size.width * 0.25,
                                 decoration: BoxDecoration(
+                                    color: red,
                                     boxShadow: [
                                       BoxShadow(
                                           color: Colors.grey,
                                           offset: Offset(0, 1),
                                           blurRadius: 1)
                                     ],
-                                    color: green,
                                     borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(100),
-                                      topRight: Radius.circular(10),
-                                      bottomRight: Radius.circular(10),
-                                    )),
+                                        bottomRight: Radius.circular(100),
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10))),
                                 child: Center(
                                   child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
-                                        child: Icon(
-                                          CupertinoIcons.cart_fill_badge_plus,
-                                          color: Colors.white,
-                                          size: 20,
-                                        ),
+                                      Icon(
+                                        CupertinoIcons.info,
+                                        color: Colors.white,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
-                                        child: Text("Add to cart",style: TextStyle(color: Colors.white,fontSize: 12),),
+                                        child: Text(
+                                          "Details",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12),
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-
-                      ],
-                    );
-                  }),
-            ),
-
-            // NEw
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onLongPress: () {
-                          setState(() {
-                            imageloaction = "New";
-                          });
-                          getImage();
-                        },
-                        child: Text(
-                          "New",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            shadows: <Shadow>[
-                              Shadow(
-                                offset: Offset(1.0, 1.0),
-                                blurRadius: 1.0,
-                                color: Colors.grey,
+                            ),
+                            Container(
+                              height: 30,
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 1),
+                                        blurRadius: 1)
+                                  ],
+                                  color: green,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(100),
+                                    topRight: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                  )),
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Icon(
+                                        CupertinoIcons.cart_fill_badge_plus,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Text(
+                                        "Add to cart",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }),
+          ),
+
+          // NEw
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onLongPress: () {
+                        setState(() {
+                          imageloaction = "New";
+                        });
+                        getImage();
+                      },
+                      child: Text(
+                        "New",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 1.0,
+                              color: Colors.grey,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => New(
+                                    neww: "New",
+                                  )));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(0, 1),
+                                blurRadius: 2)
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 1),
+                            child: Text(
+                              "View More",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 12,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => New(
-                                  neww: "New",
-                                )));
-                      },
-                      child: Container(
+                  ),
+                ],
+              )),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.28,
+            width: MediaQuery.of(context).size.width * 0.95,
+            child: FirebaseAnimatedList(
+                scrollDirection: Axis.horizontal,
+                query: FirebaseDatabase.instance.reference().child("New"),
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
+                  Map newimages = snapshot.value;
+
+                  return Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        width: MediaQuery.of(context).size.width * 0.5,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white,
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(newimages["image"])),
+                            borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.grey,
                                   offset: Offset(0, 1),
-                                  blurRadius: 2)
+                                  blurRadius: 1)
                             ]),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1),
-                              child: Text(
-                                "View More",
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.normal,
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                  color: green,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 1),
+                                        blurRadius: 2)
+                                  ],
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      topRight: Radius.circular(100))),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 25, left: 5),
+                                child: Text(
+                                  "Rs.100",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                              ),
-                            ),
-                          ),
+                              )),
                         ),
                       ),
-                    ),
-                  ],
-                )),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.28,
-              width: MediaQuery.of(context).size.width * 0.95,
-              child: FirebaseAnimatedList(
-                  scrollDirection: Axis.horizontal,
-                  query: FirebaseDatabase.instance.reference().child("New"),
-                  itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                      Animation<double> animation, int index) {
-                    Map newimages = snapshot.value;
-
-                    return Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(newimages["image"])),
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    offset: Offset(0, 1),
-                                    blurRadius: 1)
-                              ]),
-                          child:  Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    color: green,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey,
-                                          offset: Offset(0, 1),
-                                          blurRadius: 2)
-                                    ],
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topRight: Radius.circular(100))),
-
-                                child:Padding(
-                                  padding: const EdgeInsets.only(top: 25,left: 5),
-                                  child: Text("Rs.100",style: TextStyle(color: Colors.white,fontSize: 10,fontWeight: FontWeight.bold),),
-                                )
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ViewDetails()));
-                                },
-                                child: Container(
-                                  height:30,
-                                  width: MediaQuery.of(context).size.width * 0.25,
-                                  decoration: BoxDecoration(
-                                      color: red,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey,
-                                            offset: Offset(0, 1),
-                                            blurRadius: 1)
-                                      ],
-                                      borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(100),
-                                          bottomLeft: Radius.circular(10),
-                                          topLeft: Radius.circular(10))),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-
-                                        Icon(
-                                          CupertinoIcons.info,
-                                          color: Colors.white,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: Text("Details",style: TextStyle(color: Colors.white,fontSize: 12),),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ViewDetails()));
+                              },
+                              child: Container(
                                 height: 30,
-                                width:
-                                MediaQuery.of(context).size.width * 0.25,
+                                width: MediaQuery.of(context).size.width * 0.25,
                                 decoration: BoxDecoration(
+                                    color: red,
                                     boxShadow: [
                                       BoxShadow(
                                           color: Colors.grey,
                                           offset: Offset(0, 1),
                                           blurRadius: 1)
                                     ],
-                                    color: green,
                                     borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(100),
-                                      topRight: Radius.circular(10),
-                                      bottomRight: Radius.circular(10),
-                                    )),
+                                        bottomRight: Radius.circular(100),
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10))),
                                 child: Center(
                                   child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
-                                        child: Icon(
-                                          CupertinoIcons.cart_fill_badge_plus,
-                                          color: Colors.white,
-                                          size: 20,
-                                        ),
+                                      Icon(
+                                        CupertinoIcons.info,
+                                        color: Colors.white,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
-                                        child: Text("Add to cart",style: TextStyle(color: Colors.white,fontSize: 12),),
+                                        child: Text(
+                                          "Details",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12),
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
-            ),
-
-
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onLongPress: () {
-                          setState(() {
-                            imageloaction = "NIKE";
-                          });
-                          getImage();
-                        },
-                        child: Text(
-                          "NIKE",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            shadows: <Shadow>[
-                              Shadow(
-                                offset: Offset(1.0, 1.0),
-                                blurRadius: 1.0,
-                                color: Colors.grey,
+                            ),
+                            Container(
+                              height: 30,
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 1),
+                                        blurRadius: 1)
+                                  ],
+                                  color: green,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(100),
+                                    topRight: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                  )),
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Icon(
+                                        CupertinoIcons.cart_fill_badge_plus,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Text(
+                                        "Add to cart",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }),
+          ),
+
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onLongPress: () {
+                        setState(() {
+                          imageloaction = "NIKE";
+                        });
+                        getImage();
+                      },
+                      child: Text(
+                        "NIKE",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 1.0,
+                              color: Colors.grey,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => New(
+                                    neww: "NIKE",
+                                  )));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(0, 1),
+                                blurRadius: 2)
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 1),
+                            child: Text(
+                              "View More",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 12,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => New(
-                                  neww: "NIKE",
-                                )));
-                      },
-                      child: Container(
+                  ),
+                ],
+              )),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.42,
+            width: MediaQuery.of(context).size.width * 0.95,
+            child: FirebaseAnimatedList(
+                scrollDirection: Axis.horizontal,
+                query: FirebaseDatabase.instance.reference().child("NIKE"),
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation<double> animation, int index) {
+                  Map newimages = snapshot.value;
+
+                  return Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        width: MediaQuery.of(context).size.width * 0.5,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.white,
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(newimages["image"])),
+                            borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.grey,
                                   offset: Offset(0, 1),
-                                  blurRadius: 2)
+                                  blurRadius: 1)
                             ]),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 1),
-                              child: Text(
-                                "View More",
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.normal,
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                  color: green,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 1),
+                                        blurRadius: 2)
+                                  ],
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      topRight: Radius.circular(100))),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 25, left: 5),
+                                child: Text(
+                                  "Rs.100",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                              ),
-                            ),
-                          ),
+                              )),
                         ),
                       ),
-                    ),
-                  ],
-                )),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.42,
-              width: MediaQuery.of(context).size.width * 0.95,
-              child: FirebaseAnimatedList(
-                  scrollDirection: Axis.horizontal,
-                  query: FirebaseDatabase.instance.reference().child("NIKE"),
-                  itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                      Animation<double> animation, int index) {
-                    Map newimages = snapshot.value;
-
-                    return Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(newimages["image"])),
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey,
-                                    offset: Offset(0, 1),
-                                    blurRadius: 1)
-                              ]),
-                          child:  Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    color: green,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey,
-                                          offset: Offset(0, 1),
-                                          blurRadius: 2)
-                                    ],
-                                    borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10),
-                                        topRight: Radius.circular(100))),
-
-                                child:Padding(
-                                  padding: const EdgeInsets.only(top: 25,left: 5),
-                                  child: Text("Rs.100",style: TextStyle(color: Colors.white,fontSize: 10,fontWeight: FontWeight.bold),),
-                                )
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ViewDetails()));
-                                },
-                                child: Container(
-                                  height:30,
-                                  width: MediaQuery.of(context).size.width * 0.25,
-                                  decoration: BoxDecoration(
-                                      color: red,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.grey,
-                                            offset: Offset(0, 1),
-                                            blurRadius: 1)
-                                      ],
-                                      borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(100),
-                                          bottomLeft: Radius.circular(10),
-                                          topLeft: Radius.circular(10))),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-
-                                        Icon(
-                                          CupertinoIcons.info,
-                                          color: Colors.white,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: Text("Details",style: TextStyle(color: Colors.white,fontSize: 12),),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ViewDetails()));
+                              },
+                              child: Container(
                                 height: 30,
-                                width:
-                                MediaQuery.of(context).size.width * 0.25,
+                                width: MediaQuery.of(context).size.width * 0.25,
                                 decoration: BoxDecoration(
+                                    color: red,
                                     boxShadow: [
                                       BoxShadow(
                                           color: Colors.grey,
                                           offset: Offset(0, 1),
                                           blurRadius: 1)
                                     ],
-                                    color: green,
                                     borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(100),
-                                      topRight: Radius.circular(10),
-                                      bottomRight: Radius.circular(10),
-                                    )),
+                                        bottomRight: Radius.circular(100),
+                                        bottomLeft: Radius.circular(10),
+                                        topLeft: Radius.circular(10))),
                                 child: Center(
                                   child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 8.0),
-                                        child: Icon(
-                                          CupertinoIcons.cart_fill_badge_plus,
-                                          color: Colors.white,
-                                          size: 20,
-                                        ),
+                                      Icon(
+                                        CupertinoIcons.info,
+                                        color: Colors.white,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(2.0),
-                                        child: Text("Add to cart",style: TextStyle(color: Colors.white,fontSize: 12),),
+                                        child: Text(
+                                          "Details",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12),
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                            Container(
+                              height: 30,
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0, 1),
+                                        blurRadius: 1)
+                                  ],
+                                  color: green,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(100),
+                                    topRight: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                  )),
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Icon(
+                                        CupertinoIcons.cart_fill_badge_plus,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Text(
+                                        "Add to cart",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    );
-                  }),
-            ),
-
-          ],
-        ),
+                      ),
+                    ],
+                  );
+                }),
+          ),
+        ],
+      ),
     );
   }
 }

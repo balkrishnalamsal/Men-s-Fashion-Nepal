@@ -1,26 +1,13 @@
 import 'dart:io';
-
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:menfashionnepal/Man%20fashion%20wear.dart';
 import 'package:uuid/uuid.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-class UploadImage extends StatefulWidget {
-  String postidcoming;
-  UploadImage({required this.postidcoming});
-  @override
-  _UploadImageState createState() => _UploadImageState(postidcoming);
-}
-
-class _UploadImageState extends State<UploadImage> {
-  String postimage;
-  _UploadImageState(this.postimage);
+class Calculation with ChangeNotifier{
 
   File ? crop;
   String? value = "False";
@@ -29,6 +16,7 @@ class _UploadImageState extends State<UploadImage> {
   File ? cropimage;
   FirebaseStorage storage = FirebaseStorage.instance;
   final picker = ImagePicker();
+
 
   getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -41,18 +29,16 @@ class _UploadImageState extends State<UploadImage> {
           maxHeight: 700,
           compressFormat: ImageCompressFormat.jpg,
           androidUiSettings: AndroidUiSettings(
-            toolbarColor: Colors.deepOrangeAccent,
             toolbarTitle: "Crop",
-            statusBarColor: Colors.deepOrangeAccent,
           )))!;
-      this.setState(() {
-        cropimage = crop;
-        Controluploading();
-      });
+         cropimage = crop;
+        notifyListeners();
+        ImageUploading();
+
     }
   }
 
-  Controluploading() async {
+  ImageUploading() async {
     if (cropimage == null) {
       value = "False";
       Fluttertoast.showToast(msg: "Please select image ");
@@ -64,21 +50,16 @@ class _UploadImageState extends State<UploadImage> {
         .child('$postid')
         .putFile(cropimage!);
     var downloadUrl = await snapshot.ref.getDownloadURL();
-    setState(() {
+        notifyListeners();
       imageUrl = downloadUrl;
-    });
-    FirebaseDatabase.instance.reference().child("MensFeshion").child(postimage).update({
-      "image": imageUrl,
-    }).whenComplete((){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>Fashion()));
-    });
+
   }
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: GestureDetector(
-          onTap: getImage,
-          child: Container(child: Center(child: Text("Select Image")))),
-    );
-  }
+
+
+
+
+
+
+
+
 }

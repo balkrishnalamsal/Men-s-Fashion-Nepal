@@ -4,25 +4,35 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:menfashionnepal/MAinHomepage.dart';
+import 'package:menfashionnepal/homepage.dart';
+import 'package:firebase_core/firebase_core.dart';
 
+void main() async {
 
-class Fashion extends StatefulWidget {
-  @override
-  _FashionState createState() => _FashionState();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(CupertinoApp(
+    color: Colors.blueAccent,
+    debugShowCheckedModeBanner: false,
+    home: Navigation_Page(),
+  ));
 }
 
-class _FashionState extends State<Fashion> {
+class Navigation_Page extends StatefulWidget {
+  @override
+  _Navigation_PageState createState() => _Navigation_PageState();
+}
+
+class _Navigation_PageState extends State<Navigation_Page> {
 
 
   int _selectedIndex = 0;
 
   List<Widget> tabItems = [
     Homepage(),
-    Center(child: Text("1")),
-    Center(child: Text("2")),
-    Center(child: Text("3")),
-    Center(child: Text("4"))
+    Center(child: Text("Mahendra")),
+    Center(child: Text("bikash")),
+
   ];
 
   @override
@@ -47,16 +57,13 @@ class _FashionState extends State<Fashion> {
               icon: Icon(Icons.search),
               title: Text('Search'),
             ),
-            FlashyTabBarItem(
-              icon: Icon(Icons.highlight),
-              title: Text('Highlights'),
-            ),
+
             FlashyTabBarItem(
               icon: Icon(CupertinoIcons.cart),
               title: Text('Cart'),
             ),
             FlashyTabBarItem(
-              icon: Icon(CupertinoIcons.profile_circled),
+              icon: Icon(Icons.highlight),
               title: Text('Profile'),
             ),
           ],

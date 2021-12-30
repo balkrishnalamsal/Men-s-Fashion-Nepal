@@ -2,21 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ViewDetails extends StatefulWidget {
-  String? price;
-  String? images;
-  ViewDetails({this.price, this.images});
-
   @override
-  State<ViewDetails> createState() => _ViewDetailsState(price!, images);
+  State<ViewDetails> createState() => _ViewDetailsState();
 }
 
 class _ViewDetailsState extends State<ViewDetails> {
   String? color = "Blue";
   int? value = 01;
   int? size = 7;
-  String price;
   var images;
-  _ViewDetailsState(this.price, this.images);
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +57,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                       width: MediaQuery.of(context).size.width * 0.9,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              fit: BoxFit.fill, image: NetworkImage(images))),
+                      ),
                     ),
                   ),
                   Column(
@@ -74,7 +67,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                       Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
-                          price,
+                          "price",
                           style: TextStyle(
                               color: Colors.red,
                               fontSize: 20,

@@ -1,4 +1,5 @@
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:menfashionnepal/ProviderFile/Provider_Data.dart';
@@ -87,88 +88,43 @@ class _HomepageState extends State<Homepage> {
                   borderRadius: BorderRadius.circular(10)
               ),
               height: MediaQuery.of(context).size.height * 0.28,
-              child: StreamBuilder(
-                stream: FirebaseFirestore.instance.collection("Trends").limit(5).snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot){
-                  if(!snapshot.hasData){
-                    return Center(child: CircularProgressIndicator());
-                  }else {
-                  return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (_,index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 160,
-                                width: 200,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(width: 0.2,color: Colors.grey),
-                                    image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                        image: NetworkImage(snapshot.data!.docs[index]["image"])
-                                    )
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Align(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Text("Rs.100",style: TextStyle(color: Colors.red),),),
-                              ),
-
-                              Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: (){
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewDetails()));
-                                    },
-                                    child: Container(
-                                      height: 40,
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          borderRadius: BorderRadius.only(bottomRight: Radius.circular(50),bottomLeft: Radius.circular(10),topLeft: Radius.circular(10))
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "View Details",style: TextStyle(color: Colors.white,fontSize: 12),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 40,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        color: Colors.deepPurple,
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(50),topRight: Radius.circular(10),bottomRight: Radius.circular(10))
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        "Buy Now",style: TextStyle(color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-
-
-                            ],
-                          ),
+              child: CarouselSlider(
+                  items: [1,2,3,4,].map((i) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return   Consumer<Calculation>(builder: (context,todo,child){
+                          return  Container(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                    image: NetworkImage(todo.imageone.toString())
+                                )
+                            ),
+                          );
+                        },
                         );
-                        }
+                      },
+                    );
+                  }).toList(),
 
-                      );
-                  }
 
-                },
-              ),
+                  options: CarouselOptions(
+                    aspectRatio: 16/9,
+                    viewportFraction: 0.8,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    reverse: false,
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 2),
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
+                  )
+              )
             ),
           ),
           Align(

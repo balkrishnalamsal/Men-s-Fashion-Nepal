@@ -15,13 +15,10 @@ class Calculation with ChangeNotifier {
   File? cropimage;
   FirebaseStorage storage = FirebaseStorage.instance;
   final picker = ImagePicker();
- String?imageone;
+  String? imageone;
   String? imagetwo;
-  String?imagethree;
-  String?imagefour;
-
-
-
+  String? imagethree;
+  String? imagefour;
 
   getImage(String Section) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -55,14 +52,54 @@ class Calculation with ChangeNotifier {
     FirebaseUploading(downloadUrl, Section);
   }
 
-
-
   FirebaseUploading(String downloadurl, String Section) {
     String postid = Uuid().v4();
     FirebaseFirestore.instance.collection(Section).doc(postid).set({
       "image": downloadurl,
       "postid": postid,
+      "actualprize": "",
+      "discountprize": "",
+      "sizeone": "",
+      "sizetwo": "",
+      "sizethree": "",
+      "sizefour": "",
+      "sizefive": "",
+      "name": "",
+      "stocks": "",
+      "rating": "",
+      "brand": "",
+      "model": "",
     });
   }
 
+  UpdateDetails(
+      String postid,
+      String Section,
+      String actualprize,
+      String Discountprice,
+      String name,
+      String stocks,
+      String brand,
+      String model,
+      String sizeone,
+      String rating,
+      String Sizetwo,
+      String Sizethree,
+      String sizefour,
+      String sizefive) {
+    FirebaseFirestore.instance.collection(Section).doc(postid).update({
+      "actualprize": actualprize,
+      "discountprize": Discountprice,
+      "sizeone": sizeone,
+      "sizetwo": Sizetwo,
+      "sizethree": Sizethree,
+      "sizefour": sizefour,
+      "sizefive": sizefive,
+      "name": name,
+      "stocks": stocks,
+      "rating": rating,
+      "brand": brand,
+      "model": model,
+    });
+  }
 }

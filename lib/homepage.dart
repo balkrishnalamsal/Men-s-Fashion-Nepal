@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:menfashionnepal/AddDetailsPage.dart';
 import 'package:menfashionnepal/ProviderFile/PageSliderProvider.dart';
 import 'package:menfashionnepal/ProviderFile/Provider_Data.dart';
 import 'dart:ui';
@@ -539,19 +540,24 @@ class _HomepageState extends State<Homepage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        height: 160,
-                                        width: 200,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                                width: 0.2, color: Colors.grey),
-                                            image: DecorationImage(
-                                                fit: BoxFit.fill,
-                                                image: NetworkImage(snapshot
-                                                    .data!
-                                                    .docs[index]["image"]))),
+                                      GestureDetector(
+                                        onLongPress: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(postid: snapshot.data!.docs[index]["postid"],Section: "New",),));
+                                        },
+                                        child: Container(
+                                          height: 160,
+                                          width: 200,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                  width: 0.2, color: Colors.grey),
+                                              image: DecorationImage(
+                                                  fit: BoxFit.fill,
+                                                  image: NetworkImage(snapshot
+                                                      .data!
+                                                      .docs[index]["image"]))),
+                                        ),
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.only(top: 2.0),

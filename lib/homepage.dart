@@ -20,18 +20,16 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<Calculation>(
-            create: (_) => Calculation(),
-          ),
-          ChangeNotifierProvider<PageSlider>(
-            create: (_) => PageSlider(),
-          ),
-
-
-        ],
+          providers: [
+            ChangeNotifierProvider<Calculation>(
+              create: (_) => Calculation(),
+            ),
+            ChangeNotifierProvider<PageSlider>(
+              create: (_) => PageSlider(),
+            ),
+          ],
           builder: (context, con) {
-          context.read<PageSlider>().Pageslider();
+            context.read<PageSlider>().Pageslider();
             return ListView(
               children: [
                 Padding(
@@ -77,10 +75,8 @@ class _HomepageState extends State<Homepage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
-                          onTap: (){
-                            setState(() {
-
-                            });
+                          onTap: () {
+                            setState(() {});
                           },
                           child: Icon(
                             CupertinoIcons.cart,
@@ -90,131 +86,148 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(left: 8.0,right: 8),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10),
                   child: CupertinoTextField(
                     decoration: BoxDecoration(
-                      border: Border.all(width: 0.2,color: Colors.grey),
-                      borderRadius: BorderRadius.circular(15)
-                    ),
-                  placeholder: "Search",
+                        border: Border.all(width: 0.2, color: Colors.grey),
+                        borderRadius: BorderRadius.circular(15)),
+                    placeholder: "Search",
                     prefix: Padding(
                       padding: const EdgeInsets.all(2.0),
-                      child: Icon(CupertinoIcons.search,color: Colors.grey,),
+                      child: Icon(
+                        CupertinoIcons.search,
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
                 ),
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Consumer<PageSlider>(
-            builder: (context,tod,child){
-                   return (tod.imageone==null)? Text("data"):Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)),
-                      height: MediaQuery.of(context).size.height * 0.34,
-                      child: CarouselSlider(
-                          items: [
-                            Consumer<PageSlider>(
-                                builder: (context, todo, child) {
-                                  return GestureDetector(
-                                      onTap: (){
-                                        todo.PageSliderGetImage("PageSlider","1");
+                  child: Consumer<PageSlider>(builder: (context, tod, child) {
+                    return (tod.imageone == null)
+                        ? Text("data")
+                        : Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10)),
+                            height: MediaQuery.of(context).size.height * 0.34,
+                            child: CarouselSlider(
+                                items: [
+                                  Consumer<PageSlider>(
+                                      builder: (context, todo, child) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        todo.PageSliderGetImage(
+                                            "PageSlider", "1");
                                       },
-                                    child: Container(
-                                      height: MediaQuery.of(context).size.height,
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(     borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: NetworkImage(todo.imageone.toString()),
-                                        )
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            image: DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: NetworkImage(
+                                                  todo.imageone.toString()),
+                                            )),
                                       ),
-                                    ),
-                                  );
-                                }),
-                            Consumer<PageSlider>(
-                                builder: (context, todo, child) {
-                                  return GestureDetector(
-                                      onTap: (){
-                                        todo.PageSliderGetImage("PageSlider","2");
+                                    );
+                                  }),
+                                  Consumer<PageSlider>(
+                                      builder: (context, todo, child) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        todo.PageSliderGetImage(
+                                            "PageSlider", "2");
                                       },
-                                    child: Container(
-                                      height: MediaQuery.of(context).size.height,
-                                      width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                        image: NetworkImage(todo.imagetwo.toString()),
-                                        )
-                                        )
-                                    ),
-                                  );
-                                }),
-
-                            Consumer<PageSlider>(
-                                builder: (context, todo, child) {
-                                  return GestureDetector(
-                                    onTap: (){
-                                      todo.PageSliderGetImage("PageSlider","3");
-                                    },
-                                    child: Container(
-                                        height: MediaQuery.of(context).size.height,
-                                        width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: NetworkImage(todo.imagethree.toString()),
-                                            )
-                                        )
-                                    ),
-                                  );
-                                }),
-                            Consumer<PageSlider>(
-                                builder: (context, todo, child) {
-                                  return GestureDetector(
-                                    onTap: (){
-                                      todo.PageSliderGetImage("PageSlider","4");
-                                    },
-                                    child: Container(
-                                        height: MediaQuery.of(context).size.height,
-                                        width: MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                            image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: NetworkImage(todo.imagefour.toString()),
-                                            )
-                                        )
-                                    ),
-                                  );
-                                }),
-                          ],
-                          options: CarouselOptions(
-                            aspectRatio: 16 / 9,
-                            viewportFraction: 0.9 ,
-                            initialPage: 0,
-                            height: MediaQuery.of(context).size.height*0.3,
-                            enableInfiniteScroll: true,
-                            reverse: false,
-                            autoPlay: true,
-                            autoPlayInterval: Duration(seconds: 3),
-                            autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            enlargeCenterPage: true,
-                            scrollDirection: Axis.horizontal,
-                          ))
-                     );
-                  }
-                ),
+                                      child: Container(
+                                          height: MediaQuery.of(context)
+                                              .size
+                                              .height,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                fit: BoxFit.fill,
+                                                image: NetworkImage(
+                                                    todo.imagetwo.toString()),
+                                              ))),
+                                    );
+                                  }),
+                                  Consumer<PageSlider>(
+                                      builder: (context, todo, child) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        todo.PageSliderGetImage(
+                                            "PageSlider", "3");
+                                      },
+                                      child: Container(
+                                          height: MediaQuery.of(context)
+                                              .size
+                                              .height,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                fit: BoxFit.fill,
+                                                image: NetworkImage(
+                                                    todo.imagethree.toString()),
+                                              ))),
+                                    );
+                                  }),
+                                  Consumer<PageSlider>(
+                                      builder: (context, todo, child) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        todo.PageSliderGetImage(
+                                            "PageSlider", "4");
+                                      },
+                                      child: Container(
+                                          height: MediaQuery.of(context)
+                                              .size
+                                              .height,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                fit: BoxFit.fill,
+                                                image: NetworkImage(
+                                                    todo.imagefour.toString()),
+                                              ))),
+                                    );
+                                  }),
+                                ],
+                                options: CarouselOptions(
+                                  aspectRatio: 16 / 9,
+                                  viewportFraction: 0.9,
+                                  initialPage: 0,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.3,
+                                  enableInfiniteScroll: true,
+                                  reverse: false,
+                                  autoPlay: true,
+                                  autoPlayInterval: Duration(seconds: 3),
+                                  autoPlayAnimationDuration:
+                                      Duration(milliseconds: 800),
+                                  autoPlayCurve: Curves.fastOutSlowIn,
+                                  enlargeCenterPage: true,
+                                  scrollDirection: Axis.horizontal,
+                                )));
+                  }),
                 ),
                 Align(
                     alignment: Alignment.centerLeft,
@@ -339,16 +352,16 @@ class _HomepageState extends State<Homepage> {
                                                                   ["image"]))),
                                                 ),
                                                 Padding(
+                                                  padding: const EdgeInsets.only(top: 2.0),
+                                                  child: Text("Latto T39GY Dark Grey"),
+                                                ),
+                                                Padding(
                                                   padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Align(
-                                                    alignment:
-                                                        Alignment.bottomLeft,
-                                                    child: Text(
-                                                      "Rs.100",
-                                                      style: TextStyle(
-                                                          color: Colors.red),
-                                                    ),
+                                                      const EdgeInsets.only(bottom: 5.0),
+                                                  child: Text(
+                                                    "Rs.100",
+                                                    style: TextStyle(
+                                                        color: Colors.red,fontSize: 15),
                                                   ),
                                                 ),
                                                 Row(
@@ -367,18 +380,26 @@ class _HomepageState extends State<Homepage> {
                                                         width: 100,
                                                         decoration: BoxDecoration(
                                                             color: Colors.red,
-                                                            borderRadius:
-                                                                BorderRadius.only(
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            50))),
+                                                            borderRadius: BorderRadius.only(
+                                                                bottomRight:
+                                                                    Radius
+                                                                        .circular(
+                                                                            50),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        10),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        10))),
                                                         child: Center(
-                                                          child: Text(
-                                                            "View Details",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 12),
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(right: 8.0),
+                                                            child: Text(
+                                                              "View Details",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
@@ -389,17 +410,25 @@ class _HomepageState extends State<Homepage> {
                                                       decoration: BoxDecoration(
                                                           color:
                                                               Colors.deepPurple,
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                                  topLeft: Radius
+                                                          borderRadius: BorderRadius.only(
+                                                              topRight: Radius
+                                                                  .circular(10),
+                                                              bottomRight:
+                                                                  Radius
                                                                       .circular(
-                                                                          50))),
+                                                                          10),
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                      50))),
                                                       child: Center(
-                                                        child: Text(
-                                                          "Buy Now",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.only(left: 8.0),
+                                                          child: Text(
+                                                            "Buy Now",
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.white),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
@@ -525,13 +554,16 @@ class _HomepageState extends State<Homepage> {
                                                     .docs[index]["image"]))),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Align(
-                                          alignment: Alignment.bottomLeft,
-                                          child: Text(
-                                            "Rs.100",
-                                            style: TextStyle(color: Colors.red),
-                                          ),
+                                        padding: const EdgeInsets.only(top: 2.0),
+                                        child: Text("Latto T39GY Dark Grey"),
+                                      ),
+                                      Padding(
+                                        padding:
+                                        const EdgeInsets.only(bottom: 5.0),
+                                        child: Text(
+                                          "Rs.100",
+                                          style: TextStyle(
+                                              color: Colors.red,fontSize: 15),
                                         ),
                                       ),
                                       Row(
@@ -541,7 +573,8 @@ class _HomepageState extends State<Homepage> {
                                               Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                      builder: (context) =>
+                                                      builder:
+                                                          (context) =>
                                                           ViewDetails()));
                                             },
                                             child: Container(
@@ -549,17 +582,26 @@ class _HomepageState extends State<Homepage> {
                                               width: 100,
                                               decoration: BoxDecoration(
                                                   color: Colors.red,
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  50))),
+                                                  borderRadius: BorderRadius.only(
+                                                      bottomRight:
+                                                      Radius
+                                                          .circular(
+                                                          50),
+                                                      topLeft: Radius
+                                                          .circular(
+                                                          10),
+                                                      bottomLeft: Radius
+                                                          .circular(
+                                                          10))),
                                               child: Center(
-                                                child: Text(
-                                                  "View Details",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  child: Text(
+                                                    "View Details",
+                                                    style: TextStyle(
+                                                        color: Colors
+                                                            .white,),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -568,15 +610,27 @@ class _HomepageState extends State<Homepage> {
                                             height: 40,
                                             width: 100,
                                             decoration: BoxDecoration(
-                                                color: Colors.deepPurple,
+                                                color:
+                                                Colors.deepPurple,
                                                 borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(50))),
-                                            child: Center(
-                                              child: Text(
-                                                "Buy Now",
-                                                style: TextStyle(
-                                                    color: Colors.white),
+                                                    topRight: Radius
+                                                        .circular(10),
+                                                    bottomRight:
+                                                    Radius
+                                                        .circular(
+                                                        10),
+                                                    topLeft: Radius
+                                                        .circular(
+                                                        50))),
+                                            child: Align(alignment: Alignment.center,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(left: 8.0),
+                                                child: Text(
+                                                  "Buy Now",
+                                                  style: TextStyle(
+                                                      color:
+                                                      Colors.white),
+                                                ),
                                               ),
                                             ),
                                           ),

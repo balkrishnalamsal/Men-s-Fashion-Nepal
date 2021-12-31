@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:menfashionnepal/ProviderFile/PageSliderProvider.dart';
 import 'package:menfashionnepal/ProviderFile/Provider_Data.dart';
 import 'dart:ui';
 import 'package:provider/provider.dart';
@@ -18,10 +19,19 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ChangeNotifierProvider(
-          create: (context) => Calculation(),
+      body: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<Calculation>(
+            create: (_) => Calculation(),
+          ),
+          ChangeNotifierProvider<PageSlider>(
+            create: (_) => PageSlider(),
+          ),
+
+
+        ],
           builder: (context, con) {
-            context.read<Calculation>().Pageslider();
+          context.read<PageSlider>().Pageslider();
             return ListView(
               children: [
                 Padding(
@@ -66,11 +76,18 @@ class _HomepageState extends State<Homepage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
-                        child: Icon(
-                          CupertinoIcons.text_alignleft,
-                          size: 25,
-                          color: Colors.deepOrangeAccent,
-                          semanticLabel: "Menu",
+                        child: GestureDetector(
+                          onTap: (){
+                            setState(() {
+
+                            });
+                          },
+                          child: Icon(
+                            CupertinoIcons.text_alignleft,
+                            size: 25,
+                            color: Colors.deepOrangeAccent,
+                            semanticLabel: "Menu",
+                          ),
                         ),
                       ),
                     ],
@@ -85,63 +102,70 @@ class _HomepageState extends State<Homepage> {
                       height: MediaQuery.of(context).size.height * 0.28,
                       child: CarouselSlider(
                           items: [
-                            Consumer<Calculation>(
+                            Consumer<PageSlider>(
                                 builder: (context, todo, child) {
-                              return Container(
-                                height: MediaQuery.of(context).size.height,
-                                width: MediaQuery.of(context).size.width,
-                                color: Colors.deepPurple,
-                              );
-                            }),
-                            Consumer<Calculation>(
-                                builder: (context, todo, child) {
-                                  return Container(
-                                    height: MediaQuery.of(context).size.height,
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(todo.imageone.toString()),
-                                      )
-                                    ),
-                                  );
-                                }),
-                            Consumer<Calculation>(
-                                builder: (context, todo, child) {
-                                  return Container(
-                                    height: MediaQuery.of(context).size.height,
-                                    width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                      image: NetworkImage(todo.imageone.toString()),
-                                      )
-                                      )
-                                  );
-                                }),
-
-                            Consumer<Calculation>(
-                                builder: (context, todo, child) {
-                                  return Container(
+                                  return GestureDetector(
+                                      onTap: (){
+                                        todo.PageSliderGetImage("PageSlider","1");
+                                      },
+                                    child: Container(
                                       height: MediaQuery.of(context).size.height,
                                       width: MediaQuery.of(context).size.width,
                                       decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: NetworkImage(todo.imageone.toString()),
-                                          )
-                                      )
+                                        image: DecorationImage(
+                                          image: NetworkImage(todo.imageone.toString()),
+                                        )
+                                      ),
+                                    ),
                                   );
                                 }),
-                            Consumer<Calculation>(
+                            Consumer<PageSlider>(
+                                builder: (context, todo, child) {
+                                  return GestureDetector(
+                                      onTap: (){
+                                        todo.PageSliderGetImage("PageSlider","2");
+                                      },
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height,
+                                      width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                        image: NetworkImage(todo.imagetwo.toString()),
+                                        )
+                                        )
+                                    ),
+                                  );
+                                }),
+
+                            Consumer<PageSlider>(
                                 builder: (context, todo, child) {
                                   return GestureDetector(
                                     onTap: (){
-
+                                      todo.PageSliderGetImage("PageSlider","3");
                                     },
                                     child: Container(
                                         height: MediaQuery.of(context).size.height,
                                         width: MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
-                                              image: NetworkImage(todo.imageone.toString()),
+                                              image: NetworkImage(todo.imagethree.toString()),
+                                            )
+                                        )
+                                    ),
+                                  );
+                                }),
+                            Consumer<PageSlider>(
+                                builder: (context, todo, child) {
+                                  return GestureDetector(
+                                    onTap: (){
+                                      todo.PageSliderGetImage("PageSlider","4");
+                                    },
+                                    child: Container(
+                                        height: MediaQuery.of(context).size.height,
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage(todo.imagefour.toString()),
                                             )
                                         )
                                     ),

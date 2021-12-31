@@ -20,6 +20,9 @@ class Calculation with ChangeNotifier {
   String?imagethree;
   String?imagefour;
 
+
+
+
   getImage(String Section) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -62,89 +65,4 @@ class Calculation with ChangeNotifier {
     });
   }
 
-
-  //Page Slider
-
-  Pageslider() async {
-    final QuerySnapshot resutquery =
-        await FirebaseFirestore.instance.collection("PageSlider").get();
-    final List<DocumentSnapshot> documentsnapshot = resutquery.docs;
-    if (documentsnapshot.length == 0) {
-    } else {
-      imageone = documentsnapshot[0]["one"];
-      imagetwo = documentsnapshot[0]["two"];
-      imagethree = documentsnapshot[0]["three"];
-      imagefour = documentsnapshot[0]["four"];
-      notifyListeners();
-
-    }
-  }
-
-  PageSliderGetImage(String Section,String index) async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      crop = (await ImageCropper.cropImage(
-          sourcePath: pickedFile.path,
-          aspectRatio: CropAspectRatio(ratioX: 5, ratioY: 4),
-          compressQuality: 50,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarTitle: "Crop",
-          )))!;
-      cropimage = crop;
-      PageSliderImageUploading(cropimage!, Section,index);
-    }
-  }
-
-  PageSliderImageUploading(File image, String Section,String index) async {
-    if (image == null) {
-      value = "False";
-      Fluttertoast.showToast(msg: "Please select image ");
-    }
-    String postid = Uuid().v4();
-    notifyListeners();
-    var snapshot =
-    await storage.ref().child(Section).child('$postid').putFile(image);
-    var downloadUrl = await snapshot.ref.getDownloadURL();
-
-    PageSliderFirebaseUploading(downloadUrl, Section,index);
-  }
-  PageSliderFirebaseUploading(String downloadurl, String Section,String index) {
-    if(index=="1"){
-      FirebaseFirestore.instance.collection(Section).doc("one").set({
-        "one": downloadurl,
-        "two":downloadurl,
-        "three":downloadurl,
-        "four":downloadurl,
-      });
-    }else if(index=="2"){
-
-      FirebaseFirestore.instance.collection(Section).doc("one").update({
-        "one": downloadurl,
-        "two":"",
-        "three":"",
-        "four":"",
-
-      });
-
-    }else if(index=="3"){
-
-      FirebaseFirestore.instance.collection(Section).doc("one").update({
-        "one": downloadurl,
-        "two":"",
-        "three":"",
-        "four":"",
-      });
-    }else if(index=="4"){
-      FirebaseFirestore.instance.collection(Section).doc("one").update({
-        "one": downloadurl,
-        "two":"",
-        "three":"",
-        "four":"",
-      });
-    }
-
-  }
 }

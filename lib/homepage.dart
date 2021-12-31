@@ -96,10 +96,12 @@ class _HomepageState extends State<Homepage> {
 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
+                  child: Consumer<PageSlider>(
+            builder: (context,tod,child){
+                   return (tod.imageone==null)? Text("data"):Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10)),
-                      height: MediaQuery.of(context).size.height * 0.28,
+                      height: MediaQuery.of(context).size.height * 0.26,
                       child: CarouselSlider(
                           items: [
                             Consumer<PageSlider>(
@@ -111,8 +113,9 @@ class _HomepageState extends State<Homepage> {
                                     child: Container(
                                       height: MediaQuery.of(context).size.height,
                                       width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
+                                      decoration: BoxDecoration(     borderRadius: BorderRadius.circular(10),
                                         image: DecorationImage(
+                                          fit: BoxFit.fill,
                                           image: NetworkImage(todo.imageone.toString()),
                                         )
                                       ),
@@ -129,7 +132,9 @@ class _HomepageState extends State<Homepage> {
                                       height: MediaQuery.of(context).size.height,
                                       width: MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
                                         image: DecorationImage(
+                                          fit: BoxFit.fill,
                                         image: NetworkImage(todo.imagetwo.toString()),
                                         )
                                         )
@@ -147,7 +152,9 @@ class _HomepageState extends State<Homepage> {
                                         height: MediaQuery.of(context).size.height,
                                         width: MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
                                             image: DecorationImage(
+                                              fit: BoxFit.fill,
                                               image: NetworkImage(todo.imagethree.toString()),
                                             )
                                         )
@@ -164,7 +171,9 @@ class _HomepageState extends State<Homepage> {
                                         height: MediaQuery.of(context).size.height,
                                         width: MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
                                             image: DecorationImage(
+                                              fit: BoxFit.fill,
                                               image: NetworkImage(todo.imagefour.toString()),
                                             )
                                         )
@@ -174,18 +183,21 @@ class _HomepageState extends State<Homepage> {
                           ],
                           options: CarouselOptions(
                             aspectRatio: 16 / 9,
-                            viewportFraction: 0.8,
+                            viewportFraction: 0.8 ,
                             initialPage: 0,
                             enableInfiniteScroll: true,
                             reverse: false,
                             autoPlay: true,
-                            autoPlayInterval: Duration(seconds: 2),
+                            autoPlayInterval: Duration(seconds: 5),
                             autoPlayAnimationDuration:
                                 Duration(milliseconds: 800),
                             autoPlayCurve: Curves.fastOutSlowIn,
                             enlargeCenterPage: true,
                             scrollDirection: Axis.horizontal,
-                          ))),
+                          ))
+                     );
+                  }
+                ),
                 ),
                 Align(
                     alignment: Alignment.centerLeft,

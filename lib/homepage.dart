@@ -1,7 +1,9 @@
-import 'package:firebase_database/ui/firebase_animated_list.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:menfashionnepal/ProviderFile/Provider_Data.dart';
 import 'dart:ui';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:menfashionnepal/ViewDetails.dart';
@@ -18,7 +20,10 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(
+      body: ChangeNotifierProvider(
+        create:(context)=>Calculation(),
+        builder: (context,con){
+        return  ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -79,11 +84,91 @@ class _HomepageState extends State<Homepage> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.red,
                   borderRadius: BorderRadius.circular(10)
               ),
               height: MediaQuery.of(context).size.height * 0.28,
-              width: MediaQuery.of(context).size.width * 0.95,
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance.collection("Trends").limit(5).snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot){
+                  if(!snapshot.hasData){
+                    return Center(child: CircularProgressIndicator());
+                  }else {
+                  return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (_,index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 160,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(width: 0.2,color: Colors.grey),
+                                    image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                        image: NetworkImage(snapshot.data!.docs[index]["image"])
+                                    )
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Text("Rs.100",style: TextStyle(color: Colors.red),),),
+                              ),
+
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: (){
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewDetails()));
+                                    },
+                                    child: Container(
+                                      height: 40,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius: BorderRadius.only(bottomRight: Radius.circular(50),bottomLeft: Radius.circular(10),topLeft: Radius.circular(10))
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "View Details",style: TextStyle(color: Colors.white,fontSize: 12),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 40,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        color: Colors.deepPurple,
+                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(50),topRight: Radius.circular(10),bottomRight: Radius.circular(10))
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Buy Now",style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+
+                            ],
+                          ),
+                        );
+                        }
+
+                      );
+                  }
+
+                },
+              ),
             ),
           ),
           Align(
@@ -94,8 +179,8 @@ class _HomepageState extends State<Homepage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
-                      onLongPress: () {
-
+                      onTap: () {
+                        context.read<Calculation>().getImage("Trends");
                       },
                       child: Text(
                         "Trends",
@@ -151,141 +236,114 @@ class _HomepageState extends State<Homepage> {
 
           //Trends
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.31,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10)
-              ),
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: AssetImage("Assets/jutta.jpg")
-                              )
-                          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.29,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10)
+            ),
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.28,
+                        width: MediaQuery.of(context).size.width,
+                        child: StreamBuilder(
+                          stream: FirebaseFirestore.instance.collection("Trends").limit(5).snapshots(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<QuerySnapshot> snapshot){
+                            if(!snapshot.hasData){
+                              return Container(
+                                  height: 500,
+                                  width: 500,
+                                  child: Center(child: CircularProgressIndicator(color: Colors.red,)));}
+                            else{
+                            return ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data!.docs.length,
+                                itemBuilder: (_,index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: 160,
+                                          width: 200,
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              border: Border.all(width: 0.2,color: Colors.grey),
+                                              image: DecorationImage(
+                                                fit: BoxFit.fill,
+                                                  image: NetworkImage(snapshot.data!.docs[index]["image"])
+                                              )
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Text("Rs.100",style: TextStyle(color: Colors.red),),),
+                                        ),
 
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          width: MediaQuery.of(context).size.width * 0.5,
+                                        Row(
+                                          children: [
+                                            GestureDetector(
+                                              onTap: (){
+                                                Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewDetails()));
+                                              },
+                                              child: Container(
+                                                height: 40,
+                                                width: 100,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.red,
+                                                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    "View Details",style: TextStyle(color: Colors.white,fontSize: 12),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              height: 40,
+                                              width: 100,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.deepPurple,
+                                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(50))
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  "Buy Now",style: TextStyle(color: Colors.white),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+
+                                      ],
+                                    ),
+                                  );
+
+                                });
+
+                              }
+                          },
                         ),
+                      ),
 
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text("Rs.100",style: TextStyle(color: Colors.red),),),
-                        ),
 
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewDetails()));
-                              },
-                              child: Container(
-                                height: 40,
-                                width: 100,
-                                decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "View Details",style: TextStyle(color: Colors.white,fontSize: 12),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 40,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
-                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(50))
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Buy Now",style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                      ],
-                    ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: AssetImage("Assets/jutta.jpg")
-                              )
-                          ),
+                ),
 
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          width: MediaQuery.of(context).size.width * 0.5,
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text("Rs.100",style: TextStyle(color: Colors.red),),),
-                        ),
-
-                        Row(
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "View Details",style: TextStyle(color: Colors.white,fontSize: 12),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 40,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                  color: Colors.deepPurple,
-                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(50))
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Buy Now",style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                      ],
-                    ),
-                  ),
-
-                ],
-              ),
+              ],
             ),
           ),
           // NEw
@@ -297,7 +355,8 @@ class _HomepageState extends State<Homepage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
-                      onLongPress: () {
+                      onTap: () {
+                        context.read<Calculation>().getImage("New");
                       },
                       child: Text(
                         "New",
@@ -353,9 +412,92 @@ class _HomepageState extends State<Homepage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              color: Colors.red,
               height: MediaQuery.of(context).size.height * 0.28,
               width: MediaQuery.of(context).size.width * 0.95,
+              child: StreamBuilder(
+                stream: FirebaseFirestore.instance.collection("New").limit(5).snapshots(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot){
+                  if(!snapshot.hasData){
+                    return Container(
+                        height: 500,
+                        width: 500,
+                        child: Center(child: CircularProgressIndicator(color: Colors.red,)));}
+                  else{
+                    return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (_,index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: 160,
+                                  width: 200,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(width: 0.2,color: Colors.grey),
+                                      image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: NetworkImage(snapshot.data!.docs[index]["image"])
+                                      )
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Text("Rs.100",style: TextStyle(color: Colors.red),),),
+                                ),
+
+                                Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewDetails()));
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "View Details",style: TextStyle(color: Colors.white,fontSize: 12),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 40,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                          color: Colors.deepPurple,
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(50))
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Buy Now",style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+
+                              ],
+                            ),
+                          );
+
+                        });
+
+                  }
+                },
+              ),
             ),
           ),
 
@@ -432,6 +574,8 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
         ],
+      );
+        }
       ),
     );
   }

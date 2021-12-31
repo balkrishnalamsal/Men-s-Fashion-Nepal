@@ -1,11 +1,12 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Calculation with ChangeNotifier{
 
@@ -18,7 +19,7 @@ class Calculation with ChangeNotifier{
   final picker = ImagePicker();
 
 
-  getImage() async {
+  getImage(String Section) async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       crop = (await ImageCropper.cropImage(
@@ -32,29 +33,37 @@ class Calculation with ChangeNotifier{
             toolbarTitle: "Crop",
           )))!;
          cropimage = crop;
-        notifyListeners();
-        ImageUploading();
+        ImageUploading(cropimage!,Section);
 
     }
   }
 
-  ImageUploading() async {
-    if (cropimage == null) {
+  ImageUploading(File image,String Section) async {
+    if (image == null) {
       value = "False";
       Fluttertoast.showToast(msg: "Please select image ");
     }
     String postid = Uuid().v4();
+    notifyListeners();
     var snapshot = await storage
         .ref()
-        .child("MainImage")
+        .child(Section)
         .child('$postid')
-        .putFile(cropimage!);
+        .putFile(image);
     var downloadUrl = await snapshot.ref.getDownloadURL();
-        notifyListeners();
-      imageUrl = downloadUrl;
+
+    FirebaseUploading(downloadUrl,Section);
 
   }
 
+
+  FirebaseUploading(String downloadurl,String Section){
+    String postid = Uuid().v4();
+    FirebaseFirestore.instance.collection(Section).doc(postid).set({
+      "image":downloadurl,
+      "postid":postid,
+    });
+  }
 
 
 

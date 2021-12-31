@@ -32,7 +32,7 @@ class _Navigation_PageState extends State<Navigation_Page> {
     Homepage(),
     Center(child: Text("Mahendra")),
     Center(child: Text("bikash")),
-
+    Center(child: Text("bikash")),
   ];
 
   @override

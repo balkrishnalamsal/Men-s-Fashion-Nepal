@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "739634893962",
-    "firebase_url": "https://menfashionnepal-default-rtdb.firebaseio.com",
-    "project_id": "menfashionnepal",
-    "storage_bucket": "menfashionnepal.appspot.com"
+    "project_number": "150305650984",
+    "firebase_url": "https://fashionapp-f5876-default-rtdb.firebaseio.com",
+    "project_id": "fashionapp-f5876",
+    "storage_bucket": "fashionapp-f5876.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:739634893962:android:f15d259503dea7b59bc973",
+        "mobilesdk_app_id": "1:150305650984:android:a7735193c9665acf80781d",
         "android_client_info": {
           "package_name": "com.menfashionnepal.menfashionnepal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "739634893962-tk9kfr3tlapfjfjo9bhheh1bpakrv2ub.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.menfashionnepal.menfashionnepal",
-            "certificate_hash": "3b1089468133df3bcbbe24d484714ecb6fa93d91"
-          }
-        },
-        {
-          "client_id": "739634893962-eev97rvkl9q85mhdvkd1gtom98uijupb.apps.googleusercontent.com",
+          "client_id": "150305650984-9ntb963tr76ebqfusa51ask0cbm37i3m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBKWqRKBgBMrN8nEKJmrUN4POn5nTVGDM4"
+          "current_key": "AIzaSyC0dXhzFMCFceqiG_FArC6UPRo2Y0_UHrY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "739634893962-eev97rvkl9q85mhdvkd1gtom98uijupb.apps.googleusercontent.com",
+              "client_id": "150305650984-9ntb963tr76ebqfusa51ask0cbm37i3m.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

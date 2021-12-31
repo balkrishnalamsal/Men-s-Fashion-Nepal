@@ -75,7 +75,7 @@ class _HomepageState extends State<Homepage> {
                             )),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
                           onTap: (){
                             setState(() {
@@ -83,14 +83,30 @@ class _HomepageState extends State<Homepage> {
                             });
                           },
                           child: Icon(
-                            CupertinoIcons.text_alignleft,
+                            CupertinoIcons.cart,
                             size: 25,
                             color: Colors.deepOrangeAccent,
                             semanticLabel: "Menu",
                           ),
                         ),
                       ),
+
                     ],
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0,right: 8),
+                  child: CupertinoTextField(
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 0.2,color: Colors.grey),
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                  placeholder: "Search",
+                    prefix: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Icon(CupertinoIcons.search,color: Colors.grey,),
+                    ),
                   ),
                 ),
 
@@ -101,7 +117,7 @@ class _HomepageState extends State<Homepage> {
                    return (tod.imageone==null)? Text("data"):Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10)),
-                      height: MediaQuery.of(context).size.height * 0.26,
+                      height: MediaQuery.of(context).size.height * 0.34,
                       child: CarouselSlider(
                           items: [
                             Consumer<PageSlider>(
@@ -183,12 +199,13 @@ class _HomepageState extends State<Homepage> {
                           ],
                           options: CarouselOptions(
                             aspectRatio: 16 / 9,
-                            viewportFraction: 0.8 ,
+                            viewportFraction: 0.9 ,
                             initialPage: 0,
+                            height: MediaQuery.of(context).size.height*0.3,
                             enableInfiniteScroll: true,
                             reverse: false,
                             autoPlay: true,
-                            autoPlayInterval: Duration(seconds: 5),
+                            autoPlayInterval: Duration(seconds: 3),
                             autoPlayAnimationDuration:
                                 Duration(milliseconds: 800),
                             autoPlayCurve: Curves.fastOutSlowIn,
@@ -263,7 +280,7 @@ class _HomepageState extends State<Homepage> {
                 //Trends
 
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.29,
+                  height: MediaQuery.of(context).size.height * 0.32,
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(10)),
                   child: ListView(
@@ -275,7 +292,7 @@ class _HomepageState extends State<Homepage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.28,
+                              height: MediaQuery.of(context).size.height * 0.30,
                               width: MediaQuery.of(context).size.width,
                               child: StreamBuilder(
                                 stream: FirebaseFirestore.instance
@@ -466,8 +483,7 @@ class _HomepageState extends State<Homepage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.28,
-                    width: MediaQuery.of(context).size.width * 0.95,
+                    height: MediaQuery.of(context).size.height * 0.35,
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection("New")

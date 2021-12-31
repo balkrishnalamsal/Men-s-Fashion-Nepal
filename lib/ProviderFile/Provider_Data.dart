@@ -15,11 +15,10 @@ class Calculation with ChangeNotifier {
   File? cropimage;
   FirebaseStorage storage = FirebaseStorage.instance;
   final picker = ImagePicker();
-  String ? imageone;
-  String ? imagetwo;
-  String ? imagethree;
-  String ? imagefour;
-
+ String?imageone;
+  String? imagetwo;
+  String?imagethree;
+  String?imagefour;
 
   getImage(String Section) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -113,32 +112,39 @@ class Calculation with ChangeNotifier {
     PageSliderFirebaseUploading(downloadUrl, Section,index);
   }
   PageSliderFirebaseUploading(String downloadurl, String Section,String index) {
-    String postid = Uuid().v4();
-
-    if(index==0){
-      FirebaseFirestore.instance.collection(Section).doc(postid).update({
+    if(index=="1"){
+      FirebaseFirestore.instance.collection(Section).doc("one").set({
         "one": downloadurl,
+        "two":downloadurl,
+        "three":downloadurl,
+        "four":downloadurl,
       });
-    }else if(index==1){
+    }else if(index=="2"){
 
-      FirebaseFirestore.instance.collection(Section).doc(postid).update({
-        "two": postid,
-
-      });
-
-    }else if(index==2){
-
-      FirebaseFirestore.instance.collection(Section).doc(postid).update({
-        "three": downloadurl,
+      FirebaseFirestore.instance.collection(Section).doc("one").update({
+        "one": downloadurl,
+        "two":"",
+        "three":"",
+        "four":"",
 
       });
-    }else if(index==3){
 
-      FirebaseFirestore.instance.collection(Section).doc(postid).update({
-        "four": postid,
+    }else if(index=="3"){
+
+      FirebaseFirestore.instance.collection(Section).doc("one").update({
+        "one": downloadurl,
+        "two":"",
+        "three":"",
+        "four":"",
+      });
+    }else if(index=="4"){
+      FirebaseFirestore.instance.collection(Section).doc("one").update({
+        "one": downloadurl,
+        "two":"",
+        "three":"",
+        "four":"",
       });
     }
 
   }
-
 }

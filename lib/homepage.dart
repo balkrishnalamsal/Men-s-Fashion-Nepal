@@ -805,6 +805,7 @@ class _HomepageState extends State<Homepage> {
                       } else {
                         return GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                             scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
                             itemCount: snapshot.data!.docs.length,
                             itemBuilder: (_, index) {
                               return Padding(

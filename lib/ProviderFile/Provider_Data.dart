@@ -65,7 +65,7 @@ class Calculation with ChangeNotifier {
       "sizefour": "",
       "sizefive": "",
       "name": "",
-      "stocks": "",
+      "stocks": "- In Stocks",
       "rating": "",
       "brand": "",
       "model": "",
@@ -85,6 +85,7 @@ class Calculation with ChangeNotifier {
       String rating,
       String Sizetwo,
       String Sizethree,
+      String sizesix,
       String sizefour,
       String sizefive) {
     FirebaseFirestore.instance.collection(Section).doc(postid).update({
@@ -95,8 +96,8 @@ class Calculation with ChangeNotifier {
       "sizethree": Sizethree,
       "sizefour": sizefour,
       "sizefive": sizefive,
+      "sizesix":sizesix,
       "name": name,
-      "stocks": stocks,
       "rating": rating,
       "brand": brand,
       "model": model,

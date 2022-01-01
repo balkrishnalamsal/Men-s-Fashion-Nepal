@@ -334,36 +334,65 @@ class _HomepageState extends State<Homepage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Container(
-                                                  height: 160,
-                                                  width: 200,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      border: Border.all(
-                                                          width: 0.2,
-                                                          color: Colors.grey),
-                                                      image: DecorationImage(
-                                                          fit: BoxFit.fill,
-                                                          image: NetworkImage(
-                                                              snapshot.data!
-                                                                          .docs[
-                                                                      index]
-                                                                  ["image"]))),
+                                                GestureDetector(
+                                                  onLongPress: (){
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(postid: snapshot.data!.docs[index]["postid"],Section: "Trends",),));
+                                                  },
+                                                  child: Container(
+                                                    height: 160,
+                                                    width: 200,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                10),
+                                                        border: Border.all(
+                                                            width: 0.2,
+                                                            color: Colors.grey),
+                                                        image: DecorationImage(
+                                                            fit: BoxFit.fill,
+                                                            image: NetworkImage(
+                                                                snapshot.data!
+                                                                            .docs[
+                                                                        index]
+                                                                    ["image"]))),
+                                                  ),
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets.only(top: 2.0),
-                                                  child: Text("Latto T39GY Dark Grey"),
+                                                  child: Text(snapshot.data!.docs[index]["name"]),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(bottom: 5.0),
-                                                  child: Text(
-                                                    "Rs.100",
-                                                    style: TextStyle(
-                                                        color: Colors.red,fontSize: 15),
-                                                  ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "Rs."+ snapshot.data!.docs[index]["actualprize"],
+                                                          style: TextStyle(
+                                                              color: Colors.red,fontSize: 15,decoration: TextDecoration.lineThrough),
+                                                        ),
+
+                                                        Padding(
+                                                          padding: const EdgeInsets.all(8.0),
+                                                          child: Text(
+                                                            "Rs."+ snapshot.data!.docs[index]["discountprize"],
+                                                            style: TextStyle(
+                                                              color: Colors.red,fontSize: 15,),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+
+                                                    Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Text(snapshot.data!.docs[index]["stocks"],
+                                                        style: TextStyle(
+                                                          color: Colors.green,fontSize: 15,),
+                                                      ),
+                                                    ),
+
+                                                  ],
+
                                                 ),
                                                 Row(
                                                   children: [
@@ -374,7 +403,7 @@ class _HomepageState extends State<Homepage> {
                                                             MaterialPageRoute(
                                                                 builder:
                                                                     (context) =>
-                                                                        ViewDetails()));
+                                                                        ViewDetails(Section:"Trends",postid:snapshot.data!.docs[index]["postid"],)));
                                                       },
                                                       child: Container(
                                                         height: 40,
@@ -542,7 +571,7 @@ class _HomepageState extends State<Homepage> {
                                     children: [
                                       GestureDetector(
                                         onLongPress: (){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(postid: snapshot.data!.docs[index]["postid"],Section: "New",),));
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(Section:"New",postid: snapshot.data!.docs[index]["postid"],)));
                                         },
                                         child: Container(
                                           height: 160,
@@ -560,17 +589,40 @@ class _HomepageState extends State<Homepage> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 2.0),
-                                        child: Text("Latto T39GY Dark Grey"),
+                                        padding: const EdgeInsets.only(top: 5.0),
+                                        child: Text(snapshot.data!.docs[index]["name"]),
                                       ),
-                                      Padding(
-                                        padding:
-                                        const EdgeInsets.only(bottom: 5.0),
-                                        child: Text(
-                                          "Rs.100",
-                                          style: TextStyle(
-                                              color: Colors.red,fontSize: 15),
-                                        ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "Rs."+ snapshot.data!.docs[index]["actualprize"],
+                                                style: TextStyle(
+                                                    color: Colors.red,fontSize: 15,decoration: TextDecoration.lineThrough),
+                                              ),
+
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  "Rs."+ snapshot.data!.docs[index]["discountprize"],
+                                                  style: TextStyle(
+                                                    color: Colors.red,fontSize: 15,),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(snapshot.data!.docs[index]["stocks"],
+                                              style: TextStyle(
+                                                color: Colors.green,fontSize: 15,),
+                                            ),
+                                          ),
+
+                                        ],
+
                                       ),
                                       Row(
                                         children: [
@@ -581,7 +633,7 @@ class _HomepageState extends State<Homepage> {
                                                   MaterialPageRoute(
                                                       builder:
                                                           (context) =>
-                                                          ViewDetails()));
+                                                          ViewDetails(Section: "New",postid:snapshot.data!.docs[index]["postid"],)));
                                             },
                                             child: Container(
                                               height: 40,

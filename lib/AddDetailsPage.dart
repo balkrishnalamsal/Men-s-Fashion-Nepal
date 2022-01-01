@@ -27,6 +27,7 @@ class _AddDetailsState extends State<AddDetails> {
   TextEditingController? SizeThree;
   TextEditingController? SizeFour;
   TextEditingController? SizeFive;
+  TextEditingController? SizeSix;
   _AddDetailsState(this.postid, this.Section);
 
   @override
@@ -44,6 +45,7 @@ class _AddDetailsState extends State<AddDetails> {
     SizeThree = TextEditingController();
     SizeFour = TextEditingController();
     SizeFive = TextEditingController();
+    SizeSix = TextEditingController();
   }
 
   @override
@@ -237,6 +239,23 @@ class _AddDetailsState extends State<AddDetails> {
                         placeholder: 'Size',
                         placeholderStyle: TextStyle(color: Colors.grey),
                       )),
+                  Container(
+                      padding: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(),
+                      child: CupertinoTextField(
+                        style: TextStyle(color: Colors.white),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              5,
+                            ),
+                            border: Border.all(width: 0.1, color: Colors.white),
+                            color: Colors.black),
+                        controller: SizeSix,
+                        cursorColor: Colors.white,
+                        placeholder: 'Size',
+                        placeholderStyle: TextStyle(color: Colors.grey),
+                      )),
+
                   ChangeNotifierProvider<Calculation>(
                     create: (_) => Calculation(),
                     builder: (_, context) {
@@ -256,7 +275,7 @@ class _AddDetailsState extends State<AddDetails> {
                                 String sizefour = SizeFour!.text;
                                 String sizefive = SizeFive!.text;
                                 String rating = Rating!.text;
-
+                                String sizesix = SizeSix!.text;
                                 Provider.of<Calculation>(context, listen: false)
                                     .UpdateDetails(
                                         postid!,
@@ -271,6 +290,7 @@ class _AddDetailsState extends State<AddDetails> {
                                         rating,
                                         sizetwo,
                                         sizethree,
+                                        sizesix,
                                         sizefour,
                                         sizefive);
                               },

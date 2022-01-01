@@ -339,8 +339,8 @@ class _HomepageState extends State<Homepage> {
                                                     Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(postid: snapshot.data!.docs[index]["postid"],Section: "Trends",),));
                                                   },
                                                   child: Container(
-                                                    height: 160,
-                                                    width: 200,
+                                                    height: MediaQuery.of(context).size.width*0.4,
+                                                    width: MediaQuery.of(context).size.width*0.52,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius.circular(
@@ -385,9 +385,18 @@ class _HomepageState extends State<Homepage> {
 
                                                     Padding(
                                                       padding: const EdgeInsets.all(8.0),
-                                                      child: Text(snapshot.data!.docs[index]["stocks"],
-                                                        style: TextStyle(
-                                                          color: Colors.green,fontSize: 15,),
+                                                      child: GestureDetector(
+                                                        onLongPress: (){
+                                                          Provider.of<Calculation>(context,listen: false).OutofStock("Trends", snapshot.data!.docs[index]["postid"]);
+                                                        },
+                                                        onTap: (){
+                                                          Provider.of<Calculation>(context,listen: false).InStocks("Trends", snapshot.data!.docs[index]["postid"]);
+                                                        },
+
+                                                        child: Text(snapshot.data!.docs[index]["stocks"],
+                                                          style: TextStyle(
+                                                            color: Colors.green,fontSize: 11,),
+                                                        ),
                                                       ),
                                                     ),
 
@@ -574,8 +583,8 @@ class _HomepageState extends State<Homepage> {
                                         Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(Section:"New",postid: snapshot.data!.docs[index]["postid"],)));
                                         },
                                         child: Container(
-                                          height: 160,
-                                          width: 200,
+                                          height: MediaQuery.of(context).size.width*0.4,
+                                          width: MediaQuery.of(context).size.width*0.52,
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
@@ -615,9 +624,17 @@ class _HomepageState extends State<Homepage> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: Text(snapshot.data!.docs[index]["stocks"],
-                                              style: TextStyle(
-                                                color: Colors.green,fontSize: 15,),
+                                            child: GestureDetector(
+                                              onLongPress: (){
+                                                Provider.of<Calculation>(context,listen: false).OutofStock("New", snapshot.data!.docs[index]["postid"]);
+                                              },
+                                              onTap: (){
+                                                Provider.of<Calculation>(context,listen: false).InStocks("New", snapshot.data!.docs[index]["postid"]);
+                                              },
+                                              child: Text(snapshot.data!.docs[index]["stocks"],
+                                                style: TextStyle(
+                                                  color: Colors.green,fontSize: 11,),
+                                              ),
                                             ),
                                           ),
 

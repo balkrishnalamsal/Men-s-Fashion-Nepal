@@ -155,9 +155,9 @@ class _ViewDetailsState extends State<ViewDetails> {
                                             ),
                                             Padding(
                                               padding:
-                                              const EdgeInsets.only(top: 10.0, left: 5, right: 75),
+                                              const EdgeInsets.only(top: 10.0, left: 5, right: 65),
                                               child: Text(
-                                                "Size:$size",
+                                                "Size : $size",
                                                 style: TextStyle(color: Colors.deepPurple),
                                               ),
                                             ),

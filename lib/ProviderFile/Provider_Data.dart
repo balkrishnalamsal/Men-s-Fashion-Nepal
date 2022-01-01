@@ -104,4 +104,19 @@ class Calculation with ChangeNotifier {
       "model": model,
     });
   }
+
+
+  OutofStock(String section,String postid){
+    FirebaseFirestore.instance.collection(section).doc(postid).update({
+      "stocks":"- Out of stocks"
+    });
+  }
+
+  InStocks(String section,String postid){
+    FirebaseFirestore.instance.collection(section).doc(postid).update({
+      "stocks": "- In Stocks",
+    });
+  }
+
+
 }

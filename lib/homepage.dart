@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:menfashionnepal/AddDetailsPage.dart';
 import 'package:menfashionnepal/ProviderFile/PageSliderProvider.dart';
 import 'package:menfashionnepal/ProviderFile/Provider_Data.dart';
+import 'package:menfashionnepal/ViewMorePage.dart';
 import 'dart:ui';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -258,7 +259,9 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewMore(section: "Trends",)));
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
@@ -504,7 +507,9 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewMore(section: "New",)));
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
@@ -714,7 +719,7 @@ class _HomepageState extends State<Homepage> {
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                             onTap: () {
-                              context.read<Calculation>().getImage("All");
+                              context.read<Calculation>().getImage("All categories");
                             },
                             child: Text(
                               "All categories",
@@ -734,7 +739,9 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewMore(section: "All categories",)));
+                          },
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
@@ -775,7 +782,7 @@ class _HomepageState extends State<Homepage> {
                         borderRadius: BorderRadius.circular(10)),
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance
-                          .collection("All")
+                          .collection("All categories")
                           .limit(10)
                           .snapshots(),
                       builder: (BuildContext context,
@@ -802,7 +809,7 @@ class _HomepageState extends State<Homepage> {
                                     children: [
                                       GestureDetector(
                                         onLongPress: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(Section:"All",postid: snapshot.data!.docs[index]["postid"],)));
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(Section:"All categories",postid: snapshot.data!.docs[index]["postid"],)));
                                         },
                                         child: Center(
                                           child: Container(
@@ -849,10 +856,10 @@ class _HomepageState extends State<Homepage> {
                                               padding: const EdgeInsets.all(8.0),
                                               child: GestureDetector(
                                                 onLongPress: (){
-                                                  Provider.of<Calculation>(context,listen: false).OutofStock("All", snapshot.data!.docs[index]["postid"]);
+                                                  Provider.of<Calculation>(context,listen: false).OutofStock("All categories", snapshot.data!.docs[index]["postid"]);
                                                 },
                                                 onTap: (){
-                                                  Provider.of<Calculation>(context,listen: false).InStocks("All", snapshot.data!.docs[index]["postid"]);
+                                                  Provider.of<Calculation>(context,listen: false).InStocks("All categories", snapshot.data!.docs[index]["postid"]);
                                                 },
                                                 child: Padding(
                                                   padding: const EdgeInsets.only(right: 8.0),
@@ -877,7 +884,7 @@ class _HomepageState extends State<Homepage> {
                                                   MaterialPageRoute(
                                                       builder:
                                                           (context) =>
-                                                          ViewDetails(Section: "All",postid:snapshot.data!.docs[index]["postid"],)));
+                                                          ViewDetails(Section: "All categories",postid:snapshot.data!.docs[index]["postid"],)));
                                             },
                                             child: Container(
                                               height: MediaQuery.of(context).size.height*0.04,

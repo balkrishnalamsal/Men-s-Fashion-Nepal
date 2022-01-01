@@ -252,7 +252,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                 ],
                                               ),
                                             ),
-                                            Container(
+                                           Container(
                                               height: MediaQuery.of(context).size.height * 0.05,
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -266,7 +266,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                           size = snapshot.data!.docs.first["sizeone"];
                                                         });
                                                       },
-                                                      child: Container(
+                                                      child: (snapshot.data!.docs.first["sizeone"].toString()=="")? Text(""):  Container(
                                                         height: 30,
                                                         width: 30,
                                                         decoration: BoxDecoration(
@@ -290,7 +290,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                     },
                                                     child: Padding(
                                                       padding: const EdgeInsets.all(5.0),
-                                                      child: Container(
+                                                      child: (snapshot.data!.docs.first["sizetwo"].toString()=="")? Text(""):  Container(
                                                         height: 30,
                                                         width: 30,
                                                         decoration: BoxDecoration(
@@ -318,7 +318,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                           size = snapshot.data!.docs.first["sizethree"];
                                                         });
                                                       },
-                                                      child: Container(
+                                                      child: (snapshot.data!.docs.first["sizethree"].toString()=="")? Text(""):  Container(
                                                         height: 30,
                                                         width: 30,
                                                         decoration: BoxDecoration(
@@ -351,7 +351,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                     size = snapshot.data!.docs.first["sizefour"];
                                                   });
                                                 },
-                                                child: Container(
+                                                child: (snapshot.data!.docs.first["sizefour"].toString()=="")? Text(""):  Container(
                                                   height: 30,
                                                   width: 30,
                                                   decoration: BoxDecoration(
@@ -375,7 +375,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                               },
                                               child: Padding(
                                                 padding: const EdgeInsets.all(5.0),
-                                                child: Container(
+                                                child: (snapshot.data!.docs.first["sizefive"].toString()=="")? Text(""):  Container(
                                                   height: 30,
                                                   width: 30,
                                                   decoration: BoxDecoration(
@@ -403,7 +403,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                     size = snapshot.data!.docs.first["sizesix"];
                                                   });
                                                 },
-                                                child: Container(
+                                                child: (snapshot.data!.docs.first["sizesix"].toString()=="")? Text(""):  Container(
                                                   height: 30,
                                                   width: 30,
                                                   decoration: BoxDecoration(

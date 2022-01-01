@@ -68,6 +68,7 @@ class Calculation with ChangeNotifier {
       "stocks": "- In Stocks",
       "rating": "",
       "brand": "",
+      "sizesix":"",
       "model": "",
     });
   }

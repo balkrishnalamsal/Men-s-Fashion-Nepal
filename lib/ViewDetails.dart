@@ -13,8 +13,8 @@ class ViewDetails extends StatefulWidget {
 
 class _ViewDetailsState extends State<ViewDetails> {
   String? color = "Blue";
-  int? value = 01;
-  int? size = 7;
+  int? value =1;
+  String ? size;
   var images;
   String section;
   String postid;
@@ -145,16 +145,17 @@ class _ViewDetailsState extends State<ViewDetails> {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                 top: 10.0,
-                                                left: 5,
+                                                left: 8,
+                                                bottom: 10
                                               ),
                                               child: Text(
-                                                "Quantity:",
+                                                "Quantity : $value",
                                                 style: TextStyle(color: Colors.deepPurple),
                                               ),
                                             ),
                                             Padding(
                                               padding:
-                                              const EdgeInsets.only(top: 10.0, left: 5, right: 85),
+                                              const EdgeInsets.only(top: 10.0, left: 5, right: 75),
                                               child: Text(
                                                 "Size:$size",
                                                 style: TextStyle(color: Colors.deepPurple),
@@ -167,7 +168,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Container(
-                                              height: MediaQuery.of(context).size.height * 0.1,
+                                              height: MediaQuery.of(context).size.height * 0.05,
                                               child: Row(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
@@ -176,7 +177,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                     child: GestureDetector(
                                                       onTap: () {
                                                         setState(() {
-                                                          if (value! >= 1) {
+                                                          if (value! >= 2) {
                                                             value = (value! - 1);
                                                           }
                                                         });
@@ -252,8 +253,9 @@ class _ViewDetailsState extends State<ViewDetails> {
                                               ),
                                             ),
                                             Container(
-                                              height: MediaQuery.of(context).size.height * 0.1,
+                                              height: MediaQuery.of(context).size.height * 0.05,
                                               child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
@@ -261,7 +263,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                     child: GestureDetector(
                                                       onTap: () {
                                                         setState(() {
-                                                          size = 6;
+                                                          size = snapshot.data!.docs.first["sizeone"];
                                                         });
                                                       },
                                                       child: Container(
@@ -283,7 +285,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                   GestureDetector(
                                                     onTap: () {
                                                       setState(() {
-                                                        size = 7;
+                                                        size =snapshot.data!.docs.first["sizetwo"];
                                                       });
                                                     },
                                                     child: Padding(
@@ -313,7 +315,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                     child: GestureDetector(
                                                       onTap: () {
                                                         setState(() {
-                                                          size = 8;
+                                                          size = snapshot.data!.docs.first["sizethree"];
                                                         });
                                                       },
                                                       child: Container(
@@ -346,7 +348,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                               child: GestureDetector(
                                                 onTap: () {
                                                   setState(() {
-                                                    size = 6;
+                                                    size = snapshot.data!.docs.first["sizefour"];
                                                   });
                                                 },
                                                 child: Container(
@@ -368,7 +370,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                             GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  size = 7;
+                                                  size =  snapshot.data!.docs.first["sizefive"];
                                                 });
                                               },
                                               child: Padding(
@@ -398,7 +400,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                               child: GestureDetector(
                                                 onTap: () {
                                                   setState(() {
-                                                    size = 8;
+                                                    size = snapshot.data!.docs.first["sizesix"];
                                                   });
                                                 },
                                                 child: Container(

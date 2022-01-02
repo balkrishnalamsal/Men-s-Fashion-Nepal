@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:menfashionnepal/AddDetailsPage.dart';
-import 'package:menfashionnepal/ProviderFile/PageSliderProvider.dart';
 import 'package:menfashionnepal/ProviderFile/Provider_Data.dart';
 import 'package:menfashionnepal/ViewMorePage.dart';
 import 'dart:ui';
@@ -27,12 +26,8 @@ class _HomepageState extends State<Homepage> {
             ChangeNotifierProvider<Calculation>(
               create: (_) => Calculation(),
             ),
-            ChangeNotifierProvider<PageSlider>(
-              create: (_) => PageSlider(),
-            ),
           ],
           builder: (context, con) {
-            context.read<PageSlider>().Pageslider();
             return ListView(
               children: [
                 Padding(
@@ -43,7 +38,10 @@ class _HomepageState extends State<Homepage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
-                            onLongPress: () {},
+                            onLongPress: () {
+                              context.read<Calculation>().getImage("PageSlider"
+                                  );
+                            },
                             child: RichText(
                               softWrap: true,
                               text: TextSpan(children: <TextSpan>[
@@ -109,129 +107,52 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                 ),
-
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Consumer<PageSlider>(builder: (context, tod, child) {
-                    return (tod.imageone == null)
-                        ? Text("data")
-                        : Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10)),
-                            height: MediaQuery.of(context).size.height * 0.34,
-                            child: CarouselSlider(
-                                items: [
-                                  Consumer<PageSlider>(
-                                      builder: (context, todo, child) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        todo.PageSliderGetImage(
-                                            "PageSlider", "1");
-                                      },
-                                      child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: NetworkImage(
-                                                  todo.imageone.toString()),
-                                            )),
-                                      ),
-                                    );
-                                  }),
-                                  Consumer<PageSlider>(
-                                      builder: (context, todo, child) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        todo.PageSliderGetImage(
-                                            "PageSlider", "2");
-                                      },
-                                      child: Container(
-                                          height: MediaQuery.of(context)
-                                              .size
-                                              .height,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              image: DecorationImage(
-                                                fit: BoxFit.fill,
-                                                image: NetworkImage(
-                                                    todo.imagetwo.toString()),
-                                              ))),
-                                    );
-                                  }),
-                                  Consumer<PageSlider>(
-                                      builder: (context, todo, child) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        todo.PageSliderGetImage(
-                                            "PageSlider", "3");
-                                      },
-                                      child: Container(
-                                          height: MediaQuery.of(context)
-                                              .size
-                                              .height,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              image: DecorationImage(
-                                                fit: BoxFit.fill,
-                                                image: NetworkImage(
-                                                    todo.imagethree.toString()),
-                                              ))),
-                                    );
-                                  }),
-                                  Consumer<PageSlider>(
-                                      builder: (context, todo, child) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        todo.PageSliderGetImage(
-                                            "PageSlider", "4");
-                                      },
-                                      child: Container(
-                                          height: MediaQuery.of(context)
-                                              .size
-                                              .height,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              image: DecorationImage(
-                                                fit: BoxFit.fill,
-                                                image: NetworkImage(
-                                                    todo.imagefour.toString()),
-                                              ))),
-                                    );
-                                  }),
-                                ],
-                                options: CarouselOptions(
-                                  aspectRatio: 16 / 9,
-                                  viewportFraction: 0.9,
-                                  initialPage: 0,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.3,
-                                  enableInfiniteScroll: true,
-                                  reverse: false,
-                                  autoPlay: true,
-                                  autoPlayInterval: Duration(seconds: 3),
-                                  autoPlayAnimationDuration:
-                                      Duration(milliseconds: 800),
-                                  autoPlayCurve: Curves.fastOutSlowIn,
-                                  enlargeCenterPage: true,
-                                  scrollDirection: Axis.horizontal,
+                Container(
+                  height: MediaQuery.of(context).size.height*0.3,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("PageSlider")
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) {
+                        return Container(
+                            height: 500,
+                            width: 500,
+                            child: Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.red,
                                 )));
-                  }),
+                      } else {
+                        return
+                          CarouselSlider.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                 decoration: BoxDecoration(
+                                   image: DecorationImage(
+                                     fit: BoxFit.fill,
+                                       image: NetworkImage(snapshot.data!.docs[itemIndex]["image"]))
+                                 ),
+                                ),
+                            options:CarouselOptions(
+                              autoPlay: true,
+                              height: MediaQuery.of(context).size.height*0.3,
+                              enlargeCenterPage: true,
+                              autoPlayInterval: Duration(seconds: 5),
+                              viewportFraction: 0.9,
+                              enableInfiniteScroll: true,
+                              aspectRatio: 2.0,
+                              initialPage: 0,
+                            ),
+                          );
+
+                      }
+                    },
+                  ),
                 ),
+
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

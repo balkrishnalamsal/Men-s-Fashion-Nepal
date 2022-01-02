@@ -138,12 +138,9 @@ class _ViewMoreState extends State<ViewMore> {
                                             Provider.of<Calculation>(context,listen: false).InStocks(section!, snapshot.data!.docs[index]["postid"]);
                                           },
 
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(right: 8.0),
-                                            child: Text(snapshot.data!.docs[index]["stocks"],
-                                              style: TextStyle(
-                                                color: Colors.green,fontSize: 11,),
-                                            ),
+                                          child: Text(snapshot.data!.docs[index]["stocks"],
+                                            style: TextStyle(
+                                              color: Colors.green,fontSize: 11,),
                                           ),
                                         ),
 

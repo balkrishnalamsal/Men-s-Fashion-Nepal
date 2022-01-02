@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -19,7 +20,10 @@ class Calculation with ChangeNotifier {
   String? imagetwo;
   String? imagethree;
   String? imagefour;
-
+  List<Widget> list=<Widget>[];
+   List get listitem => list;
+   int quantity=1;
+   int get Qunatity => quantity;
   getImage(String Section) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -167,6 +171,34 @@ class Calculation with ChangeNotifier {
 
     });
   }
+
+
+
+
+  AddToCart(String image,String name,String size,String discountrate,int Quantity){
+    list.add(Container(
+      height: 500,
+      width: 500,
+      color: Colors.blue,
+      child: Text(image),
+    ));
+    notifyListeners();
+  }
+
+
+  Decrement(){
+
+      if (quantity>= 2) {
+        quantity = (quantity - 1);
+      }
+      notifyListeners();
+  }
+
+  Increment(){
+      quantity = (quantity + 1);
+    notifyListeners();
+  }
+
 
 
 }

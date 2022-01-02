@@ -70,6 +70,11 @@ class Calculation with ChangeNotifier {
       "brand": "",
       "sizesix":"",
       "model": "",
+    }).whenComplete(() {
+      FirebaseFirestore.instance.collection(Section).doc(postid).collection(Section).doc(postid).set({
+        "image": downloadurl,
+        "postid": postid,
+      });
     });
   }
 

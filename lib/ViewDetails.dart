@@ -70,7 +70,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                       ),
                       child: StreamBuilder(
                         stream: FirebaseFirestore.instance
-                            .collection(section)
+                            .collection(section).doc(postid).collection(section).where("postid",isEqualTo: postid)
                             .snapshots(),
                         builder: (BuildContext context,
                             AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -89,14 +89,22 @@ class _ViewDetailsState extends State<ViewDetails> {
                                 itemCount: snapshot.data!.docs.length,
                                 itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
                                     Container(
-                                      child: Text(snapshot.data!.docs[itemIndex]["name"]),
+                                     decoration: BoxDecoration(
+                                       image: DecorationImage(
+                                         image: NetworkImage(
+                                             snapshot.data!.docs[itemIndex]["image"],
+                                         )
+                                       )
+                                     ),
                                     ),
                                 options:CarouselOptions(
                                 autoPlay: true,
+                                height: MediaQuery.of(context).size.height*0.3,
                                 enlargeCenterPage: true,
                                 viewportFraction: 0.9,
+                                autoPlayInterval: Duration(seconds: 2),
                                 aspectRatio: 2.0,
-                                initialPage: 2,
+                                initialPage: 0,
                               ),
                               );
 

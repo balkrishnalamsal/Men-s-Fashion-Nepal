@@ -140,7 +140,7 @@ class _HomepageState extends State<Homepage> {
                               autoPlay: true,
                               height: MediaQuery.of(context).size.height*0.3,
                               enlargeCenterPage: true,
-                              autoPlayInterval: Duration(seconds: 5),
+                              autoPlayInterval: Duration(seconds: 2),
                               viewportFraction: 0.9,
                               enableInfiniteScroll: true,
                               aspectRatio: 2.0,
@@ -222,7 +222,7 @@ class _HomepageState extends State<Homepage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.34,
+                        height: MediaQuery.of(context).size.height * 0.35,
                         width: MediaQuery.of(context).size.width,
                         child: StreamBuilder(
                           stream: FirebaseFirestore.instance
@@ -464,7 +464,7 @@ class _HomepageState extends State<Homepage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.34,
+                    height: MediaQuery.of(context).size.height * 0.35,
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection("New")
@@ -696,7 +696,7 @@ class _HomepageState extends State<Homepage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.34,
+                    height: MediaQuery.of(context).size.height * 0.35,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         color: Colors.white,

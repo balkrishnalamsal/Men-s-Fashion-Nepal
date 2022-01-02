@@ -38,6 +38,8 @@ class Calculation with ChangeNotifier {
     }
   }
 
+
+
   ImageUploading(File image, String Section) async {
     if (image == null) {
       value = "False";
@@ -120,6 +122,49 @@ class Calculation with ChangeNotifier {
   InStocks(String section,String postid){
     FirebaseFirestore.instance.collection(section).doc(postid).update({
       "stocks": "- In Stocks",
+    });
+  }
+
+
+
+  PageSlidergetImage(String Section,String postid) async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      crop = (await ImageCropper.cropImage(
+          sourcePath: pickedFile.path,
+          aspectRatio: CropAspectRatio(ratioX: 5, ratioY: 4),
+          compressQuality: 50,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarTitle: "Crop",
+          )))!;
+      cropimage = crop;
+      PageSliderImageUploading(cropimage!, Section,postid);
+    }
+  }
+
+  PageSliderImageUploading(File image, String Section,String postid) async {
+    if (image == null) {
+      value = "False";
+      Fluttertoast.showToast(msg: "Please select image ");
+    }
+    String id = Uuid().v4();
+    notifyListeners();
+    var snapshot =
+    await storage.ref().child(Section).child('$id').putFile(image);
+    var downloadUrl = await snapshot.ref.getDownloadURL();
+
+    UpdateImage(downloadUrl, Section,postid);
+  }
+
+
+  UpdateImage(String downloadurl,String section,String postid){
+    FirebaseFirestore.instance.collection(section).doc(postid).collection(section).doc().set({
+      "image":downloadurl,
+      "posid":postid,
+
     });
   }
 

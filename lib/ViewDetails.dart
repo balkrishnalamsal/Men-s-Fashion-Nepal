@@ -53,7 +53,6 @@ class _ViewDetailsState extends State<ViewDetails> {
                           size: 30,
                         )),
                     Consumer<Calculation>(builder: (context, todo, child) {
-                      print(todo.listitem.length.toString());
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -68,7 +67,6 @@ class _ViewDetailsState extends State<ViewDetails> {
                               color: Colors.blue,
                               size: 30,
                             ),
-                            Text(todo.listitem.length.toString()),
                           ],
                         ),
                       );
@@ -668,7 +666,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                       size,
                                                       snapshot.data!.docs.first[
                                                           "discountprize"],
-                                                      1);
+                                                      context.read<Calculation>().Qunatity);
                                             },
                                             child: Container(
                                               height: MediaQuery.of(context)

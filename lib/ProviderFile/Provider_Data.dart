@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_info/device_info.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +21,23 @@ class Calculation with ChangeNotifier {
   String? imagetwo;
   String? imagethree;
   String? imagefour;
-  List<Widget> list=<Widget>[];
-   List get listitem => list;
    int quantity=1;
    int get Qunatity => quantity;
+  var deviceInfo = DeviceInfoPlugin();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   getImage(String Section) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -175,19 +189,24 @@ class Calculation with ChangeNotifier {
 
 
 
-  AddToCart(String image,String name,String size,String discountrate,int Quantity){
-    list.add(Container(
-      height: 500,
-      width: 500,
-      color: Colors.blue,
-      child: Text(image),
-    ));
-    notifyListeners();
+  AddToCart(String image,String name,String size,String discountrate,int q)async{
+    var androidDeviceInfo = await deviceInfo.androidInfo;
+    String uiddd = androidDeviceInfo.androidId;
+    int discount = int.parse(discountrate);
+    FirebaseFirestore.instance.collection("AddToCart").doc().set({
+      "image": image,
+      "discountprize": discount*q,
+      "size": size,
+      "name": name,
+      "quantity": q,
+      "deviceid": uiddd,
+    });
+
+
   }
 
 
   Decrement(){
-
       if (quantity>= 2) {
         quantity = (quantity - 1);
       }
@@ -198,6 +217,9 @@ class Calculation with ChangeNotifier {
       quantity = (quantity + 1);
     notifyListeners();
   }
+
+
+
 
 
 

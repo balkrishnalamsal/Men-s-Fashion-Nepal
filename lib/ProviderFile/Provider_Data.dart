@@ -218,7 +218,6 @@ class Calculation with ChangeNotifier {
   }
 
   CartItem()async{
-
     var deviceInfo = DeviceInfoPlugin();
     var androidDeviceInfo =await deviceInfo.androidInfo;
     var uiddd = androidDeviceInfo.androidId;
@@ -232,6 +231,7 @@ class Calculation with ChangeNotifier {
     final List<DocumentSnapshot> baby = resutquery.docs;
     if (baby.length == 0) {
       iteamcount ="0";
+      notifyListeners();
     } else {
       iteamcount=baby.length.toString();
    notifyListeners();

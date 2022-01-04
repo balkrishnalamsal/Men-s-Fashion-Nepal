@@ -10,26 +10,22 @@ import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:menfashionnepal/ViewDetails.dart';
+import 'CartPage.dart';
 
-class Homepage extends StatefulWidget {
-  @override
-  State<Homepage> createState() => _HomepageState();
-}
+class Homepage extends StatelessWidget {
 
-class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: MultiProvider(
-          providers: [
-            ChangeNotifierProvider<Calculation>(
-              create: (_) => Calculation(),
-            ),
-          ],
-          builder: (context, con) {
-            context.read<Calculation>().CartItem();
-            return ListView(
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<Calculation>(
+            create: (_) => Calculation(),
+          ),
+        ],
+        builder: (context, con) {
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: ListView(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -41,7 +37,7 @@ class _HomepageState extends State<Homepage> {
                         child: GestureDetector(
                             onLongPress: () {
                               context.read<Calculation>().getImage("PageSlider"
-                                  );
+                              );
                             },
                             child: RichText(
                               softWrap: true,
@@ -77,17 +73,26 @@ class _HomepageState extends State<Homepage> {
                       Stack(
                         children: [
                           Positioned(
-                            left: MediaQuery.of(context).size.width*0.045,
+                            left: MediaQuery
+                                .of(context)
+                                .size
+                                .width * 0.07,
                             bottom: 27,
                             child: Container(
-                              decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
-                              child: Consumer<Calculation>(builder: (context,to,child){
-                                context.read<Calculation>().CartItem();
-                                return Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: Text(to.Iteamcount.toString(),style: TextStyle(color: Colors.white,fontSize: 8,fontWeight: FontWeight.bold),),
-                                );
-                              }),
+                              decoration: BoxDecoration(
+                                  color: Colors.red, shape: BoxShape.circle),
+                              child: Consumer<Calculation>(
+                                  builder: (context, to, child) {
+                                    Provider.of<Calculation>(
+                                        context, listen: false).CartItem();
+                                    return Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: Text(to.Iteamcount.toString(),
+                                        style: TextStyle(color: Colors.white,
+                                            fontSize: 8,
+                                            fontWeight: FontWeight.bold),),
+                                    );
+                                  }),
                             ),
                           ),
 
@@ -95,7 +100,10 @@ class _HomepageState extends State<Homepage> {
                             padding: const EdgeInsets.all(8.0),
                             child: GestureDetector(
                               onTap: () {
-                                setState(() {});
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AddToCart()));
                               },
                               child: Icon(
                                 CupertinoIcons.cart,
@@ -105,7 +113,6 @@ class _HomepageState extends State<Homepage> {
                               ),
                             ),
                           ),
-
 
 
                         ],
@@ -131,7 +138,10 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height*0.3,
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height * 0.3,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection("PageSlider")
@@ -150,18 +160,26 @@ class _HomepageState extends State<Homepage> {
                         return
                           CarouselSlider.builder(
                             itemCount: snapshot.data!.docs.length,
-                            itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
+                            itemBuilder: (BuildContext context, int itemIndex,
+                                int pageViewIndex) =>
                                 Container(
-                                  width: MediaQuery.of(context).size.width,
-                                 decoration: BoxDecoration(
-                                   image: DecorationImage(
-                                     fit: BoxFit.fill,
-                                       image: NetworkImage(snapshot.data!.docs[itemIndex]["image"]))
-                                 ),
+                                  width: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: NetworkImage(snapshot.data!
+                                              .docs[itemIndex]["image"]))
+                                  ),
                                 ),
-                            options:CarouselOptions(
+                            options: CarouselOptions(
                               autoPlay: true,
-                              height: MediaQuery.of(context).size.height*0.3,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height * 0.3,
                               enlargeCenterPage: true,
                               autoPlayInterval: Duration(seconds: 2),
                               viewportFraction: 0.9,
@@ -170,7 +188,6 @@ class _HomepageState extends State<Homepage> {
                               initialPage: 0,
                             ),
                           );
-
                       }
                     },
                   ),
@@ -204,7 +221,9 @@ class _HomepageState extends State<Homepage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewMore(section: "Trends",)));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) =>
+                                ViewMore(section: "Trends",)));
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -245,8 +264,14 @@ class _HomepageState extends State<Homepage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.35,
-                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.35,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
                         child: StreamBuilder(
                           stream: FirebaseFirestore.instance
                               .collection("Trends")
@@ -260,8 +285,8 @@ class _HomepageState extends State<Homepage> {
                                   width: 500,
                                   child: Center(
                                       child: CircularProgressIndicator(
-                                    color: Colors.red,
-                                  )));
+                                        color: Colors.red,
+                                      )));
                             } else {
                               return ListView.builder(
                                   scrollDirection: Axis.horizontal,
@@ -271,19 +296,43 @@ class _HomepageState extends State<Homepage> {
                                       padding: const EdgeInsets.all(2.0),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           GestureDetector(
-                                            onLongPress: (){
-                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(postid: snapshot.data!.docs[index]["postid"],Section: "Trends",),));
+                                            onLongPress: () {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        AddDetails(
+                                                          postid: snapshot.data!
+                                                              .docs[index]["postid"],
+                                                          Section: "Trends",),));
+                                            },
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder:
+                                                          (context) =>
+                                                          ViewDetails(
+                                                            Section: "Trends",
+                                                            postid: snapshot
+                                                                .data!
+                                                                .docs[index]["postid"],)));
                                             },
                                             child: Container(
-                                              height: MediaQuery.of(context).size.height*0.19,
-                                              width: MediaQuery.of(context).size.width*0.52,
+                                              height: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .height * 0.19,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width * 0.52,
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
+                                                  BorderRadius.circular(
+                                                      10),
                                                   border: Border.all(
                                                       width: 0.2,
                                                       color: Colors.grey),
@@ -291,50 +340,71 @@ class _HomepageState extends State<Homepage> {
                                                       fit: BoxFit.fill,
                                                       image: NetworkImage(
                                                           snapshot.data!
-                                                                      .docs[
-                                                                  index]
-                                                              ["image"]))),
+                                                              .docs[
+                                                          index]
+                                                          ["image"]))),
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(top: 5.0),
-                                            child: Text(snapshot.data!.docs[index]["name"]),
+                                            padding: const EdgeInsets.only(
+                                                top: 5.0),
+                                            child: Text(snapshot.data!
+                                                .docs[index]["name"]),
                                           ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment: MainAxisAlignment
+                                                .spaceBetween,
                                             children: [
                                               Row(
                                                 children: [
                                                   Text(
-                                                    "Rs."+ snapshot.data!.docs[index]["actualprize"],
+                                                    "Rs." + snapshot.data!
+                                                        .docs[index]["actualprize"],
                                                     style: TextStyle(
-                                                        color: Colors.red,fontSize: 15,decoration: TextDecoration.lineThrough),
+                                                        color: Colors.red,
+                                                        fontSize: 15,
+                                                        decoration: TextDecoration
+                                                            .lineThrough),
                                                   ),
 
                                                   Padding(
-                                                    padding: const EdgeInsets.all(8.0),
+                                                    padding: const EdgeInsets
+                                                        .all(8.0),
                                                     child: Text(
-                                                      "Rs."+ snapshot.data!.docs[index]["discountprize"],
+                                                      "Rs." + snapshot.data!
+                                                          .docs[index]["discountprize"],
                                                       style: TextStyle(
-                                                        color: Colors.red,fontSize: 15,),
+                                                        color: Colors.red,
+                                                        fontSize: 15,),
                                                     ),
                                                   )
                                                 ],
                                               ),
 
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.all(
+                                                    8.0),
                                                 child: GestureDetector(
-                                                  onLongPress: (){
-                                                    Provider.of<Calculation>(context,listen: false).OutofStock("Trends", snapshot.data!.docs[index]["postid"]);
+                                                  onLongPress: () {
+                                                    Provider.of<Calculation>(
+                                                        context, listen: false)
+                                                        .OutofStock("Trends",
+                                                        snapshot.data!
+                                                            .docs[index]["postid"]);
                                                   },
-                                                  onTap: (){
-                                                    Provider.of<Calculation>(context,listen: false).InStocks("Trends", snapshot.data!.docs[index]["postid"]);
+                                                  onTap: () {
+                                                    Provider.of<Calculation>(
+                                                        context, listen: false)
+                                                        .InStocks("Trends",
+                                                        snapshot.data!
+                                                            .docs[index]["postid"]);
                                                   },
 
-                                                  child: Text(snapshot.data!.docs[index]["stocks"],
+                                                  child: Text(snapshot.data!
+                                                      .docs[index]["stocks"],
                                                     style: TextStyle(
-                                                      color: Colors.green,fontSize: 11,),
+                                                      color: Colors.green,
+                                                      fontSize: 11,),
                                                   ),
                                                 ),
                                               ),
@@ -351,61 +421,95 @@ class _HomepageState extends State<Homepage> {
                                                       MaterialPageRoute(
                                                           builder:
                                                               (context) =>
-                                                                  ViewDetails(Section:"Trends",postid:snapshot.data!.docs[index]["postid"],)));
+                                                              ViewDetails(
+                                                                Section: "Trends",
+                                                                postid: snapshot
+                                                                    .data!
+                                                                    .docs[index]["postid"],)));
                                                 },
                                                 child: Container(
-                                                  height: MediaQuery.of(context).size.height*0.04,
-                                                  width: MediaQuery.of(context).size.width*0.24,
+                                                  height: MediaQuery
+                                                      .of(context)
+                                                      .size
+                                                      .height * 0.04,
+                                                  width: MediaQuery
+                                                      .of(context)
+                                                      .size
+                                                      .width * 0.24,
                                                   decoration: BoxDecoration(
                                                       color: Colors.red,
-                                                      borderRadius: BorderRadius.only(
+                                                      borderRadius: BorderRadius
+                                                          .only(
                                                           bottomRight:
-                                                              Radius
-                                                                  .circular(
-                                                                      50),
+                                                          Radius
+                                                              .circular(
+                                                              50),
                                                           topLeft: Radius
                                                               .circular(
-                                                                  10),
+                                                              10),
                                                           bottomLeft: Radius
                                                               .circular(
-                                                                  10))),
+                                                              10))),
                                                   child: Center(
                                                     child: Padding(
-                                                      padding: const EdgeInsets.only(right: 8.0),
+                                                      padding: const EdgeInsets
+                                                          .only(right: 8.0),
                                                       child: Text(
                                                         "View Details",
                                                         style: TextStyle(
-                                                            color: Colors
-                                                                .white,),
+                                                          color: Colors
+                                                              .white,),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                              Container(
-                                                height: MediaQuery.of(context).size.height*0.04,
-                                                width: MediaQuery.of(context).size.width*0.24,
-                                                decoration: BoxDecoration(
-                                                    color:
-                                                        Colors.deepPurple,
-                                                    borderRadius: BorderRadius.only(
-                                                        topRight: Radius
-                                                            .circular(10),
-                                                        bottomRight:
-                                                            Radius
-                                                                .circular(
-                                                                    10),
-                                                        topLeft: Radius
-                                                            .circular(
-                                                                50))),
-                                                child: Center(
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(left: 8.0),
-                                                    child: Text(
-                                                      "Buy Now",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.white),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder:
+                                                              (context) =>
+                                                              ViewDetails(
+                                                                Section: "Trends",
+                                                                postid: snapshot
+                                                                    .data!
+                                                                    .docs[index]["postid"],)));
+                                                },
+                                                child: Container(
+                                                  height: MediaQuery
+                                                      .of(context)
+                                                      .size
+                                                      .height * 0.04,
+                                                  width: MediaQuery
+                                                      .of(context)
+                                                      .size
+                                                      .width * 0.24,
+                                                  decoration: BoxDecoration(
+                                                      color:
+                                                      Colors.deepPurple,
+                                                      borderRadius: BorderRadius
+                                                          .only(
+                                                          topRight: Radius
+                                                              .circular(10),
+                                                          bottomRight:
+                                                          Radius
+                                                              .circular(
+                                                              10),
+                                                          topLeft: Radius
+                                                              .circular(
+                                                              50))),
+                                                  child: Center(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .only(left: 8.0),
+                                                      child: Text(
+                                                        "Buy Now",
+                                                        style: TextStyle(
+                                                            color:
+                                                            Colors.white),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -452,7 +556,9 @@ class _HomepageState extends State<Homepage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewMore(section: "New",)));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) =>
+                                ViewMore(section: "New",)));
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -487,7 +593,10 @@ class _HomepageState extends State<Homepage> {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.35,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.35,
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection("New")
@@ -501,8 +610,8 @@ class _HomepageState extends State<Homepage> {
                               width: 500,
                               child: Center(
                                   child: CircularProgressIndicator(
-                                color: Colors.red,
-                              )));
+                                    color: Colors.red,
+                                  )));
                         } else {
                           return ListView.builder(
                               scrollDirection: Axis.horizontal,
@@ -512,20 +621,43 @@ class _HomepageState extends State<Homepage> {
                                   padding: const EdgeInsets.all(2.0),
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       GestureDetector(
-                                        onLongPress: (){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(Section:"New",postid: snapshot.data!.docs[index]["postid"],)));
+                                        onLongPress: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AddDetails(Section: "New",
+                                                        postid: snapshot.data!
+                                                            .docs[index]["postid"],)));
+                                        },
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder:
+                                                      (context) =>
+                                                      ViewDetails(
+                                                        Section: "New",
+                                                        postid: snapshot.data!
+                                                            .docs[index]["postid"],)));
                                         },
                                         child: Container(
-                                          height: MediaQuery.of(context).size.height*0.19,
-                                          width: MediaQuery.of(context).size.width*0.52,
+                                          height: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height * 0.19,
+                                          width: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .width * 0.52,
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                               border: Border.all(
-                                                  width: 0.2, color: Colors.grey),
+                                                  width: 0.2,
+                                                  color: Colors.grey),
                                               image: DecorationImage(
                                                   fit: BoxFit.fill,
                                                   image: NetworkImage(snapshot
@@ -534,40 +666,60 @@ class _HomepageState extends State<Homepage> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 5.0),
-                                        child: Text(snapshot.data!.docs[index]["name"]),
+                                        padding: const EdgeInsets.only(
+                                            top: 5.0),
+                                        child: Text(
+                                            snapshot.data!.docs[index]["name"]),
                                       ),
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceBetween,
                                         children: [
                                           Row(
                                             children: [
                                               Text(
-                                                "Rs."+ snapshot.data!.docs[index]["actualprize"],
+                                                "Rs." + snapshot.data!
+                                                    .docs[index]["actualprize"],
                                                 style: TextStyle(
-                                                    color: Colors.red,fontSize: 15,decoration: TextDecoration.lineThrough),
+                                                    color: Colors.red,
+                                                    fontSize: 15,
+                                                    decoration: TextDecoration
+                                                        .lineThrough),
                                               ),
 
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.all(
+                                                    8.0),
                                                 child: Text(
-                                                  "Rs."+ snapshot.data!.docs[index]["discountprize"],
+                                                  "Rs." + snapshot.data!
+                                                      .docs[index]["discountprize"],
                                                   style: TextStyle(
-                                                    color: Colors.red,fontSize: 15,),
+                                                    color: Colors.red,
+                                                    fontSize: 15,),
                                                 ),
                                               )
                                             ],
                                           ),
                                           GestureDetector(
-                                            onLongPress: (){
-                                              Provider.of<Calculation>(context,listen: false).OutofStock("New", snapshot.data!.docs[index]["postid"]);
+                                            onLongPress: () {
+                                              Provider.of<Calculation>(
+                                                  context, listen: false)
+                                                  .OutofStock("New",
+                                                  snapshot.data!
+                                                      .docs[index]["postid"]);
                                             },
-                                            onTap: (){
-                                              Provider.of<Calculation>(context,listen: false).InStocks("New", snapshot.data!.docs[index]["postid"]);
+                                            onTap: () {
+                                              Provider.of<Calculation>(
+                                                  context, listen: false)
+                                                  .InStocks("New",
+                                                  snapshot.data!
+                                                      .docs[index]["postid"]);
                                             },
-                                            child: Text(snapshot.data!.docs[index]["stocks"],
+                                            child: Text(snapshot.data!
+                                                .docs[index]["stocks"],
                                               style: TextStyle(
-                                                color: Colors.green,fontSize: 11,),
+                                                color: Colors.green,
+                                                fontSize: 11,),
                                             ),
                                           ),
 
@@ -583,14 +735,25 @@ class _HomepageState extends State<Homepage> {
                                                   MaterialPageRoute(
                                                       builder:
                                                           (context) =>
-                                                          ViewDetails(Section: "New",postid:snapshot.data!.docs[index]["postid"],)));
+                                                          ViewDetails(
+                                                            Section: "New",
+                                                            postid: snapshot
+                                                                .data!
+                                                                .docs[index]["postid"],)));
                                             },
                                             child: Container(
-                                              height: MediaQuery.of(context).size.height*0.04,
-                                              width: MediaQuery.of(context).size.width*0.24,
+                                              height: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .height * 0.04,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width * 0.24,
                                               decoration: BoxDecoration(
                                                   color: Colors.red,
-                                                  borderRadius: BorderRadius.only(
+                                                  borderRadius: BorderRadius
+                                                      .only(
                                                       bottomRight:
                                                       Radius
                                                           .circular(
@@ -603,41 +766,65 @@ class _HomepageState extends State<Homepage> {
                                                           10))),
                                               child: Center(
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  padding: const EdgeInsets
+                                                      .only(right: 8.0),
                                                   child: Text(
                                                     "View Details",
                                                     style: TextStyle(
-                                                        color: Colors
-                                                            .white,),
+                                                      color: Colors
+                                                          .white,),
                                                   ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                          Container(
-                                            height: MediaQuery.of(context).size.height*0.04,
-                                            width: MediaQuery.of(context).size.width*0.24,
-                                            decoration: BoxDecoration(
-                                                color:
-                                                Colors.deepPurple,
-                                                borderRadius: BorderRadius.only(
-                                                    topRight: Radius
-                                                        .circular(10),
-                                                    bottomRight:
-                                                    Radius
-                                                        .circular(
-                                                        10),
-                                                    topLeft: Radius
-                                                        .circular(
-                                                        50))),
-                                            child: Align(alignment: Alignment.center,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(left: 8.0),
-                                                child: Text(
-                                                  "Buy Now",
-                                                  style: TextStyle(
-                                                      color:
-                                                      Colors.white),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder:
+                                                          (context) =>
+                                                          ViewDetails(
+                                                            Section: "New",
+                                                            postid: snapshot
+                                                                .data!
+                                                                .docs[index]["postid"],)));
+                                            },
+                                            child: Container(
+                                              height: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .height * 0.04,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width * 0.24,
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                  Colors.deepPurple,
+                                                  borderRadius: BorderRadius
+                                                      .only(
+                                                      topRight: Radius
+                                                          .circular(10),
+                                                      bottomRight:
+                                                      Radius
+                                                          .circular(
+                                                          10),
+                                                      topLeft: Radius
+                                                          .circular(
+                                                          50))),
+                                              child: Align(
+                                                alignment: Alignment.center,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .only(left: 8.0),
+                                                  child: Text(
+                                                    "Buy Now",
+                                                    style: TextStyle(
+                                                        color:
+                                                        Colors.white),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -663,7 +850,8 @@ class _HomepageState extends State<Homepage> {
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                             onTap: () {
-                              context.read<Calculation>().getImage("All categories");
+                              context.read<Calculation>().getImage(
+                                  "All categories");
                             },
                             child: Text(
                               "All categories",
@@ -684,7 +872,9 @@ class _HomepageState extends State<Homepage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewMore(section: "All categories",)));
+                            Navigator.push(context, MaterialPageRoute(builder: (
+                                context) =>
+                                ViewMore(section: "All categories",)));
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -719,8 +909,14 @@ class _HomepageState extends State<Homepage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.35,
-                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.35,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10)),
@@ -752,18 +948,42 @@ class _HomepageState extends State<Homepage> {
                                     CrossAxisAlignment.start,
                                     children: [
                                       GestureDetector(
-                                        onLongPress: (){
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(Section:"All categories",postid: snapshot.data!.docs[index]["postid"],)));
+                                        onLongPress: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AddDetails(
+                                                        Section: "All categories",
+                                                        postid: snapshot.data!
+                                                            .docs[index]["postid"],)));
+                                        },
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder:
+                                                      (context) =>
+                                                      ViewDetails(
+                                                        Section: "All categories",
+                                                        postid: snapshot.data!
+                                                            .docs[index]["postid"],)));
                                         },
                                         child: Center(
                                           child: Container(
-                                            height: MediaQuery.of(context).size.height*0.19,
-                                            width: MediaQuery.of(context).size.width*0.52,
+                                            height: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .height * 0.19,
+                                            width: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .width * 0.52,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                 BorderRadius.circular(10),
                                                 border: Border.all(
-                                                    width: 0.2, color: Colors.grey),
+                                                    width: 0.2,
+                                                    color: Colors.grey),
                                                 image: DecorationImage(
                                                     fit: BoxFit.fill,
                                                     image: NetworkImage(snapshot
@@ -773,43 +993,67 @@ class _HomepageState extends State<Homepage> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 10.0),
-                                        child: Text(snapshot.data!.docs[index]["name"]),
+                                        padding: const EdgeInsets.only(
+                                            top: 10.0),
+                                        child: Text(
+                                            snapshot.data!.docs[index]["name"]),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 2.0),
+                                        padding: const EdgeInsets.only(
+                                            top: 2.0),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .spaceBetween,
                                           children: [
                                             Row(
                                               children: [
                                                 Text(
-                                                  "Rs."+ snapshot.data!.docs[index]["actualprize"],
+                                                  "Rs." + snapshot.data!
+                                                      .docs[index]["actualprize"],
                                                   style: TextStyle(
-                                                      color: Colors.red,fontSize: 15,decoration: TextDecoration.lineThrough),
+                                                      color: Colors.red,
+                                                      fontSize: 15,
+                                                      decoration: TextDecoration
+                                                          .lineThrough),
                                                 ),
 
                                                 Text(
-                                                  "Rs."+ snapshot.data!.docs[index]["discountprize"],
+                                                  "Rs." + snapshot.data!
+                                                      .docs[index]["discountprize"],
                                                   style: TextStyle(
-                                                    color: Colors.red,fontSize: 15,),
+                                                    color: Colors.red,
+                                                    fontSize: 15,),
                                                 )
                                               ],
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.all(8.0),
+                                              padding: const EdgeInsets.all(
+                                                  8.0),
                                               child: GestureDetector(
-                                                onLongPress: (){
-                                                  Provider.of<Calculation>(context,listen: false).OutofStock("All categories", snapshot.data!.docs[index]["postid"]);
+                                                onLongPress: () {
+                                                  Provider.of<Calculation>(
+                                                      context, listen: false)
+                                                      .OutofStock(
+                                                      "All categories",
+                                                      snapshot.data!
+                                                          .docs[index]["postid"]);
                                                 },
-                                                onTap: (){
-                                                  Provider.of<Calculation>(context,listen: false).InStocks("All categories", snapshot.data!.docs[index]["postid"]);
+                                                onTap: () {
+                                                  Provider.of<Calculation>(
+                                                      context, listen: false)
+                                                      .InStocks(
+                                                      "All categories",
+                                                      snapshot.data!
+                                                          .docs[index]["postid"]);
                                                 },
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(right: 8.0),
-                                                  child: Text(snapshot.data!.docs[index]["stocks"],
+                                                  padding: const EdgeInsets
+                                                      .only(right: 8.0),
+                                                  child: Text(snapshot.data!
+                                                      .docs[index]["stocks"],
                                                     style: TextStyle(
-                                                      color: Colors.green,fontSize: 11,),
+                                                      color: Colors.green,
+                                                      fontSize: 11,),
                                                   ),
                                                 ),
                                               ),
@@ -828,14 +1072,25 @@ class _HomepageState extends State<Homepage> {
                                                   MaterialPageRoute(
                                                       builder:
                                                           (context) =>
-                                                          ViewDetails(Section: "All categories",postid:snapshot.data!.docs[index]["postid"],)));
+                                                          ViewDetails(
+                                                            Section: "All categories",
+                                                            postid: snapshot
+                                                                .data!
+                                                                .docs[index]["postid"],)));
                                             },
                                             child: Container(
-                                              height: MediaQuery.of(context).size.height*0.04,
-                                              width: MediaQuery.of(context).size.width*0.24,
+                                              height: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .height * 0.04,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width * 0.24,
                                               decoration: BoxDecoration(
                                                   color: Colors.red,
-                                                  borderRadius: BorderRadius.only(
+                                                  borderRadius: BorderRadius
+                                                      .only(
                                                       bottomRight:
                                                       Radius
                                                           .circular(
@@ -848,7 +1103,8 @@ class _HomepageState extends State<Homepage> {
                                                           10))),
                                               child: Center(
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(right: 8.0),
+                                                  padding: const EdgeInsets
+                                                      .only(right: 8.0),
                                                   child: Text(
                                                     "View Details",
                                                     style: TextStyle(
@@ -859,30 +1115,53 @@ class _HomepageState extends State<Homepage> {
                                               ),
                                             ),
                                           ),
-                                          Container(
-                                            height: MediaQuery.of(context).size.height*0.04,
-                                            width: MediaQuery.of(context).size.width*0.24,
-                                            decoration: BoxDecoration(
-                                                color:
-                                                Colors.deepPurple,
-                                                borderRadius: BorderRadius.only(
-                                                    topRight: Radius
-                                                        .circular(10),
-                                                    bottomRight:
-                                                    Radius
-                                                        .circular(
-                                                        10),
-                                                    topLeft: Radius
-                                                        .circular(
-                                                        50))),
-                                            child: Align(alignment: Alignment.center,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(left: 8.0),
-                                                child: Text(
-                                                  "Buy Now",
-                                                  style: TextStyle(
-                                                      color:
-                                                      Colors.white),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder:
+                                                          (context) =>
+                                                          ViewDetails(
+                                                            Section: "All categories",
+                                                            postid: snapshot
+                                                                .data!
+                                                                .docs[index]["postid"],)));
+                                            },
+                                            child: Container(
+                                              height: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .height * 0.04,
+                                              width: MediaQuery
+                                                  .of(context)
+                                                  .size
+                                                  .width * 0.24,
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                  Colors.deepPurple,
+                                                  borderRadius: BorderRadius
+                                                      .only(
+                                                      topRight: Radius
+                                                          .circular(10),
+                                                      bottomRight:
+                                                      Radius
+                                                          .circular(
+                                                          10),
+                                                      topLeft: Radius
+                                                          .circular(
+                                                          50))),
+                                              child: Align(
+                                                alignment: Alignment.center,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .only(left: 8.0),
+                                                  child: Text(
+                                                    "Buy Now",
+                                                    style: TextStyle(
+                                                        color:
+                                                        Colors.white),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -899,8 +1178,9 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
               ],
-            );
-          }),
-    );
+            ),
+          );
+        }
+        );
   }
 }

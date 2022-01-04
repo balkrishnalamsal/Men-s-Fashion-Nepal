@@ -1,15 +1,12 @@
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info/device_info.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:menfashionnepal/CartPage.dart';
-import 'package:menfashionnepal/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'homepage.dart';
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();

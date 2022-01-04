@@ -65,7 +65,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                           children: [
 
                             Positioned(
-                              left: MediaQuery.of(context).size.width*0.048,
+                              left: MediaQuery.of(context).size.width*0.08,
                               bottom: 31,
                               child: Container(
                                 decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),

@@ -170,8 +170,10 @@ class _AddToCartState extends State<AddToCart> {
                                                             GestureDetector(
                                                               onTap: (){
                                                                 String postid=snapshot.data!.docs[index]["postid"];
-                                                              FirebaseFirestore.instance.collection("AddToCart").doc(postid).delete();
-                                                                context.read<Calculation>().CartItem();
+                                                                FirebaseFirestore.instance.collection("AddToCart").doc(postid).delete().whenComplete(() {
+                                                                  context.read<Calculation>().CartItem();
+                                                                });
+
                                                               },
                                                               child: Container(
                                                                 decoration: BoxDecoration(

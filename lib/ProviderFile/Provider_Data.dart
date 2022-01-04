@@ -192,14 +192,16 @@ class Calculation with ChangeNotifier {
   AddToCart(String image,String name,String size,String discountrate,int q)async{
     var androidDeviceInfo = await deviceInfo.androidInfo;
     String uiddd = androidDeviceInfo.androidId;
+    String id = Uuid().v4();
     int discount = int.parse(discountrate);
-    FirebaseFirestore.instance.collection("AddToCart").doc().set({
+    FirebaseFirestore.instance.collection("AddToCart").doc(id).set({
       "image": image,
       "discountprize": discount*q,
       "size": size,
       "name": name,
       "quantity": q,
       "deviceid": uiddd,
+      "postid":id
     });
 
 

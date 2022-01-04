@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info/device_info.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
@@ -129,28 +130,54 @@ class _AddToCartState extends State<AddToCart> {
                                         child: Container(
                                           height: MediaQuery.of(context).size.height*0.14,
                                           width: MediaQuery.of(context).size.width*0.45,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(top: 10.0,left: 32),
-                                                child: Text(snapshot.data!.docs[index]["name"],style: TextStyle(fontWeight: FontWeight.bold),),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 32.0,top: 8,),
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
-                                                    Text("Rs."+snapshot.data!.docs[index]["discountprize"].toString()),
+                                                    Text(snapshot.data!.docs[index]["name"],style: TextStyle(fontWeight: FontWeight.bold),),
 
-                                                    Text("x"+snapshot.data!.docs[index]["quantity"].toString()),
+                                                  GestureDetector(
+                                                    onTap: (){
+                                                      String postid=snapshot.data!.docs[index]["postid"];
+                                                    FirebaseFirestore.instance.collection("AddToCart").doc(postid).delete();
+
+                                                    },
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius: BorderRadius.circular(10),
+                                                        boxShadow: [BoxShadow(
+                                                            offset: Offset(0,1),
+                                                            color: Colors.grey,
+                                                            blurRadius: 1)]
+                                                      ),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.all(2.0),
+                                                        child: Icon(CupertinoIcons.clear,size: 20,),
+                                                      ),
+                                                    ),
+                                                  )
                                                   ],
                                                 ),
-                                              ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 10.0),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                                            ],
+                                                    children: [
+                                                      Text("Rs."+snapshot.data!.docs[index]["discountprize"].toString()),
+
+                                                      Text("x"+snapshot.data!.docs[index]["quantity"].toString()),
+                                                    ],
+                                                  ),
+                                                ),
+
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),

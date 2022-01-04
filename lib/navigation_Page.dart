@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:menfashionnepal/CartPage.dart';
+import 'package:menfashionnepal/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'homepage.dart';
+import 'package:provider/provider.dart';
+
+import 'ProviderFile/Provider_Data.dart';
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,14 +45,22 @@ class _Navigation_PageState extends State<Navigation_Page> {
     return
       WillPopScope(
       onWillPop: (() => SystemNavigator.pop().then((value) => value as bool)),
-      child: Scaffold(
+      child:MultiProvider(
+          providers: [
+          ChangeNotifierProvider<Calculation>(
+          create: (_) => Calculation(),
+    ),
+    ],
+    builder: (context, con) {
+      return Scaffold(
         backgroundColor: Colors.white,
         bottomNavigationBar: FlashyTabBar(
           selectedIndex: _selectedIndex,
           showElevation: true,
-          onItemSelected: (index) => setState(() {
-            _selectedIndex = index;
-          }),
+          onItemSelected: (index) =>
+              setState(() {
+                _selectedIndex = index;
+              }),
           items: [
             FlashyTabBarItem(
               icon: Icon(Icons.event),
@@ -71,13 +82,21 @@ class _Navigation_PageState extends State<Navigation_Page> {
           ],
         ),
         body: Container(
-          width: MediaQuery.of(context).size.width * 1,
-          height: MediaQuery.of(context).size.height * 1,
-          child:tabItems[_selectedIndex],
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * 1,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height * 1,
+          child: tabItems[_selectedIndex],
 
 
         ),
-      ),
+      );
+    }
+    ),
     );
   }
 }

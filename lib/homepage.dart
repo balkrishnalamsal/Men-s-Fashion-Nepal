@@ -16,14 +16,7 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<Calculation>(
-            create: (_) => Calculation(),
-          ),
-        ],
-        builder: (context, con) {
-          return Scaffold(
+    return  Scaffold(
             backgroundColor: Colors.white,
             body: ListView(
               children: [
@@ -1181,6 +1174,5 @@ class Homepage extends StatelessWidget {
             ),
           );
         }
-        );
   }
-}
+

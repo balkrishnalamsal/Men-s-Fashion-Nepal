@@ -38,6 +38,7 @@ class _AddToCartState extends State<AddToCart> {
     builder: (context, con) {
     return  SafeArea(
       child: Container(
+        color: Colors.white,
             child: Column(
                 children: [
 
@@ -87,7 +88,7 @@ class _AddToCartState extends State<AddToCart> {
             ),
 
                   Container(
-                    height: MediaQuery.of(context).size.height*0.7,
+                    height: MediaQuery.of(context).size.height*0.8,
                     width: MediaQuery.of(context).size.width,
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance
@@ -95,15 +96,6 @@ class _AddToCartState extends State<AddToCart> {
                           .snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
-
-                        int sum;
-                        var data = snapshot.data!.docs;
-                        sum = data.fold(0, (previousValue, element){
-                          return previousValue + int.parse(element['discountprize'].toString());
-
-
-                        }
-                        );
 
 
 
@@ -116,11 +108,18 @@ class _AddToCartState extends State<AddToCart> {
                                     color: Colors.green,
                                   )));
                         } else {
+
+                          int sum;
+                          var data = snapshot.data!.docs;
+                          sum = data.fold(0, (previousValue, element){
+                            return previousValue + int.parse(element['discountprize'].toString());
+                          }
+                          );
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
-                                height: MediaQuery.of(context).size.height*0.6,
+                                height: MediaQuery.of(context).size.height*0.68 ,
                                 width: MediaQuery.of(context).size.width,
                                 child: ListView.builder(
                                     scrollDirection: Axis.vertical,
@@ -222,25 +221,55 @@ class _AddToCartState extends State<AddToCart> {
 
 
                               Container(
-                                color: Colors.blue,
                                 height: MediaQuery.of(context)
                                     .size
                                     .height *
-                                    0.1,
+                                    0.05,
                                 width: MediaQuery.of(context)
                                     .size
                                     .width,
-                                child: Row(
-                                  children: [
-                                    Text("Total"),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child:(Text(sum.toString())),
-                                    )
-                                  ],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Total :",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+                                      (Text(" Rs "+sum.toString(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),))
+                                    ],
+                                  ),
                                 ),
                               ),
 
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height *
+                                      0.05,
+                                  width: MediaQuery.of(context)
+                                      .size
+                                      .width *
+                                      0.8,
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius:
+                                      BorderRadius.circular(
+                                          10)),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsets.only(
+                                          left: 8.0),
+                                      child: Text(
+                                        "CHECKOUT",
+                                        style: TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
 
                             ],
                           );
@@ -248,39 +277,6 @@ class _AddToCartState extends State<AddToCart> {
                       },
                     ),
                   ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: MediaQuery.of(context)
-                          .size
-                          .height *
-                          0.04,
-                      width: MediaQuery.of(context)
-                          .size
-                          .width *
-                          0.28,
-                      decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius:
-                          BorderRadius.circular(
-                              10)),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding:
-                          const EdgeInsets.only(
-                              left: 8.0),
-                          child: Text(
-                            "CHECKOUT",
-                            style: TextStyle(
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-
                 ],
               )
             ),

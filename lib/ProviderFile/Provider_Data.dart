@@ -24,19 +24,8 @@ class Calculation with ChangeNotifier {
    int quantity=1;
    int get Qunatity => quantity;
   var deviceInfo = DeviceInfoPlugin();
-
-
-
-
-
-
-
-
-
-
-
-
-
+  String? iteamcount;
+  String? get Iteamcount=>iteamcount;
 
   getImage(String Section) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -228,6 +217,26 @@ class Calculation with ChangeNotifier {
 
   }
 
+  CartItem()async{
 
+    var deviceInfo = DeviceInfoPlugin();
+    var androidDeviceInfo =await deviceInfo.androidInfo;
+    var uiddd = androidDeviceInfo.androidId;
+    final QuerySnapshot resutquery = await FirebaseFirestore.instance
+        .collection("AddToCart")
+        .where(
+      "deviceid",
+      isEqualTo: uiddd,
+    ).get();
+
+    final List<DocumentSnapshot> baby = resutquery.docs;
+    if (baby.length == 0) {
+      iteamcount ="0";
+    } else {
+      iteamcount=baby.length.toString();
+   notifyListeners();
+    }
+
+  }
 
 }

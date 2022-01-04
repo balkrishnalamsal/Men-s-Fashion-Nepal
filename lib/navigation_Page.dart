@@ -1,4 +1,6 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,12 +31,14 @@ class _Navigation_PageState extends State<Navigation_Page> {
 
   int _selectedIndex = 0;
 
+
   List<Widget> tabItems = [
     Homepage(),
-    Center(child: Text("Mahendra")),
+    Center(child: Text("Krishna")),
     AddToCart(),
-    Center(child: Text("bikash")),
+    Center(child: Text("Krishna")),
   ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,12 +59,12 @@ class _Navigation_PageState extends State<Navigation_Page> {
               title: Text('Homepage'),
             ),
             FlashyTabBarItem(
-              icon: Icon(Icons.search),
+              icon: Icon(Icons.search,),
               title: Text('Search'),
             ),
 
             FlashyTabBarItem(
-              icon: Icon(CupertinoIcons.cart),
+              icon: Icon(CupertinoIcons.cart,),
               title: Text('Cart'),
             ),
             FlashyTabBarItem(

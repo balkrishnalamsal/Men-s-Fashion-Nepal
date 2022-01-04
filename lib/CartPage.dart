@@ -36,6 +36,7 @@ class _AddToCartState extends State<AddToCart> {
     ),
     ],
     builder: (context, con) {
+
     return  SafeArea(
       child: Container(
         color: Colors.white,
@@ -170,6 +171,7 @@ class _AddToCartState extends State<AddToCart> {
                                                               onTap: (){
                                                                 String postid=snapshot.data!.docs[index]["postid"];
                                                               FirebaseFirestore.instance.collection("AddToCart").doc(postid).delete();
+                                                                context.read<Calculation>().CartItem();
                                                               },
                                                               child: Container(
                                                                 decoration: BoxDecoration(

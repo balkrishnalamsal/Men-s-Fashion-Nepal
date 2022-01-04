@@ -39,8 +39,9 @@ class _ViewDetailsState extends State<ViewDetails> {
           return ListView(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 15.0, top: 10, right: 15),
+                padding: const EdgeInsets.only(left: 15.0, top: 20, right: 15),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
@@ -60,13 +61,33 @@ class _ViewDetailsState extends State<ViewDetails> {
                               MaterialPageRoute(
                                   builder: (context) => AddToCart()));
                         },
-                        child: Row(
+                        child: Stack(
                           children: [
-                            Icon(
-                              CupertinoIcons.cart,
-                              color: Colors.blue,
-                              size: 30,
+
+                            Positioned(
+                              left: MediaQuery.of(context).size.width*0.048,
+                              bottom: 31,
+                              child: Container(
+                                decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
+                                child: Consumer<Calculation>(builder: (context,to,child){
+                                  context.read<Calculation>().CartItem();
+                                  return Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: Text(to.Iteamcount.toString(),style: TextStyle(color: Colors.white,fontSize: 8,fontWeight: FontWeight.bold),),
+                                  );
+                                }),
+                              ),
                             ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                CupertinoIcons.cart,
+                                color: Colors.green,
+                                size: 30,
+                              ),
+                            ),
+
                           ],
                         ),
                       );
@@ -656,6 +677,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                         children: [
                                           GestureDetector(
                                             onTap: () {
+                                              context.read<Calculation>().CartItem();
                                               Provider.of<Calculation>(context,
                                                       listen: false)
                                                   .AddToCart(

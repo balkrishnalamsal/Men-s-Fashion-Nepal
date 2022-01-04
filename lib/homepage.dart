@@ -28,6 +28,7 @@ class _HomepageState extends State<Homepage> {
             ),
           ],
           builder: (context, con) {
+            context.read<Calculation>().CartItem();
             return ListView(
               children: [
                 Padding(
@@ -73,19 +74,41 @@ class _HomepageState extends State<Homepage> {
                               ]),
                             )),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {});
-                          },
-                          child: Icon(
-                            CupertinoIcons.cart,
-                            size: 25,
-                            color: Colors.deepOrangeAccent,
-                            semanticLabel: "Menu",
+                      Stack(
+                        children: [
+                          Positioned(
+                            left: MediaQuery.of(context).size.width*0.045,
+                            bottom: 27,
+                            child: Container(
+                              decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
+                              child: Consumer<Calculation>(builder: (context,to,child){
+                                context.read<Calculation>().CartItem();
+                                return Padding(
+                                  padding: const EdgeInsets.all(3.0),
+                                  child: Text(to.Iteamcount.toString(),style: TextStyle(color: Colors.white,fontSize: 8,fontWeight: FontWeight.bold),),
+                                );
+                              }),
+                            ),
                           ),
-                        ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {});
+                              },
+                              child: Icon(
+                                CupertinoIcons.cart,
+                                size: 25,
+                                color: Colors.green,
+                                semanticLabel: "Menu",
+                              ),
+                            ),
+                          ),
+
+
+
+                        ],
                       ),
                     ],
                   ),

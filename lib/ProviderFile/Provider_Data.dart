@@ -221,7 +221,12 @@ class Calculation with ChangeNotifier {
   }
 
 
+ int Total(int sum){
+   print(sum);
+   notifyListeners();
+    return sum;
 
+  }
 
 
 

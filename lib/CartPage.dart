@@ -4,6 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'ProviderFile/Provider_Data.dart';
 
 
 class AddToCart extends StatefulWidget {
@@ -13,8 +16,11 @@ class AddToCart extends StatefulWidget {
 
 class _AddToCartState extends State<AddToCart> {
   var deviceInfo = DeviceInfoPlugin();
-  var  sum=0;
   String ? uiddd;
+
+
+
+
   deviceid()async{
     var androidDeviceInfo =await deviceInfo.androidInfo;
      uiddd = androidDeviceInfo.androidId;
@@ -22,9 +28,15 @@ class _AddToCartState extends State<AddToCart> {
 
   @override
   Widget build(BuildContext context) {
-    deviceid();
     return Scaffold(
-        body: SafeArea(
+        body:MultiProvider(
+        providers: [
+        ChangeNotifierProvider<Calculation>(
+        create: (_) => Calculation(),
+    ),
+    ],
+    builder: (context, con) {
+    return  SafeArea(
       child: Container(
             child: Column(
                 children: [
@@ -75,7 +87,7 @@ class _AddToCartState extends State<AddToCart> {
             ),
 
                   Container(
-                    height: MediaQuery.of(context).size.height*0.6,
+                    height: MediaQuery.of(context).size.height*0.7,
                     width: MediaQuery.of(context).size.width,
                     child: StreamBuilder(
                       stream: FirebaseFirestore.instance
@@ -83,6 +95,18 @@ class _AddToCartState extends State<AddToCart> {
                           .snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
+
+                        int sum;
+                        var data = snapshot.data!.docs;
+                        sum = data.fold(0, (previousValue, element){
+                          return previousValue + int.parse(element['discountprize'].toString());
+
+
+                        }
+                        );
+
+
+
                         if (!snapshot.hasData) {
                           return Container(
                               height: 500,
@@ -92,121 +116,136 @@ class _AddToCartState extends State<AddToCart> {
                                     color: Colors.green,
                                   )));
                         } else {
-                          return ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.docs.length,
-                              itemBuilder: (_, index) {
-                                    var data = snapshot.data!.docs;
-                                    sum = data.fold(0, (previousValue, element){
-                                 return previousValue + int.parse(element['discountprize'].toString());
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: MediaQuery.of(context).size.height*0.6,
+                                width: MediaQuery.of(context).size.width,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (_, index){
 
-                                 });
-
-                                return Padding(
-                                  padding: const EdgeInsets.only(left: 14.0,bottom: 14),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Center(
-                                        child: Container(
-                                          height: MediaQuery.of(context).size.height*0.15,
-                                          width: MediaQuery.of(context).size.width*0.48,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                              BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  width: 0.2, color: Colors.grey),
-                                              image: DecorationImage(
-                                                  fit: BoxFit.fill,
-                                                  image: NetworkImage(snapshot
-                                                      .data!
-                                                      .docs[index]["image"]))),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 4.0),
-                                        child: Container(
-                                          height: MediaQuery.of(context).size.height*0.14,
-                                          width: MediaQuery.of(context).size.width*0.45,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15.0),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                      return Padding(
+                                        padding: const EdgeInsets.only(left: 14.0,bottom: 14),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                               children: [
-                                                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    Text(snapshot.data!.docs[index]["name"],style: TextStyle(fontWeight: FontWeight.bold),),
-
-                                                  GestureDetector(
-                                                    onTap: (){
-                                                      String postid=snapshot.data!.docs[index]["postid"];
-                                                    FirebaseFirestore.instance.collection("AddToCart").doc(postid).delete();
-
-                                                    },
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius: BorderRadius.circular(10),
-                                                        boxShadow: [BoxShadow(
-                                                            offset: Offset(0,1),
-                                                            color: Colors.grey,
-                                                            blurRadius: 1)]
-                                                      ),
-                                                      child: Padding(
-                                                        padding: const EdgeInsets.all(2.0),
-                                                        child: Icon(CupertinoIcons.clear,size: 20,),
-                                                      ),
-                                                    ),
-                                                  )
-                                                  ],
+                                                Center(
+                                                  child: Container(
+                                                    height: MediaQuery.of(context).size.height*0.15,
+                                                    width: MediaQuery.of(context).size.width*0.48,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius.circular(10),
+                                                        border: Border.all(
+                                                            width: 0.2, color: Colors.grey),
+                                                        image: DecorationImage(
+                                                            fit: BoxFit.fill,
+                                                            image: NetworkImage(snapshot
+                                                                .data!
+                                                                .docs[index]["image"]))),
+                                                  ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(top: 10.0),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  padding: const EdgeInsets.only(top: 4.0),
+                                                  child: Container(
+                                                    height: MediaQuery.of(context).size.height*0.14,
+                                                    width: MediaQuery.of(context).size.width*0.45,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.all(15.0),
+                                                      child: Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            children: [
+                                                              Text(snapshot.data!.docs[index]["name"],style: TextStyle(fontWeight: FontWeight.bold),),
 
-                                                    children: [
-                                                      Text("Rs."+snapshot.data!.docs[index]["discountprize"].toString()),
+                                                            GestureDetector(
+                                                              onTap: (){
+                                                                String postid=snapshot.data!.docs[index]["postid"];
+                                                              FirebaseFirestore.instance.collection("AddToCart").doc(postid).delete();
+                                                              },
+                                                              child: Container(
+                                                                decoration: BoxDecoration(
+                                                                  color: Colors.white,
+                                                                  borderRadius: BorderRadius.circular(10),
+                                                                  boxShadow: [BoxShadow(
+                                                                      offset: Offset(0,1),
+                                                                      color: Colors.grey,
+                                                                      blurRadius: 1)]
+                                                                ),
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets.all(2.0),
+                                                                  child: Icon(CupertinoIcons.clear,size: 20,),
+                                                                ),
+                                                              ),
+                                                            )
+                                                            ],
+                                                          ),
+                                                          Padding(
+                                                            padding: const EdgeInsets.only(top: 10.0),
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                                                      Text("x"+snapshot.data!.docs[index]["quantity"].toString()),
-                                                    ],
+                                                              children: [
+                                                                Text("Rs."+snapshot.data!.docs[index]["discountprize"].toString()),
+
+                                                                Text("x"+snapshot.data!.docs[index]["quantity"].toString()),
+                                                              ],
+                                                            ),
+                                                          ),
+
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
 
                                               ],
                                             ),
-                                          ),
-                                        ),
-                                      ),
 
-                                    ],
-                                  ),
-                                );
-                              });
+
+
+
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                              ),
+
+
+                              Container(
+                                color: Colors.blue,
+                                height: MediaQuery.of(context)
+                                    .size
+                                    .height *
+                                    0.1,
+                                width: MediaQuery.of(context)
+                                    .size
+                                    .width,
+                                child: Row(
+                                  children: [
+                                    Text("Total"),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child:(Text(sum.toString())),
+                                    )
+                                  ],
+                                ),
+                              ),
+
+
+                            ],
+                          );
                         }
                       },
-                    ),
-                  ),
-
-                  Container(
-                    height: MediaQuery.of(context)
-                        .size
-                        .height *
-                        0.1,
-                    width: MediaQuery.of(context)
-                        .size
-                        .width,
-                    child: Row(
-                      children: [
-                        Text("Total"),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(sum.toString()),
-                        )
-                        ],
                     ),
                   ),
 
@@ -245,7 +284,9 @@ class _AddToCartState extends State<AddToCart> {
                 ],
               )
             ),
-          ),
+          );
+        }
+        ),
 
     );
   }

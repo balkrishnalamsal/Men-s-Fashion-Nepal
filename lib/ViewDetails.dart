@@ -231,7 +231,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                   .data!.docs.first["stocks"],
                                               style: TextStyle(
                                                 color: Colors.green,
-                                                fontSize: 15,
+                                                fontSize: 10,
                                               ),
                                             ),
                                           ),

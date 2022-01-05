@@ -249,14 +249,14 @@ class Homepage extends StatelessWidget {
 
           //Trends
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.35,
-                  width: MediaQuery.of(context).size.width,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.31,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection("Trends")
@@ -385,7 +385,7 @@ class Homepage extends StatelessWidget {
                                                   ["stocks"],
                                               style: TextStyle(
                                                 color: Colors.green,
-                                                fontSize: 11,
+                                                fontSize: 8,
                                               ),
                                             ),
                                           ),
@@ -493,8 +493,8 @@ class Homepage extends StatelessWidget {
                     },
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           // NEw
           Row(
@@ -562,10 +562,10 @@ class Homepage extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.35,
+          Container(
+            height: MediaQuery.of(context).size.height * 0.31,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("New")
@@ -853,13 +853,13 @@ class Homepage extends StatelessWidget {
                   ),
                 ],
               )),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.35,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("All categories")

@@ -140,7 +140,7 @@ class _ViewMoreState extends State<ViewMore> {
 
                                           child: Text(snapshot.data!.docs[index]["stocks"],
                                             style: TextStyle(
-                                              color: Colors.green,fontSize: 11,),
+                                              color: Colors.green,fontSize: 8,),
                                           ),
                                         ),
 

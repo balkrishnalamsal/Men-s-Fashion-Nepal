@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:menfashionnepal/ProviderFile/Provider_Data.dart';
-import 'package:provider/provider.dart';
+
 
 class OrderNow extends StatefulWidget {
   String? Name;
@@ -41,15 +40,6 @@ class _OrderNowState extends State<OrderNow> {
     Actualprice = TextEditingController();
     Email = TextEditingController();
     PhoneNumber = TextEditingController();
-    Brand = TextEditingController();
-    Model = TextEditingController();
-    Stocks = TextEditingController();
-    Sizeone = TextEditingController();
-    SizeTwo = TextEditingController();
-    SizeThree = TextEditingController();
-    SizeFour = TextEditingController();
-    SizeFive = TextEditingController();
-    SizeSix = TextEditingController();
   }
 
   @override

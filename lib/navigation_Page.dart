@@ -17,19 +17,19 @@ void main() async {
   runApp(CupertinoApp(
     color: Colors.blueAccent,
     debugShowCheckedModeBanner: false,
-    home: Navigation_Page(),
+    home: Navigation_Page(index:0,),
   ));
 }
 
 class Navigation_Page extends StatefulWidget {
+
+  int index;
+  Navigation_Page({required this.index});
   @override
-  _Navigation_PageState createState() => _Navigation_PageState();
+  _Navigation_PageState createState() => _Navigation_PageState(index);
 }
 
 class _Navigation_PageState extends State<Navigation_Page> {
-
-
-  int _selectedIndex = 0;
 
 
   List<Widget> tabItems = [
@@ -39,12 +39,83 @@ class _Navigation_PageState extends State<Navigation_Page> {
     Center(child: Text("Krishna")),
   ];
 
+  int selectedindex;
+
+  _Navigation_PageState(this.selectedindex);
+
 
   @override
   Widget build(BuildContext context) {
     return
       WillPopScope(
-      onWillPop: (() => SystemNavigator.pop().then((value) => value as bool)),
+      onWillPop: (){
+
+        return showCupertinoModalPopup(
+            context: context,
+            builder: (BuildContext
+            context) =>
+                CupertinoActionSheet(
+                  title: Text(
+                      "Men's Feshion"),
+                  actions: [
+                    CupertinoActionSheetAction(
+                      child: Column(
+                          mainAxisAlignment:
+                          MainAxisAlignment
+                              .center,
+                          children: [
+                            Padding(
+                              padding:
+                              const EdgeInsets.all(8.0),
+                              child:
+                              Column(
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                      Navigator.pop(context);
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          const Text('Continue Shopping', style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        SystemNavigator.pop();
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          const Text('Exit App', style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ]),
+                      onPressed:
+                          () {
+                      },
+                    )
+                  ],
+                )).then((value) => value as bool);
+
+
+
+      },
       child:MultiProvider(
           providers: [
           ChangeNotifierProvider<Calculation>(
@@ -55,15 +126,15 @@ class _Navigation_PageState extends State<Navigation_Page> {
       return Scaffold(
         backgroundColor: Colors.white,
         bottomNavigationBar: FlashyTabBar(
-          selectedIndex: _selectedIndex,
+          selectedIndex: selectedindex,
           showElevation: true,
           onItemSelected: (index) =>
               setState(() {
-                _selectedIndex = index;
+                selectedindex = index;
               }),
           items: [
             FlashyTabBarItem(
-              icon: Icon(Icons.event),
+              icon: Icon(Icons.home),
               title: Text('Homepage'),
             ),
             FlashyTabBarItem(
@@ -76,8 +147,8 @@ class _Navigation_PageState extends State<Navigation_Page> {
               title: Text('Cart'),
             ),
             FlashyTabBarItem(
-              icon: Icon(Icons.highlight),
-              title: Text('Profile'),
+              icon: Icon(CupertinoIcons.heart),
+              title: Text('Favourite'),
             ),
           ],
         ),
@@ -90,7 +161,7 @@ class _Navigation_PageState extends State<Navigation_Page> {
               .of(context)
               .size
               .height * 1,
-          child: tabItems[_selectedIndex],
+          child: tabItems[selectedindex],
 
 
         ),

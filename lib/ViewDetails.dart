@@ -6,6 +6,7 @@ import 'package:menfashionnepal/CartPage.dart';
 import 'package:provider/provider.dart';
 
 import 'ProviderFile/Provider_Data.dart';
+import 'navigation_Page.dart';
 
 class ViewDetails extends StatefulWidget {
   String? Section;
@@ -59,7 +60,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AddToCart()));
+                                  builder: (context) => Navigation_Page(index: 2,)));
                         },
                         child: Stack(
                           children: [

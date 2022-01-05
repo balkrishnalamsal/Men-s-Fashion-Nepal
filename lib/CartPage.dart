@@ -29,15 +29,7 @@ class _AddToCartState extends State<AddToCart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:MultiProvider(
-        providers: [
-        ChangeNotifierProvider<Calculation>(
-        create: (_) => Calculation(),
-    ),
-    ],
-    builder: (context, con) {
-
-    return  SafeArea(
+        body:SafeArea(
       child: Container(
         color: Colors.white,
             child: Column(
@@ -46,7 +38,7 @@ class _AddToCartState extends State<AddToCart> {
             Padding(
             padding: const EdgeInsets.all(8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -57,26 +49,15 @@ class _AddToCartState extends State<AddToCart> {
                       softWrap: true,
                       text: TextSpan(children: <TextSpan>[
                         TextSpan(
-                            text: "M",
+                            text: "Your",
                             style: TextStyle(
                               color: Colors.deepOrange,
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
                             )),
+
                         TextSpan(
-                            text: "en's ",
-                            style: TextStyle(
-                                color: Colors.deepOrange,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold)),
-                        TextSpan(
-                            text: "F",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold)),
-                        TextSpan(
-                            text: "ashion",
+                            text: " Cart",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 25,
@@ -84,6 +65,48 @@ class _AddToCartState extends State<AddToCart> {
                       ]),
                     )),
               ),
+
+              Stack(
+                children: [
+                  Positioned(
+                    left: MediaQuery.of(context).size.width * 0.07,
+                    bottom: 27,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.red, shape: BoxShape.circle),
+                      child: Consumer<Calculation>(
+                          builder: (context, to, child) {
+                            Provider.of<Calculation>(context, listen: false)
+                                .CartItem();
+                            return Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Text(
+                                to.Iteamcount.toString(),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            );
+                          }),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                      },
+                      child: Icon(
+                        CupertinoIcons.cart,
+                        size: 25,
+                        color: Colors.green,
+                        semanticLabel: "Menu",
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
             ]
           )
             ),
@@ -284,9 +307,7 @@ class _AddToCartState extends State<AddToCart> {
                 ],
               )
             ),
-          );
-        }
-        ),
+          )
 
     );
   }

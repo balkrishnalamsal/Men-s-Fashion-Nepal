@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:menfashionnepal/CartPage.dart';
+import 'package:menfashionnepal/OrderNowPage.dart';
 import 'package:provider/provider.dart';
 
 import 'ProviderFile/Provider_Data.dart';
@@ -60,26 +61,34 @@ class _ViewDetailsState extends State<ViewDetails> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Navigation_Page(index: 2,)));
+                                  builder: (context) => Navigation_Page(
+                                        index: 2,
+                                      )));
                         },
                         child: Stack(
                           children: [
-
                             Positioned(
-                              left: MediaQuery.of(context).size.width*0.08,
+                              left: MediaQuery.of(context).size.width * 0.08,
                               bottom: 31,
                               child: Container(
-                                decoration: BoxDecoration(color: Colors.red,shape: BoxShape.circle),
-                                child: Consumer<Calculation>(builder: (context,to,child){
+                                decoration: BoxDecoration(
+                                    color: Colors.red, shape: BoxShape.circle),
+                                child: Consumer<Calculation>(
+                                    builder: (context, to, child) {
                                   context.read<Calculation>().CartItem();
                                   return Padding(
                                     padding: const EdgeInsets.all(3.0),
-                                    child: Text(to.Iteamcount.toString(),style: TextStyle(color: Colors.white,fontSize: 8,fontWeight: FontWeight.bold),),
+                                    child: Text(
+                                      to.Iteamcount.toString(),
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   );
                                 }),
                               ),
                             ),
-
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Icon(
@@ -88,7 +97,6 @@ class _ViewDetailsState extends State<ViewDetails> {
                                 size: 30,
                               ),
                             ),
-
                           ],
                         ),
                       );
@@ -678,7 +686,9 @@ class _ViewDetailsState extends State<ViewDetails> {
                                         children: [
                                           GestureDetector(
                                             onTap: () {
-                                              context.read<Calculation>().CartItem();
+                                              context
+                                                  .read<Calculation>()
+                                                  .CartItem();
                                               Provider.of<Calculation>(context,
                                                       listen: false)
                                                   .AddToCart(
@@ -689,7 +699,9 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                       size,
                                                       snapshot.data!.docs.first[
                                                           "discountprize"],
-                                                      context.read<Calculation>().Qunatity);
+                                                      context
+                                                          .read<Calculation>()
+                                                          .Qunatity);
                                             },
                                             child: Container(
                                               height: MediaQuery.of(context)
@@ -720,37 +732,61 @@ class _ViewDetailsState extends State<ViewDetails> {
                                               ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.04,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.28,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.green,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              child: Align(
-                                                alignment: Alignment.center,
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 8.0),
-                                                  child: Text(
-                                                    "Order Now",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
+                                          Consumer<Calculation>(
+                                              builder: (context, todo, child) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              OrderNow(
+                                                                Name: snapshot
+                                                                        .data!
+                                                                        .docs
+                                                                        .first[
+                                                                    "name"],
+                                                                size: size,
+                                                                Quantity: todo
+                                                                        .Qunatity
+                                                                    .toString(),Total:snapshot.data!.docs.first["discountprize"],Image: snapshot.data!.docs.first["image"],
+                                                              )));
+                                                },
+                                                child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.04,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.28,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.green,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)),
+                                                  child: Align(
+                                                    alignment: Alignment.center,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
+                                                      child: Text(
+                                                        "Order Now",
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
+                                            );
+                                          })
                                         ],
                                       ),
                                     ],

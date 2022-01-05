@@ -192,8 +192,7 @@ class Calculation with ChangeNotifier {
       "deviceid": uiddd,
       "postid":id
     });
-
-
+    Fluttertoast.showToast(msg: "Successfully added to cart",textColor: Colors.green);
   }
 
 

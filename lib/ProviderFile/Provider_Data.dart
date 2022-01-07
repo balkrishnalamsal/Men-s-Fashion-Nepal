@@ -26,6 +26,8 @@ class Calculation with ChangeNotifier {
   var deviceInfo = DeviceInfoPlugin();
   String? iteamcount;
   String? get Iteamcount=>iteamcount;
+  String search="";
+  String? get Search=>search;
 
   getImage(String Section) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -74,6 +76,7 @@ class Calculation with ChangeNotifier {
       "sizefour": "",
       "sizefive": "",
       "name": "",
+      "searchname":"",
       "stocks": "- In Stocks",
       "rating": "",
       "brand": "",
@@ -98,6 +101,7 @@ class Calculation with ChangeNotifier {
               "sizefour": "",
               "sizefive": "",
               "name": "",
+              "searchname":"",
               "stocks": "- In Stocks",
               "rating": "",
               "brand": "",
@@ -131,7 +135,8 @@ class Calculation with ChangeNotifier {
       String Sizethree,
       String sizesix,
       String sizefour,
-      String sizefive) {
+      String sizefive,
+      String searchname) {
     FirebaseFirestore.instance.collection(Section).doc(postid).update({
       "actualprize": actualprize,
       "discountprize": Discountprice,
@@ -142,6 +147,7 @@ class Calculation with ChangeNotifier {
       "sizefive": sizefive,
       "sizesix":sizesix,
       "name": name,
+      "searchname":searchname,
       "rating": rating,
       "brand": brand,
       "model": model,
@@ -266,5 +272,12 @@ class Calculation with ChangeNotifier {
     }
 
   }
+
+
+  Searchcontroller(String value){
+    search=value;
+    notifyListeners();
+  }
+
 
 }

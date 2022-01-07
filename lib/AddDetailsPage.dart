@@ -292,7 +292,8 @@ class _AddDetailsState extends State<AddDetails> {
                                         sizethree,
                                         sizesix,
                                         sizefour,
-                                        sizefive);
+                                        sizefive,
+                                        namee.toLowerCase(),);
                               },
                               child: Text("Update"));
                         },

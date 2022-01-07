@@ -24,6 +24,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -147,13 +148,13 @@ class _SearchPageState extends State<SearchPage> {
             ),
             Consumer<Calculation>(builder: (context, to, child) {
               return Container(
-                height: MediaQuery.of(context).size.height * 0.8,
+                height: MediaQuery.of(context).size.height * 0.75,
                 width: MediaQuery.of(context).size.width,
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection("All categories")
                       .where("searchname", isGreaterThanOrEqualTo: to.Search!.toLowerCase(),)
-                      .limit(1)
+                      .limit(8)
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {

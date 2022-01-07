@@ -21,6 +21,7 @@ class _ViewMoreState extends State<ViewMore> {
 
   @override
   Widget build(BuildContext context) {
+    print("hello");
     return  Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -46,12 +47,12 @@ class _ViewMoreState extends State<ViewMore> {
             ),
 
             Container(
-              height: MediaQuery.of(context).size.height*0.8,
+              height: MediaQuery.of(context).size.height*0.9,
               width: MediaQuery.of(context).size.width,
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection(section!)
-                    .limit(10)
+                    .limit(50)
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -77,7 +78,7 @@ class _ViewMoreState extends State<ViewMore> {
                               children: [
                                 GestureDetector(
                                   onLongPress: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(postid: snapshot.data!.docs[index]["postid"],Section: "Trends",),));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>AddDetails(postid: snapshot.data!.docs[index]["postid"],Section: section,),));
                                   },
                                   child: Center(
                                     child: Container(

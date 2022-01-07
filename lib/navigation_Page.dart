@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:menfashionnepal/CartPage.dart';
+import 'package:menfashionnepal/SearchPage.dart';
 import 'package:menfashionnepal/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,7 @@ class _Navigation_PageState extends State<Navigation_Page> {
 
   List<Widget> tabItems = [
     Homepage(),
-    Center(child: Text("Krishna")),
+    SearchPage(),
     AddToCart(),
     Center(child: Text("Krishna")),
   ];

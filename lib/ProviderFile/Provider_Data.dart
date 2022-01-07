@@ -84,6 +84,35 @@ class Calculation with ChangeNotifier {
         "image": downloadurl,
         "postid": postid,
       });
+
+      if(Section!="All categories") {
+        FirebaseFirestore.instance.collection("All categories").doc(postid).set(
+            {
+              "image": downloadurl,
+              "postid": postid,
+              "actualprize": "",
+              "discountprize": "",
+              "sizeone": "",
+              "sizetwo": "",
+              "sizethree": "",
+              "sizefour": "",
+              "sizefive": "",
+              "name": "",
+              "stocks": "- In Stocks",
+              "rating": "",
+              "brand": "",
+              "sizesix": "",
+              "model": "",
+            });
+        FirebaseFirestore.instance.collection("All categories").doc(postid)
+            .collection("All categories").doc(postid)
+            .set({
+          "image": downloadurl,
+          "postid": postid,
+        });
+      }
+
+
     });
   }
 

@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:menfashionnepal/ViewDetails.dart';
-import 'CartPage.dart';
+
 
 class Homepage extends StatelessWidget {
   @override

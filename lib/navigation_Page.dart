@@ -9,7 +9,6 @@ import 'package:menfashionnepal/SearchPage.dart';
 import 'package:menfashionnepal/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-
 import 'ProviderFile/Provider_Data.dart';
 void main() async {
 

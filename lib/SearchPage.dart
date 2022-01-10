@@ -122,7 +122,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10, bottom: 20),
+              padding: const EdgeInsets.only(left: 10.0, right: 10, bottom: 10),
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.04,
                 width: MediaQuery.of(context).size.width * 0.8,
@@ -194,7 +194,7 @@ class _SearchPageState extends State<SearchPage> {
                                     child: Container(
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.15,
+                                              0.14,
                                       width: MediaQuery.of(context).size.width *
                                           0.5,
                                       decoration: BoxDecoration(

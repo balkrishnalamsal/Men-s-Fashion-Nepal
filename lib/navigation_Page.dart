@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:menfashionnepal/CartPage.dart';
+import 'package:menfashionnepal/LoginPage.dart';
 import 'package:menfashionnepal/SearchPage.dart';
 import 'package:menfashionnepal/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -36,7 +37,7 @@ class _Navigation_PageState extends State<Navigation_Page> {
     Homepage(),
     SearchPage(),
     AddToCart(),
-    Center(child: Text("Krishna")),
+    Continuewith(),
   ];
 
   int selectedindex;
@@ -147,8 +148,8 @@ class _Navigation_PageState extends State<Navigation_Page> {
               title: Text('Cart'),
             ),
             FlashyTabBarItem(
-              icon: Icon(CupertinoIcons.heart),
-              title: Text('Favourite'),
+              icon: Icon(CupertinoIcons.profile_circled),
+              title: Text('Profile'),
             ),
           ],
         ),

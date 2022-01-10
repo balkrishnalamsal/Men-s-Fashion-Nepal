@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "150305650984-o3qdfjt15eu5hcb9ern2ivpfsvm36reb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.menfashionnepal.menfashionnepal",
+            "certificate_hash": "8d68da79d3578d2e855b7254e9bafb9809469cf0"
+          }
+        },
+        {
           "client_id": "150305650984-9ntb963tr76ebqfusa51ask0cbm37i3m.apps.googleusercontent.com",
           "client_type": 3
         }

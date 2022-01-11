@@ -39,13 +39,13 @@ class _OrderNowState extends State<OrderNow> {
   Completer<GoogleMapController> _controller = Completer();
 
   static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    target: LatLng(27.694813680589142, 83.46274527407459),
+    zoom: 10.4746,
   );
 
   static final CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
+      target: LatLng(27.694813680589142, 83.46274527407459),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
 
@@ -65,10 +65,8 @@ class _OrderNowState extends State<OrderNow> {
         appBar: AppBar(
           title: Text('Material App Bar'),
         ),
-        body: ListView(
+        body: Column(
           children: [
-
-
 
             Padding(
               padding: const EdgeInsets.only(top: 8),
@@ -143,8 +141,20 @@ class _OrderNowState extends State<OrderNow> {
             Container(
               height: MediaQuery.of(context).size.height*0.5,
               child: GoogleMap(
-                indoorViewEnabled: true,
-                mapType: MapType.hybrid,
+                myLocationButtonEnabled: true,
+                myLocationEnabled: true,
+                onLongPress: (latlang){
+                    Marker(markerId: MarkerId("your location"),
+                      infoWindow: InfoWindow(title: "Your home"),
+                      icon: BitmapDescriptor.defaultMarkerWithHue(2),
+                      position: LatLng(latlang.latitude, latlang.longitude)
+
+                  );
+
+                },
+                markers: {
+                },
+                mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
@@ -160,7 +170,7 @@ class _OrderNowState extends State<OrderNow> {
     );
   }
   Future<void> _goToTheLake() async {
-    var status = await Permission.location.request();
+    var status = await Permission.locationAlways.request();
     if (status.isGranted) {
 
     final GoogleMapController controller = await _controller.future;

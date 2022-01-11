@@ -13,6 +13,7 @@ import 'package:flutter/widgets.dart';
 import 'package:menfashionnepal/ViewDetails.dart';
 
 
+
 class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,7 @@ class Homepage extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
+                              CupertinoPageRoute(
                                   builder: (context) => Navigation_Page(index: 2)));
                         },
                         child: Icon(
@@ -630,7 +631,8 @@ class Homepage extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5.0),
                                   child:
-                                      Text(snapshot.data!.docs[index]["name"]),
+                                      Container(
+                                          child: Text(snapshot.data!.docs[index]["name"])),
                                 ),
                                 Row(
                                   mainAxisAlignment:

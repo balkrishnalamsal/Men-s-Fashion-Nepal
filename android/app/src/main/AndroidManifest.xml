@@ -1,14 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.menfashionnepal.menfashionnepal">
-
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <queries>
         <intent>
             <action android:name="android.intent.action.SENDTO" />
             <data android:scheme="mailto" />
         </intent>
     </queries>
-
+    <queries>
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
    <application
         android:label="menfashionnepal"
         android:icon="@mipmap/ic_launcher">
@@ -50,5 +55,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyBD5KpTVRoD4mj0ywZF8UfO-MB2awVxCAI"/>
+
     </application>
 </manifest>

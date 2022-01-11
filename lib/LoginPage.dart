@@ -56,18 +56,11 @@ class _ContinuewithState extends State<Continuewith> {
                   height: 50,
                   width: MediaQuery.of(context).size.width * 0.7,
                   decoration: BoxDecoration(
-                    border: Border.all(width:0.2,color: Colors.white),
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(0,1),
-                        color: Colors.black,
-                        blurRadius:2,
-                      )
-                    ],),
+                  color: Colors.green,
+                    borderRadius: BorderRadius.circular(10),),
                   child: Center(
                     child: Text(
-                      'Continue with Google',
+                      'Sign in with Google',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold
@@ -162,6 +155,7 @@ class _ContinuewithState extends State<Continuewith> {
         this.setState(() {
           isloading = false;
           value="";
+          Fluttertoast.showToast(msg: "Login successfully");
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Navigation_Page(index: 0)));
         });

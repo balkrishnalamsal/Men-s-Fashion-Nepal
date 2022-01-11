@@ -72,7 +72,6 @@ class _AddDetailsState extends State<AddDetails> {
                             ),
                             border: Border.all(width: 0.1, color: Colors.white),
                             color: Colors.black),
-                        maxLength: 25,
                         controller: Name,
                         style: TextStyle(color: Colors.white),
                         cursorColor: Colors.white,

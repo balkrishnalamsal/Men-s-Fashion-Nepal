@@ -180,14 +180,16 @@ class _AddToCartState extends State<AddToCart> {
                                                     height: MediaQuery.of(context).size.height*0.14,
                                                     width: MediaQuery.of(context).size.width*0.45,
                                                     child: Padding(
-                                                      padding: const EdgeInsets.all(15.0),
+                                                      padding: const EdgeInsets.only(top: 15.0,bottom: 15,left: 10),
                                                       child: Column(
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
-                                                          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          Row(
+
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                             children: [
-                                                              Text(snapshot.data!.docs[index]["name"],style: TextStyle(fontWeight: FontWeight.bold),),
+                                                              Expanded(child: Text(snapshot.data!.docs[index]["name"],style: TextStyle(fontWeight: FontWeight.bold),)),
 
                                                             GestureDetector(
                                                               onTap: (){

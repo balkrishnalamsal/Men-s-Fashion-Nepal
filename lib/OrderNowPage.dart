@@ -168,7 +168,7 @@ class _OrderNowState extends State<OrderNow> {
                             setState(() {
                               _controller = controller;
                             });
-                          },
+                          },trafficEnabled: true,
                           markers: {markers},
                           onTap: (cordinate) {
                             _controller.animateCamera(
@@ -179,7 +179,11 @@ class _OrderNowState extends State<OrderNow> {
                       ),
                     )
                   : Text(""),
-              ElevatedButton(onPressed: () {}, child: Text("Submit")),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    onPressed: () {}, child: Text("Submit your order")),
+              ),
             ],
           ),
         ),

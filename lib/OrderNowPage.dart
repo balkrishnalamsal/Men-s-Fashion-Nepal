@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,18 +25,25 @@ class _OrderNowState extends State<OrderNow> {
   TextEditingController? Actualprice;
   TextEditingController? Email;
   TextEditingController? PhoneNumber;
-  String value="False";
+  String value = "False";
+
+  Location location = new Location();
+  bool _serviceEnabled=false;
+
+
+
 
   _OrderNowState(this.postid, this.Section);
 
   @override
   void initState() {
     super.initState();
+
     Name = TextEditingController();
     Actualprice = TextEditingController();
     Email = TextEditingController();
     PhoneNumber = TextEditingController();
-     mylocation();
+    mylocation();
   }
 
   late GoogleMapController _controller;
@@ -57,19 +65,27 @@ class _OrderNowState extends State<OrderNow> {
     });
   }
 
-  mylocation()async{
+  mylocation() async {
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+
     var status = await Permission.location.request();
     if (status.isGranted) {
       setState(() {
-        value="True";
+        value = "True";
       });
-
-    }else{
-     setState(() {
-       value="True";
-     });
+    } else {
+      setState(() {
+        value = "False";
+      });
     }
-
   }
 
   @override
@@ -78,7 +94,7 @@ class _OrderNowState extends State<OrderNow> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Material App Bar'),
+          title: Text('Order Details'),
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 8),
@@ -139,43 +155,35 @@ class _OrderNowState extends State<OrderNow> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text("Select your delivery destination"),
               ),
-              (value=="True")? Expanded(
-                child: Container(
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height * 0.5,
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
-                  child: GoogleMap(
-                    initialCameraPosition: _initialPosition,
-                    mapType: MapType.normal,
-                    myLocationEnabled: true,
-                    onMapCreated: (controller) {
-                      setState(() {
-                        _controller = controller;
-                      });
-                    },
-                    markers: {markers},
-                    onTap: (cordinate) {
-                      _controller
-                          .animateCamera(CameraUpdate.newLatLng(cordinate));
-                      addMarker(cordinate);
-                    },
-                  ),
-                ),
-              ):Text(""),
-              ElevatedButton(onPressed: () {
-
-
-              }, child: Text("Submit")),
+              (value == "True")
+                  ? Expanded(
+                flex: 1,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: GoogleMap(
+                          initialCameraPosition: _initialPosition,
+                          mapType: MapType.normal,
+                          myLocationEnabled: true,
+                          onMapCreated: (controller) {
+                            setState(() {
+                              _controller = controller;
+                            });
+                          },
+                          markers: {markers},
+                          onTap: (cordinate) {
+                            _controller.animateCamera(
+                                CameraUpdate.newLatLng(cordinate));
+                            addMarker(cordinate);
+                          },
+                        ),
+                      ),
+                    )
+                  : Text(""),
+              ElevatedButton(onPressed: () {}, child: Text("Submit")),
             ],
           ),
         ),
       ),
     );
   }
-
 }

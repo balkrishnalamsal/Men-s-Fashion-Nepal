@@ -1,18 +1,17 @@
-import 'dart:async';
-import 'package:permission_handler/permission_handler.dart';
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import  'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class OrderNow extends StatefulWidget {
   String? Name;
   String? Quantity;
-  String ?Image;
+  String? Image;
   String? Total;
-  String ?size;
+  String? size;
 
-
-  OrderNow({@required this.Name, this.Quantity,this.size,this.Total,this.Image});
+  OrderNow(
+      {@required this.Name, this.Quantity, this.size, this.Total, this.Image});
   @override
   State<OrderNow> createState() => _OrderNowState(Name, Quantity);
 }
@@ -33,41 +32,49 @@ class _OrderNowState extends State<OrderNow> {
     Actualprice = TextEditingController();
     Email = TextEditingController();
     PhoneNumber = TextEditingController();
+
+
+
+
   }
 
+  late GoogleMapController _controller;
 
-  Completer<GoogleMapController> _controller = Completer();
+  final CameraPosition _initialPosition = CameraPosition(
+      zoom: 10, target: LatLng(27.6764004427525, 83.46395981540647));
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(27.694813680589142, 83.46274527407459),
-    zoom: 10.4746,
-  );
+  late Marker markers = Marker(
+      icon: BitmapDescriptor.defaultMarker,
+      infoWindow: InfoWindow(title: "Delivery Destination"),
+      position: LatLng(27.6764004427525, 83.46395981540647),
+      markerId: MarkerId("random"));
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(27.694813680589142, 83.46274527407459),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
-
-
-
+  addMarker(cordinate) {
+    setState(() {
+      markers = Marker(
+          icon: BitmapDescriptor.defaultMarker,
+          infoWindow: InfoWindow(title: "Delivery Destination"),
+          position: cordinate,
+          markerId: MarkerId("e"));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: _goToTheLake,
-          label: Text('To the lake!'),
-          icon: Icon(Icons.directions_boat),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _controller.animateCamera(CameraUpdate.zoomOut());
+          },
+          child: Icon(Icons.zoom_out),
         ),
         appBar: AppBar(
           title: Text('Material App Bar'),
         ),
         body: Column(
           children: [
-
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Column(
@@ -100,15 +107,12 @@ class _OrderNowState extends State<OrderNow> {
                             border: Border.all(width: 0.1, color: Colors.grey),
                             color: Colors.white),
                         maxLength: 25,
-                        controller:Email,
+                        controller: Email,
                         style: TextStyle(color: Colors.black),
                         cursorColor: Colors.blue,
                         placeholder: 'Email Address',
                         placeholderStyle: TextStyle(color: Colors.grey),
                       )),
-
-
-
                   Container(
                       padding: EdgeInsets.all(8.0),
                       decoration: BoxDecoration(),
@@ -126,55 +130,42 @@ class _OrderNowState extends State<OrderNow> {
                         placeholder: 'Phone Number',
                         placeholderStyle: TextStyle(color: Colors.grey),
                       )),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Select your delivery destination"),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    width: MediaQuery.of(context).size.width,
+                    child: GoogleMap(
+                      initialCameraPosition: _initialPosition,
+                      mapType: MapType.normal,
+                      myLocationEnabled: true,
+                      mapToolbarEnabled: true,
+                      myLocationButtonEnabled: true,
+                      onMapCreated: (controller) {
+                        setState(() {
+                          _controller = controller;
+                        });
+                      },
+                      markers: {markers},
+                      onTap: (cordinate) {
+                        _controller
+                            .animateCamera(CameraUpdate.newLatLng(cordinate));
+                        addMarker(cordinate);
+                      },
+                    ),
+                  ),
+                  ElevatedButton(onPressed: () {
 
 
-                  ElevatedButton(
-                              onPressed: () {
-
-                              },
-                              child: Text("Submit")),
-
+                  }, child: Text("Submit")),
                 ],
               ),
             ),
-
-            Container(
-              height: MediaQuery.of(context).size.height*0.5,
-              child: GoogleMap(
-                myLocationButtonEnabled: true,
-                myLocationEnabled: true,
-                onLongPress: (latlang){
-                    Marker(markerId: MarkerId("your location"),
-                      infoWindow: InfoWindow(title: "Your home"),
-                      icon: BitmapDescriptor.defaultMarkerWithHue(2),
-                      position: LatLng(latlang.latitude, latlang.longitude)
-
-                  );
-
-                },
-                markers: {
-                },
-                mapType: MapType.normal,
-                initialCameraPosition: _kGooglePlex,
-                onMapCreated: (GoogleMapController controller) {
-                  _controller.complete(controller);
-                },
-              ),
-            ),
-
-
-
           ],
         ),
       ),
     );
   }
-  Future<void> _goToTheLake() async {
-    var status = await Permission.locationAlways.request();
-    if (status.isGranted) {
-
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  }}
-
 }

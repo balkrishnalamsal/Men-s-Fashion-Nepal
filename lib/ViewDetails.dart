@@ -113,7 +113,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       GestureDetector(
-                        onTap: () {
+                        onLongPress: () {
                           Provider.of<Calculation>(context, listen: false)
                               .PageSlidergetImage(section, postid);
                         },

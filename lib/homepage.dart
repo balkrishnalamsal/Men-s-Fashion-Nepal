@@ -188,7 +188,7 @@ class Homepage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: () {
+                  onLongPress: () {
                     context.read<Calculation>().getImage("Trends");
                   },
                   child: Text(
@@ -510,7 +510,7 @@ class Homepage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: () {
+                  onLongPress: () {
                     context.read<Calculation>().getImage("New");
                   },
                   child: Text(
@@ -807,7 +807,7 @@ class Homepage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GestureDetector(
-                      onTap: () {
+                      onLongPress: () {
                         context.read<Calculation>().getImage("All categories");
                       },
                       child: Text(

@@ -102,8 +102,15 @@ class _ViewMoreState extends State<ViewMore> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 2.0),
-                                  child: Text(snapshot.data!.docs[index]["name"]),
+                                  padding: const EdgeInsets.only(top: 5.0),
+                                  child:
+                                  Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.51,
+
+                                      child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Text(snapshot.data!.docs[index]["name"],))),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(2.0),

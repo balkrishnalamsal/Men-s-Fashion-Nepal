@@ -24,6 +24,25 @@ class _ContinuewithState extends State<Continuewith> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+
+                    Consumer<Calculation>(builder: (context, to, child) {
+                      context.read<Calculation>().GetProfileData();
+                      context.read<Calculation>().CartIteamNumber();
+                      return Padding(
+                        padding:
+                        const EdgeInsets.only(top: 20, bottom: 20),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:Text(to.email.toString(),style: TextStyle(color: Colors.red),)
+                          ),
+                        ),
+                      );
+                    }),
+
+
+
                     GestureDetector(
                       onTap: () {
                         context.read<Calculation>().loadingbool = "True";

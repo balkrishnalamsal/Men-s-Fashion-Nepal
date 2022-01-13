@@ -41,6 +41,21 @@ class Calculation with ChangeNotifier {
   late SharedPreferences preferences;
   late FirebaseAuth currentuser;
   String? loadingbool;
+
+  String ? name;
+  String? email;
+
+
+  GetProfileData()async{
+    preferences=await SharedPreferences.getInstance();
+    email=  await preferences.getString("email");
+    name = await preferences.getString("nickname");
+    notifyListeners();
+  }
+
+
+
+
   void isSignin() async {
       islogin = true;
       notifyListeners();
@@ -48,14 +63,9 @@ class Calculation with ChangeNotifier {
     preferences = await SharedPreferences.getInstance();
     islogin = await googleSignIn.isSignedIn();
     if (islogin) {
+      notifyListeners();
     }
   }
-
-
-
-
-
-
 
 
 
@@ -363,6 +373,7 @@ class Calculation with ChangeNotifier {
             "nickname", currentuser.currentUser!.displayName!);
         await preferences.setString(
             "photourl", currentuser.currentUser!.photoURL!);
+        notifyListeners();
       } else {
         currentuser = firebaseAuth;
         await preferences.setString("email", documentsnapshot[0]["email"]);
@@ -372,6 +383,7 @@ class Calculation with ChangeNotifier {
             "nickname", documentsnapshot[0]["nickname"]);
         await preferences.setString(
             "photourl", documentsnapshot[0]["photourl"]);
+        notifyListeners();
       }
         isloading = false;
         loadingbool="";
@@ -382,6 +394,7 @@ class Calculation with ChangeNotifier {
         loadingbool = "";
         notifyListeners();
     }
+    notifyListeners();
   }
 
 

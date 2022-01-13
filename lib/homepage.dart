@@ -328,8 +328,14 @@ class Homepage extends StatelessWidget {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
-                                      child: Text(
-                                          snapshot.data!.docs[index]["name"]),
+                                      child:
+                                      Container(
+                                          width: MediaQuery.of(context).size.width *
+                                              0.51,
+
+                                          child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Text(snapshot.data!.docs[index]["name"],))),
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -632,7 +638,12 @@ class Homepage extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 5.0),
                                   child:
                                       Container(
-                                          child: Text(snapshot.data!.docs[index]["name"])),
+                                          width: MediaQuery.of(context).size.width *
+                                              0.51,
+
+                                          child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Text(snapshot.data!.docs[index]["name"],))),
                                 ),
                                 Row(
                                   mainAxisAlignment:
@@ -929,9 +940,15 @@ class Homepage extends StatelessWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
+                                  padding: const EdgeInsets.only(top: 5.0),
                                   child:
-                                      Text(snapshot.data!.docs[index]["name"]),
+                                  Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.51,
+
+                                      child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Text(snapshot.data!.docs[index]["name"],))),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 2.0),

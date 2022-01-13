@@ -44,16 +44,29 @@ class Calculation with ChangeNotifier {
 
   String ? name;
   String? email;
+  String ? photourl;
 
 
   GetProfileData()async{
     preferences=await SharedPreferences.getInstance();
     email=  await preferences.getString("email");
     name = await preferences.getString("nickname");
+    photourl = await preferences.getString("photourl");
     notifyListeners();
   }
 
+ ClearPreferences()async{
+   preferences=await SharedPreferences.getInstance();
 
+   final GoogleSignIn googleSignIn = GoogleSignIn();
+   await googleSignIn.signOut().whenComplete(() {
+     preferences.clear();
+     notifyListeners();
+   });
+   notifyListeners();
+
+
+ }
 
 
   void isSignin() async {

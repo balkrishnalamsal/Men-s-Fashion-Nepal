@@ -121,9 +121,11 @@ class Homepage extends StatelessWidget {
                         builder: (context) => Navigation_Page(index: 1)));
               },
               decoration: BoxDecoration(
+                color: Colors.white,
                   border: Border.all(width: 0.2, color: Colors.grey),
                   borderRadius: BorderRadius.circular(15)),
               placeholder: "Search",
+              placeholderStyle: TextStyle(color: Colors.grey),
               prefix: Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Icon(

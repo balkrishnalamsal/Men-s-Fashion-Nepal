@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,7 +23,6 @@ class _OrderNowState extends State<OrderNow> {
   String? postid;
   String? Section;
   TextEditingController? Name;
-  TextEditingController? Actualprice;
   TextEditingController? Email;
   TextEditingController? PhoneNumber;
   String value = "False";
@@ -40,7 +40,6 @@ class _OrderNowState extends State<OrderNow> {
     super.initState();
 
     Name = TextEditingController();
-    Actualprice = TextEditingController();
     Email = TextEditingController();
     PhoneNumber = TextEditingController();
     mylocation();
@@ -165,6 +164,7 @@ class _OrderNowState extends State<OrderNow> {
                         color: Colors.white),
                     maxLength: 25,
                     controller: PhoneNumber,
+                    keyboardType: TextInputType.number,
                     style: TextStyle(color: Colors.black),
                     cursorColor: Colors.blue,
                     placeholder: 'Phone Number',
@@ -172,7 +172,7 @@ class _OrderNowState extends State<OrderNow> {
                   )),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Select your delivery destination"),
+                child: Text("Tap to select your delivery destination"),
               ),
               (value == "True")
                   ? Expanded(
@@ -201,7 +201,23 @@ class _OrderNowState extends State<OrderNow> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                    onPressed: () {}, child: Text("Submit your order")),
+                    onPressed: () {
+                      if(Name!.text.isEmpty){
+                        Fluttertoast.showToast(msg:"Please provide your Full name");
+                      }else if(Email!.text.isEmpty){
+                        Fluttertoast.showToast(msg:"Please provide email address");
+                      }else if(PhoneNumber!.text.isEmpty){
+                        Fluttertoast.showToast(msg:"Please provide Phone Number");
+
+                      } else
+                        {
+                          Fluttertoast.showToast(msg:"Your order has been successfully sent");
+
+                        }
+
+
+
+                    }, child: Text("Submit your order")),
               ),
             ],
           ),

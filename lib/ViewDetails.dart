@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:menfashionnepal/CartPage.dart';
 import 'package:menfashionnepal/OrderNowPage.dart';
 import 'package:provider/provider.dart';
@@ -739,22 +740,35 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                   const EdgeInsets.all(8.0),
                                               child: GestureDetector(
                                                 onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              OrderNow(
-                                                                Name: snapshot
-                                                                        .data!
-                                                                        .docs
-                                                                        .first[
-                                                                    "name"],
-                                                                size: size,
-                                                                Quantity: todo
-                                                                        .Qunatity
-                                                                    .toString(),Total:snapshot.data!.docs.first["discountprize"],Image: snapshot.data!.docs.first["image"],
-                                                              )));
-                                                },
+
+                                                  if(size==""){
+                                                    Fluttertoast.showToast(msg: "Pelease select size");
+                                                  }else {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (
+                                                                context) =>
+                                                                OrderNow(
+                                                                  Name: snapshot
+                                                                      .data!
+                                                                      .docs
+                                                                      .first[
+                                                                  "name"],
+                                                                  size: size,
+                                                                  Quantity: todo
+                                                                      .Qunatity
+                                                                      .toString(),
+                                                                  Total: snapshot
+                                                                      .data!
+                                                                      .docs
+                                                                      .first["discountprize"],
+                                                                  Image: snapshot
+                                                                      .data!
+                                                                      .docs
+                                                                      .first["image"],
+                                                                )));
+                                                  } },
                                                 child: Container(
                                                   height: MediaQuery.of(context)
                                                           .size

@@ -75,7 +75,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                     color: Colors.red, shape: BoxShape.circle),
                                 child: Consumer<Calculation>(
                                     builder: (context, to, child) {
-                                  context.read<Calculation>().CartItem();
+                                  context.read<Calculation>().CartIteamNumber();
                                   return Padding(
                                     padding: const EdgeInsets.all(3.0),
                                     child: Text(
@@ -688,7 +688,7 @@ class _ViewDetailsState extends State<ViewDetails> {
                                             onTap: () {
                                               context
                                                   .read<Calculation>()
-                                                  .CartItem();
+                                                  .CartIteamNumber();
                                               Provider.of<Calculation>(context,
                                                       listen: false)
                                                   .AddToCart(

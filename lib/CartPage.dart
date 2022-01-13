@@ -76,7 +76,7 @@ class _AddToCartState extends State<AddToCart> {
                       child: Consumer<Calculation>(
                           builder: (context, to, child) {
                             Provider.of<Calculation>(context, listen: false)
-                                .CartItem();
+                                .CartIteamNumber();
                             return Padding(
                               padding: const EdgeInsets.all(3.0),
                               child: Text(
@@ -195,7 +195,7 @@ class _AddToCartState extends State<AddToCart> {
                                                               onTap: (){
                                                                 String postid=snapshot.data!.docs[index]["postid"];
                                                                 FirebaseFirestore.instance.collection("AddToCart").doc(postid).delete().whenComplete(() {
-                                                                  context.read<Calculation>().CartItem();
+                                                                  context.read<Calculation>().CartIteamNumber();
                                                                 });
 
                                                               },

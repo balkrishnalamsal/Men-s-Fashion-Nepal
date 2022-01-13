@@ -71,8 +71,23 @@ class _OrderNowState extends State<OrderNow> {
     if (!_serviceEnabled) {
       _serviceEnabled = await location.requestService();
       if (!_serviceEnabled) {
-        return;
-      }
+        _serviceEnabled = await location.requestService();
+        if (!_serviceEnabled) {
+          _serviceEnabled = await location.requestService();
+          if (!_serviceEnabled) {
+            _serviceEnabled = await location.requestService();
+            if (!_serviceEnabled) {
+              _serviceEnabled = await location.requestService();
+              if (!_serviceEnabled) {
+                _serviceEnabled = await location.requestService();
+                if (!_serviceEnabled) {
+                  _serviceEnabled = await location.requestService();
+                  if (!_serviceEnabled) {
+                    _serviceEnabled = await location.requestService();
+
+        }}}}}
+        }
+        }
     }
 
 
@@ -83,13 +98,17 @@ class _OrderNowState extends State<OrderNow> {
       });
     } else {
       setState(() {
-        value = "False";
+        value = "True";
       });
     }
+
+
+
   }
 
   @override
   Widget build(BuildContext context) {
+    print("hello");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(

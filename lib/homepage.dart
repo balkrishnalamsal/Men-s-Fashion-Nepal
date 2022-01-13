@@ -74,7 +74,7 @@ class Homepage extends StatelessWidget {
                         child: Consumer<Calculation>(
                             builder: (context, to, child) {
                           Provider.of<Calculation>(context, listen: false)
-                              .CartItem();
+                              .CartIteamNumber();
                           return Padding(
                             padding: const EdgeInsets.all(3.0),
                             child: Text(

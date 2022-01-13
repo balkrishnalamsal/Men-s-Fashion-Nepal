@@ -1,12 +1,16 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info/device_info.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:menfashionnepal/navigation_Page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 class Calculation with ChangeNotifier {
@@ -28,6 +32,33 @@ class Calculation with ChangeNotifier {
   String? get Iteamcount=>iteamcount;
   String search="";
   String? get Search=>search;
+
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  bool islogin = false;
+  bool isloading = false;
+  late SharedPreferences preferences;
+  late FirebaseAuth currentuser;
+  String? loadingbool;
+  void isSignin() async {
+      islogin = true;
+      notifyListeners();
+
+    preferences = await SharedPreferences.getInstance();
+    islogin = await googleSignIn.isSignedIn();
+    if (islogin) {
+    }
+  }
+
+
+
+
+
+
+
+
+
 
   getImage(String Section) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -198,11 +229,11 @@ class Calculation with ChangeNotifier {
     await storage.ref().child(Section).child('$id').putFile(image);
     var downloadUrl = await snapshot.ref.getDownloadURL();
 
-    UpdateImage(downloadUrl, Section,postid);
+    AdditionalImage(downloadUrl, Section,postid);
   }
 
 
-  UpdateImage(String downloadurl,String section,String postid){
+  AdditionalImage(String downloadurl,String section,String postid){
     FirebaseFirestore.instance.collection(section).doc(postid).collection(section).doc().set({
       "image":downloadurl,
       "posid":postid,
@@ -251,7 +282,7 @@ class Calculation with ChangeNotifier {
 
   }
 
-  CartItem()async{
+  CartIteamNumber()async{
     var deviceInfo = DeviceInfoPlugin();
     var androidDeviceInfo =await deviceInfo.androidInfo;
     var uiddd = androidDeviceInfo.androidId;
@@ -278,6 +309,85 @@ class Calculation with ChangeNotifier {
     search=value;
     notifyListeners();
   }
+
+
+
+
+
+
+  Future<Null> controlSignIN() async {
+    preferences = await SharedPreferences.getInstance();
+    GoogleSignInAccount? googleuser = await googleSignIn.signIn();
+    GoogleSignInAuthentication googleSignInAuthentication =
+    await googleuser!.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken);
+
+    User? firebaseUser =
+        (await firebaseAuth.signInWithCredential(credential)).user;
+
+    if (firebaseUser != null) {
+      final QuerySnapshot resutquery = await FirebaseFirestore.instance
+          .collection("profile")
+          .where("userrid", isEqualTo: firebaseUser.uid)
+          .get();
+
+      final List<DocumentSnapshot> documentsnapshot = resutquery.docs;
+
+      //Save data to firestore -if new user
+      if (documentsnapshot.length == 0) {
+        String postid = Uuid().v4();
+        FirebaseFirestore.instance
+            .collection("profile")
+            .doc(firebaseUser.uid)
+            .set({
+          "nickname": firebaseUser.displayName,
+          "photourl": firebaseUser.photoURL,
+          "userrid": firebaseUser.uid,
+          "email": firebaseUser.email,
+          "createdAt": DateTime
+              .now()
+              .millisecondsSinceEpoch
+              .toString(),
+          "unique": postid,
+        });
+
+        //Write data to local
+        currentuser = firebaseAuth;
+        await preferences.setString("email", currentuser.currentUser!.email!);
+        await preferences.setString("id", currentuser.currentUser!.uid);
+        await preferences.setString("unique", postid);
+        await preferences.setString(
+            "nickname", currentuser.currentUser!.displayName!);
+        await preferences.setString(
+            "photourl", currentuser.currentUser!.photoURL!);
+      } else {
+        currentuser = firebaseAuth;
+        await preferences.setString("email", documentsnapshot[0]["email"]);
+        await preferences.setString("id", documentsnapshot[0]["userrid"]);
+        await preferences.setString("unique", documentsnapshot[0]["unique"]);
+        await preferences.setString(
+            "nickname", documentsnapshot[0]["nickname"]);
+        await preferences.setString(
+            "photourl", documentsnapshot[0]["photourl"]);
+      }
+        isloading = false;
+        loadingbool="";
+        Fluttertoast.showToast(msg: "Login successfully");
+        notifyListeners();
+    } else {
+      Fluttertoast.showToast(msg: "login Failed");
+        loadingbool = "";
+        notifyListeners();
+    }
+  }
+
+
+
+
+
 
 
 }

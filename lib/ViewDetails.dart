@@ -687,22 +687,39 @@ class _ViewDetailsState extends State<ViewDetails> {
                                         children: [
                                           GestureDetector(
                                             onTap: () {
-                                              context
-                                                  .read<Calculation>()
-                                                  .CartIteamNumber();
-                                              Provider.of<Calculation>(context,
-                                                      listen: false)
-                                                  .AddToCart(
-                                                      snapshot.data!.docs
-                                                          .first["image"],
-                                                      snapshot.data!.docs
-                                                          .first["name"],
-                                                      size,
-                                                      snapshot.data!.docs.first[
-                                                          "discountprize"],
-                                                      context
-                                                          .read<Calculation>()
-                                                          .Qunatity);
+                                              String stocks = snapshot
+                                                  .data!.docs.first["stocks"];
+                                              if (stocks == "- Out of stocks") {
+                                                Fluttertoast.showToast(
+                                                    msg:
+                                                        "This item is out of stocks");
+                                              } else {
+                                                if (size == "") {
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Pelease select size");
+                                                } else {
+                                                  context
+                                                      .read<Calculation>()
+                                                      .CartIteamNumber();
+                                                  Provider.of<Calculation>(
+                                                          context,
+                                                          listen: false)
+                                                      .AddToCart(
+                                                          snapshot.data!.docs
+                                                              .first["image"],
+                                                          snapshot.data!.docs
+                                                              .first["name"],
+                                                          size,
+                                                          snapshot.data!.docs
+                                                                  .first[
+                                                              "discountprize"],
+                                                          context
+                                                              .read<
+                                                                  Calculation>()
+                                                              .Qunatity);
+                                                }
+                                              }
                                             },
                                             child: Container(
                                               height: MediaQuery.of(context)
@@ -740,35 +757,45 @@ class _ViewDetailsState extends State<ViewDetails> {
                                                   const EdgeInsets.all(8.0),
                                               child: GestureDetector(
                                                 onTap: () {
-
-                                                  if(size==""){
-                                                    Fluttertoast.showToast(msg: "Pelease select size");
-                                                  }else {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (
-                                                                context) =>
-                                                                OrderNow(
-                                                                  Name: snapshot
-                                                                      .data!
-                                                                      .docs
-                                                                      .first[
-                                                                  "name"],
-                                                                  size: size,
-                                                                  Quantity: todo
-                                                                      .Qunatity
-                                                                      .toString(),
-                                                                  Total: snapshot
-                                                                      .data!
-                                                                      .docs
-                                                                      .first["discountprize"],
-                                                                  Image: snapshot
-                                                                      .data!
-                                                                      .docs
-                                                                      .first["image"],
-                                                                )));
-                                                  } },
+                                                  String stocks = snapshot.data!
+                                                      .docs.first["stocks"];
+                                                  if (stocks ==
+                                                      "- Out of stocks") {
+                                                    Fluttertoast.showToast(
+                                                        msg:
+                                                            "This item is out of stocks");
+                                                  } else {
+                                                    if (size == "") {
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "Pelease select size");
+                                                    } else {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder:
+                                                                  (context) =>
+                                                                      OrderNow(
+                                                                        Name: snapshot
+                                                                            .data!
+                                                                            .docs
+                                                                            .first["name"],
+                                                                        size:
+                                                                            size,
+                                                                        Quantity:
+                                                                            todo.Qunatity.toString(),
+                                                                        Total: snapshot
+                                                                            .data!
+                                                                            .docs
+                                                                            .first["discountprize"],
+                                                                        Image: snapshot
+                                                                            .data!
+                                                                            .docs
+                                                                            .first["image"],
+                                                                      )));
+                                                    }
+                                                  }
+                                                },
                                                 child: Container(
                                                   height: MediaQuery.of(context)
                                                           .size

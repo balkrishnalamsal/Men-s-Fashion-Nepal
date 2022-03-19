@@ -63,50 +63,6 @@ class Homepage extends StatelessWidget {
                         ]),
                       )),
                 ),
-                Stack(
-                  children: [
-                    Positioned(
-                      left: MediaQuery.of(context).size.width * 0.07,
-                      bottom: 27,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.red, shape: BoxShape.circle),
-                        child: Consumer<Calculation>(
-                            builder: (context, to, child) {
-                          Provider.of<Calculation>(context, listen: false)
-                              .CartIteamNumber();
-                          return Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Text(
-                              to.Iteamcount.toString(),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          );
-                        }),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) => Navigation_Page(index: 2)));
-                        },
-                        child: Icon(
-                          CupertinoIcons.cart,
-                          size: 25,
-                          color: Colors.green,
-                          semanticLabel: "Menu",
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),

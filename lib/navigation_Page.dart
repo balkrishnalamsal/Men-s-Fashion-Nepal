@@ -36,7 +36,6 @@ class _Navigation_PageState extends State<Navigation_Page> {
   List<Widget> tabItems = [
     Homepage(),
     SearchPage(),
-    AddToCart(),
     Continuewith(),
   ];
 
@@ -143,10 +142,6 @@ class _Navigation_PageState extends State<Navigation_Page> {
               title: Text('Search'),
             ),
 
-            FlashyTabBarItem(
-              icon: Icon(CupertinoIcons.cart,),
-              title: Text('Cart'),
-            ),
             FlashyTabBarItem(
               icon: Icon(CupertinoIcons.profile_circled),
               title: Text('Profile'),

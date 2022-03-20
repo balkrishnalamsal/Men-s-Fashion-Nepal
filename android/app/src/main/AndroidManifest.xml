@@ -11,7 +11,7 @@
         <package android:name="com.google.android.apps.maps" />
     </queries>
    <application
-        android:label="Mens Fashion Nepal"
+        android:label="Mens Fashion"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

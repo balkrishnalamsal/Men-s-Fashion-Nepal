@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'AddDetailsPage.dart';
 import 'ProviderFile/Provider_Data.dart';
-import 'navigation_Page.dart';
+import 'main.dart';
 
 class SearchPage extends StatefulWidget {
   @override

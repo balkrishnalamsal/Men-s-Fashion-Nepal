@@ -6,7 +6,7 @@ import 'package:menfashionnepal/AddDetailsPage.dart';
 import 'package:menfashionnepal/ProviderFile/Provider_Data.dart';
 import 'package:menfashionnepal/ViewMorePage.dart';
 import 'package:menfashionnepal/inAppbrowser.dart';
-import 'package:menfashionnepal/navigation_Page.dart';
+import 'package:menfashionnepal/main.dart';
 import 'dart:ui';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';

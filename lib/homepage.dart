@@ -696,16 +696,15 @@ class Homepage extends StatelessWidget {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //             ViewDetails(
-                                        //               Section: "New",
-                                        //               postid: snapshot
-                                        //                       .data!.docs[index]
-                                        //                   ["postid"],
-                                        //             )));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    inAppbrowewr(
+                                                     snapshot
+                                                              .data!.docs[index]
+                                                          ["model"],
+                                                    )));
                                       },
                                       child: Container(
                                         height:
@@ -859,14 +858,15 @@ class Homepage extends StatelessWidget {
                                                 )));
                                   },
                                   onTap: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => ViewDetails(
-                                    //               Section: "All categories",
-                                    //               postid: snapshot.data!
-                                    //                   .docs[index]["postid"],
-                                    //             )));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                inAppbrowewr(
+                                                  snapshot
+                                                      .data!.docs[index]
+                                                  ["model"],
+                                                )));
                                   },
                                   child: Center(
                                     child: Container(
@@ -967,16 +967,15 @@ class Homepage extends StatelessWidget {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //             ViewDetails(
-                                        //               Section: "All categories",
-                                        //               postid: snapshot
-                                        //                       .data!.docs[index]
-                                        //                   ["postid"],
-                                        //             )));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    inAppbrowewr(
+                                                      snapshot
+                                                          .data!.docs[index]
+                                                      ["model"],
+                                                    )));
                                       },
                                       child: Container(
                                         height:
@@ -1009,16 +1008,15 @@ class Homepage extends StatelessWidget {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //             ViewDetails(
-                                        //               Section: "All categories",
-                                        //               postid: snapshot
-                                        //                       .data!.docs[index]
-                                        //                   ["postid"],
-                                        //             )));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    inAppbrowewr(
+                                                      snapshot
+                                                          .data!.docs[index]
+                                                      ["model"],
+                                                    )));
                                       },
                                       child: Container(
                                         height:

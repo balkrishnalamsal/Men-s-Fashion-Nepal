@@ -73,33 +73,6 @@ class _SearchPageState extends State<SearchPage> {
                           ]),
                         )),
                   ),
-                  Stack(
-                    children: [
-                      Positioned(
-                        left: MediaQuery.of(context).size.width * 0.07,
-                        bottom: 27,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.red, shape: BoxShape.circle),
-                          child: Consumer<Calculation>(
-                              builder: (context, to, child) {
-                            Provider.of<Calculation>(context, listen: false)
-                                .CartIteamNumber();
-                            return Padding(
-                              padding: const EdgeInsets.all(3.0),
-                              child: Text(
-                                to.Iteamcount.toString(),
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            );
-                          }),
-                        ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -114,6 +87,7 @@ class _SearchPageState extends State<SearchPage> {
                       border: Border.all(width: 0.2, color: Colors.grey),
                       borderRadius: BorderRadius.circular(15)),
                   placeholder: "Search",
+
                   placeholderStyle: TextStyle(color: Colors.grey),
                   prefix: Padding(
                     padding: const EdgeInsets.all(2.0),
@@ -147,13 +121,13 @@ class _SearchPageState extends State<SearchPage> {
                           width: 500,
                           child: Center(
                               child: CircularProgressIndicator(
-                            color: Colors.red,
-                          )));
+                                color: Colors.red,
+                              )));
                     } else {
                       return GridView.builder(
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2),
+                          SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2),
                           scrollDirection: Axis.vertical,
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (_, index) {
@@ -169,21 +143,21 @@ class _SearchPageState extends State<SearchPage> {
                                           MaterialPageRoute(
                                             builder: (context) => AddDetails(
                                               postid: snapshot.data!.docs[index]
-                                                  ["postid"],
+                                              ["postid"],
                                               Section: "Trends",
                                             ),
                                           ));
                                     },
                                     child: Container(
                                       height:
-                                          MediaQuery.of(context).size.height *
-                                              0.14,
+                                      MediaQuery.of(context).size.height *
+                                          0.14,
                                       width: MediaQuery.of(context).size.width *
                                           0.5,
                                       decoration: BoxDecoration(
                                           color: Colors.red,
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                          BorderRadius.circular(10),
                                           border: Border.all(
                                               width: 0.2, color: Colors.grey),
                                           image: DecorationImage(
@@ -201,14 +175,14 @@ class _SearchPageState extends State<SearchPage> {
                                     padding: const EdgeInsets.all(2.0),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           children: [
                                             Text(
-                                              "Rs." +
+                                              r"$" +
                                                   snapshot.data!.docs[index]
-                                                      ["actualprize"],
+                                                  ["actualprize"],
                                               style: TextStyle(
                                                   color: Colors.red,
                                                   fontSize: 15,
@@ -219,9 +193,9 @@ class _SearchPageState extends State<SearchPage> {
                                               padding: const EdgeInsets.only(
                                                   left: 5.0),
                                               child: Text(
-                                                "Rs." +
+                                                r"$" +
                                                     snapshot.data!.docs[index]
-                                                        ["discountprize"],
+                                                    ["discountprize"],
                                                 style: TextStyle(
                                                   color: Colors.red,
                                                   fontSize: 15,
@@ -233,23 +207,23 @@ class _SearchPageState extends State<SearchPage> {
                                         GestureDetector(
                                           onLongPress: () {
                                             Provider.of<Calculation>(context,
-                                                    listen: false)
+                                                listen: false)
                                                 .OutofStock(
-                                                    "All categories",
-                                                    snapshot.data!.docs[index]
-                                                        ["postid"]);
+                                                "All categories",
+                                                snapshot.data!.docs[index]
+                                                ["postid"]);
                                           },
                                           onTap: () {
                                             Provider.of<Calculation>(context,
-                                                    listen: false)
+                                                listen: false)
                                                 .InStocks(
-                                                    "All categories",
-                                                    snapshot.data!.docs[index]
-                                                        ["postid"]);
+                                                "All categories",
+                                                snapshot.data!.docs[index]
+                                                ["postid"]);
                                           },
                                           child: Text(
                                             snapshot.data!.docs[index]
-                                                ["stocks"],
+                                            ["stocks"],
                                             style: TextStyle(
                                               color: Colors.green,
                                               fontSize: 8,
@@ -269,25 +243,27 @@ class _SearchPageState extends State<SearchPage> {
                                                   builder: (context) =>
                                                       inAppbrowewr(snapshot
                                                           .data!
-                                                          .docs[index]["model"])));
+                                                          .docs[index]["model"]
+
+                                                      )));
                                         },
                                         child: Container(
                                           height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
+                                              .size
+                                              .height *
                                               0.025,
                                           width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
+                                              .size
+                                              .width *
                                               0.242,
                                           decoration: BoxDecoration(
                                               color: Colors.red,
                                               borderRadius: BorderRadius.only(
                                                   bottomRight:
-                                                      Radius.circular(50),
+                                                  Radius.circular(50),
                                                   topLeft: Radius.circular(10),
                                                   bottomLeft:
-                                                      Radius.circular(10))),
+                                                  Radius.circular(10))),
                                           child: Center(
                                             child: Padding(
                                               padding: const EdgeInsets.only(
@@ -304,17 +280,17 @@ class _SearchPageState extends State<SearchPage> {
                                       ),
                                       Container(
                                         height:
-                                            MediaQuery.of(context).size.height *
-                                                0.025,
+                                        MediaQuery.of(context).size.height *
+                                            0.025,
                                         width:
-                                            MediaQuery.of(context).size.width *
-                                                0.242,
+                                        MediaQuery.of(context).size.width *
+                                            0.242,
                                         decoration: BoxDecoration(
                                             color: Colors.deepPurple,
                                             borderRadius: BorderRadius.only(
                                                 topRight: Radius.circular(10),
                                                 bottomRight:
-                                                    Radius.circular(10),
+                                                Radius.circular(10),
                                                 topLeft: Radius.circular(50))),
                                         child: Center(
                                           child: Padding(

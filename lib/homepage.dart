@@ -28,40 +28,36 @@ class Homepage extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                      onLongPress: () {
-                        context.read<Calculation>().getImage("PageSlider");
-                      },
-                      child: RichText(
-                        softWrap: true,
-                        text: TextSpan(children: <TextSpan>[
-                          TextSpan(
-                              text: "M",
-                              style: TextStyle(
-                                color: Colors.deepOrange,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          TextSpan(
-                              text: "en's ",
-                              style: TextStyle(
-                                  color: Colors.deepOrange,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold)),
-                          TextSpan(
-                              text: "F",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold)),
-                          TextSpan(
-                              text: "ashion",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold))
-                        ]),
-                      )),
+                  child: RichText(
+                    softWrap: true,
+                    text: TextSpan(children: <TextSpan>[
+                      TextSpan(
+                          text: "M",
+                          style: TextStyle(
+                            color: Colors.deepOrange,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      TextSpan(
+                          text: "en's ",
+                          style: TextStyle(
+                              color: Colors.deepOrange,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text: "F",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text: "ashion",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold))
+                    ]),
+                  ),
                 ),
               ],
             ),
@@ -145,24 +141,19 @@ class Homepage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onLongPress: () {
-                    context.read<Calculation>().getImage("Trends");
-                  },
-                  child: Text(
-                    "Trends",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(1.0, 1.0),
-                          blurRadius: 1.0,
-                          color: Colors.grey,
-                        ),
-                      ],
-                    ),
+                child: Text(
+                  "Trends",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 1.0,
+                        color: Colors.grey,
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -241,45 +232,23 @@ class Homepage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    GestureDetector(
-                                      onLongPress: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => AddDetails(
-                                                postid: snapshot.data!
-                                                    .docs[index]["postid"],
-                                                Section: "Trends",
-                                              ),
-                                            ));
-                                      },
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    inAppbrowewr(snapshot
-                                                        .data!
-                                                        .docs[index]["model"])));
-                                      },
-                                      child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.19,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.52,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                                width: 0.2, color: Colors.grey),
-                                            image: DecorationImage(
-                                                fit: BoxFit.fill,
-                                                image: NetworkImage(snapshot
-                                                    .data!
-                                                    .docs[index]["image"]))),
-                                      ),
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.19,
+                                      width:
+                                          MediaQuery.of(context).size.width *
+                                              0.52,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              width: 0.2, color: Colors.grey),
+                                          image: DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: NetworkImage(snapshot
+                                                  .data!
+                                                  .docs[index]["image"]))),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
@@ -458,24 +427,19 @@ class Homepage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onLongPress: () {
-                    context.read<Calculation>().getImage("New");
-                  },
-                  child: Text(
-                    "New",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(1.0, 1.0),
-                          blurRadius: 1.0,
-                          color: Colors.grey,
-                        ),
-                      ],
-                    ),
+                child: Text(
+                  "New",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 1.0,
+                        color: Colors.grey,
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -547,41 +511,19 @@ class Homepage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                GestureDetector(
-                                  onLongPress: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => AddDetails(
-                                                  Section: "New",
-                                                  postid: snapshot.data!
-                                                      .docs[index]["postid"],
-                                                )));
-                                  },
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => inAppbrowewr(snapshot
-                                                .data!
-                                                .docs[index]["model"]
-
-                                                )));
-                                  },
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.19,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.52,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                            width: 0.2, color: Colors.grey),
-                                        image: DecorationImage(
-                                            fit: BoxFit.fill,
-                                            image: NetworkImage(snapshot
-                                                .data!.docs[index]["image"]))),
-                                  ),
+                                Container(
+                                  height: MediaQuery.of(context).size.height *
+                                      0.19,
+                                  width: MediaQuery.of(context).size.width *
+                                      0.52,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                          width: 0.2, color: Colors.grey),
+                                      image: DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: NetworkImage(snapshot
+                                              .data!.docs[index]["image"]))),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5.0),
@@ -753,24 +695,19 @@ class Homepage extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onLongPress: () {
-                        context.read<Calculation>().getImage("All categories");
-                      },
-                      child: Text(
-                        "All categories",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(1.0, 1.0),
-                              blurRadius: 1.0,
-                              color: Colors.grey,
-                            ),
-                          ],
-                        ),
+                    child: Text(
+                      "All categories",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 1.0,
+                            color: Colors.grey,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -846,45 +783,22 @@ class Homepage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                GestureDetector(
-                                  onLongPress: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => AddDetails(
-                                                  Section: "All categories",
-                                                  postid: snapshot.data!
-                                                      .docs[index]["postid"],
-                                                )));
-                                  },
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                inAppbrowewr(
-                                                  snapshot
-                                                      .data!.docs[index]
-                                                  ["model"],
-                                                )));
-                                  },
-                                  child: Center(
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.19,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.52,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          border: Border.all(
-                                              width: 0.2, color: Colors.grey),
-                                          image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: NetworkImage(snapshot.data!
-                                                  .docs[index]["image"]))),
-                                    ),
+                                Center(
+                                  child: Container(
+                                    height:
+                                        MediaQuery.of(context).size.height *
+                                            0.19,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.52,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                        border: Border.all(
+                                            width: 0.2, color: Colors.grey),
+                                        image: DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: NetworkImage(snapshot.data!
+                                                .docs[index]["image"]))),
                                   ),
                                 ),
                                 Padding(

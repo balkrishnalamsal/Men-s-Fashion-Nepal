@@ -5,10 +5,12 @@ import 'package:menfashionnepal/homepage.dart';
 
 
 class inAppbrowewr extends StatefulWidget {
+  String ? link;
+  inAppbrowewr(this.link);
   final MyInAppBrowser browser = new MyInAppBrowser();
 
   @override
-  _inAppbrowewrState createState() => new _inAppbrowewrState();
+  _inAppbrowewrState createState() => new _inAppbrowewrState(link);
 }
 
 class _inAppbrowewrState extends State<inAppbrowewr> {
@@ -18,11 +20,13 @@ class _inAppbrowewrState extends State<inAppbrowewr> {
           hideUrlBar: true),
       inAppWebViewGroupOptions: InAppWebViewGroupOptions(
           crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
+  String ? link;
+  _inAppbrowewrState(this.link);
 
   @override
   void initState() {
     widget.browser.openUrlRequest(
-        urlRequest: URLRequest(url: Uri.parse("https://flutter.dev")),
+        urlRequest: URLRequest(url: Uri.parse(link!)),
         options: options);
     super.initState();
   }

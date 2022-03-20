@@ -163,7 +163,9 @@ class _ViewMoreState extends State<ViewMore> {
                                             MaterialPageRoute(
                                                 builder:
                                                     (context) =>
-                                                    inAppbrowewr()));
+                                                    inAppbrowewr(snapshot
+                                                        .data!
+                                                        .docs[index]["model"])));
                                       },
                                       child: Container(
                                         height: MediaQuery.of(context).size.height*0.025,

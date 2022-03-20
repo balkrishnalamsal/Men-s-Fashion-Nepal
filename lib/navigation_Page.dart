@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:menfashionnepal/CartPage.dart';
 import 'package:menfashionnepal/LoginPage.dart';
 import 'package:menfashionnepal/SearchPage.dart';
 import 'package:menfashionnepal/homepage.dart';

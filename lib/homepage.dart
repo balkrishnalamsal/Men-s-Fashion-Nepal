@@ -258,7 +258,9 @@ class Homepage extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    inAppbrowewr()));
+                                                    inAppbrowewr(snapshot
+                                                        .data!
+                                                        .docs[index]["model"])));
                                       },
                                       child: Container(
                                         height:
@@ -360,7 +362,9 @@ class Homepage extends StatelessWidget {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        inAppbrowewr()));
+                                                        inAppbrowewr(snapshot
+                                                            .data!
+                                                            .docs[index]["model"])));
                                           },
                                           child: Container(
                                             height: MediaQuery.of(context)
@@ -400,7 +404,9 @@ class Homepage extends StatelessWidget {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        inAppbrowewr()));
+                                                        inAppbrowewr(snapshot
+                                                            .data!
+                                                            .docs[index]["model"])));
                                           },
                                           child: Container(
                                             height: MediaQuery.of(context)
@@ -556,7 +562,9 @@ class Homepage extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => inAppbrowewr(
+                                            builder: (context) => inAppbrowewr(snapshot
+                                                .data!
+                                                .docs[index]["model"]
 
                                                 )));
                                   },
@@ -651,7 +659,9 @@ class Homepage extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    inAppbrowewr(
+                                                    inAppbrowewr(snapshot
+                                                        .data!
+                                                        .docs[index]["model"]
 
                                                     )));
                                       },

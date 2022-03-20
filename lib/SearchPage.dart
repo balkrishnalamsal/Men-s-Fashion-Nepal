@@ -98,24 +98,6 @@ class _SearchPageState extends State<SearchPage> {
                           }),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        Navigation_Page(index: 2)));
-                          },
-                          child: Icon(
-                            CupertinoIcons.cart,
-                            size: 25,
-                            color: Colors.green,
-                            semanticLabel: "Menu",
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ],
@@ -285,7 +267,9 @@ class _SearchPageState extends State<SearchPage> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      inAppbrowewr()));
+                                                      inAppbrowewr(snapshot
+                                                          .data!
+                                                          .docs[index]["model"])));
                                         },
                                         child: Container(
                                           height: MediaQuery.of(context)

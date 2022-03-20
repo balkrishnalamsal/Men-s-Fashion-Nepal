@@ -91,7 +91,7 @@ class _AddDetailsState extends State<AddDetails> {
                             color: Colors.black),
                         controller: Discountprice,
                         cursorColor: Colors.white,
-                        placeholder: 'Discount Price',
+                        placeholder: 'selling Price',
                         placeholderStyle: TextStyle(color: Colors.grey),
                       )),
                   Container(
@@ -139,7 +139,7 @@ class _AddDetailsState extends State<AddDetails> {
                             color: Colors.black),
                         controller: Model,
                         cursorColor: Colors.white,
-                        placeholder: 'Model',
+                        placeholder: 'Link',
                         placeholderStyle: TextStyle(color: Colors.grey),
                       )),
                   Container(
@@ -155,103 +155,7 @@ class _AddDetailsState extends State<AddDetails> {
                             color: Colors.black),
                         controller: Actualprice,
                         cursorColor: Colors.white,
-                        placeholder: 'Actual Price',
-                        placeholderStyle: TextStyle(color: Colors.grey),
-                      )),
-                  Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(),
-                      child: CupertinoTextField(
-                        style: TextStyle(color: Colors.white),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              5,
-                            ),
-                            border: Border.all(width: 0.1, color: Colors.white),
-                            color: Colors.black),
-                        controller: Sizeone,
-                        cursorColor: Colors.white,
-                        placeholder: 'Size',
-                        placeholderStyle: TextStyle(color: Colors.grey),
-                      )),
-                  Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(),
-                      child: CupertinoTextField(
-                        style: TextStyle(color: Colors.white),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              5,
-                            ),
-                            border: Border.all(width: 0.1, color: Colors.white),
-                            color: Colors.black),
-                        controller: SizeTwo,
-                        cursorColor: Colors.white,
-                        placeholder: 'Size',
-                        placeholderStyle: TextStyle(color: Colors.grey),
-                      )),
-                  Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(),
-                      child: CupertinoTextField(
-                        style: TextStyle(color: Colors.white),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              5,
-                            ),
-                            border: Border.all(width: 0.1, color: Colors.white),
-                            color: Colors.black),
-                        controller: SizeThree,
-                        cursorColor: Colors.white,
-                        placeholder: 'Size',
-                        placeholderStyle: TextStyle(color: Colors.grey),
-                      )),
-                  Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(),
-                      child: CupertinoTextField(
-                        style: TextStyle(color: Colors.white),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              5,
-                            ),
-                            border: Border.all(width: 0.1, color: Colors.white),
-                            color: Colors.black),
-                        controller: SizeFour,
-                        cursorColor: Colors.white,
-                        placeholder: 'Size',
-                        placeholderStyle: TextStyle(color: Colors.grey),
-                      )),
-                  Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(),
-                      child: CupertinoTextField(
-                        style: TextStyle(color: Colors.white),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              5,
-                            ),
-                            border: Border.all(width: 0.1, color: Colors.white),
-                            color: Colors.black),
-                        controller: SizeFive,
-                        cursorColor: Colors.white,
-                        placeholder: 'Size',
-                        placeholderStyle: TextStyle(color: Colors.grey),
-                      )),
-                  Container(
-                      padding: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(),
-                      child: CupertinoTextField(
-                        style: TextStyle(color: Colors.white),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              5,
-                            ),
-                            border: Border.all(width: 0.1, color: Colors.white),
-                            color: Colors.black),
-                        controller: SizeSix,
-                        cursorColor: Colors.white,
-                        placeholder: 'Size',
+                        placeholder: 'Price',
                         placeholderStyle: TextStyle(color: Colors.grey),
                       )),
 

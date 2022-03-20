@@ -196,30 +196,42 @@ class _ViewMoreState extends State<ViewMore> {
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      height: MediaQuery.of(context).size.height*0.025,
-                                      width: MediaQuery.of(context).size.width*0.242,
-                                      decoration: BoxDecoration(
-                                          color:
-                                          Colors.deepPurple,
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius
-                                                  .circular(10),
-                                              bottomRight:
-                                              Radius
-                                                  .circular(
-                                                  10),
-                                              topLeft: Radius
-                                                  .circular(
-                                                  50))),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(left: 8.0),
-                                          child: Text(
-                                            "Buy Now",
-                                            style: TextStyle(
-                                                color:
-                                                Colors.white),
+                                    GestureDetector(
+                                      onTap:(){
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (context) =>
+                                                    inAppbrowewr(snapshot
+                                                        .data!
+                                                        .docs[index]["model"])));
+                          },
+                                      child: Container(
+                                        height: MediaQuery.of(context).size.height*0.025,
+                                        width: MediaQuery.of(context).size.width*0.242,
+                                        decoration: BoxDecoration(
+                                            color:
+                                            Colors.deepPurple,
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius
+                                                    .circular(10),
+                                                bottomRight:
+                                                Radius
+                                                    .circular(
+                                                    10),
+                                                topLeft: Radius
+                                                    .circular(
+                                                    50))),
+                                        child: Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 8.0),
+                                            child: Text(
+                                              "Buy Now",
+                                              style: TextStyle(
+                                                  color:
+                                                  Colors.white),
+                                            ),
                                           ),
                                         ),
                                       ),

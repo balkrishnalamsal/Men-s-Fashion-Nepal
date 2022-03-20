@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:menfashionnepal/homepage.dart';
+import 'package:menfashionnepal/navigation_Page.dart';
 
 
 class inAppbrowewr extends StatefulWidget {
@@ -37,7 +38,7 @@ class _inAppbrowewrState extends State<inAppbrowewr> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Homepage(),
+      home: Navigation_Page(index: 0,),
     );
   }
 }

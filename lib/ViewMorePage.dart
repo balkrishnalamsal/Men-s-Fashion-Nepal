@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:menfashionnepal/inAppbrowser.dart';
 import 'package:provider/provider.dart';
 
 import 'AddDetailsPage.dart';
 import 'ProviderFile/Provider_Data.dart';
-import 'ViewDetails.dart';
 
 class ViewMore extends StatefulWidget {
   String ? section;
@@ -163,7 +163,7 @@ class _ViewMoreState extends State<ViewMore> {
                                             MaterialPageRoute(
                                                 builder:
                                                     (context) =>
-                                                    ViewDetails(Section:section,postid:snapshot.data!.docs[index]["postid"],)));
+                                                    inAppbrowewr()));
                                       },
                                       child: Container(
                                         height: MediaQuery.of(context).size.height*0.025,

@@ -1,9 +1,12 @@
 
+import 'dart:io';
+
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:menfashionnepal/CartPage.dart';
 import 'package:menfashionnepal/LoginPage.dart';
 import 'package:menfashionnepal/SearchPage.dart';
@@ -14,6 +17,10 @@ import 'ProviderFile/Provider_Data.dart';
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isAndroid) {
+    await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+  }
   await Firebase.initializeApp();
   runApp(CupertinoApp(
     color: Colors.blueAccent,

@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:menfashionnepal/AddDetailsPage.dart';
 import 'package:menfashionnepal/ProviderFile/Provider_Data.dart';
 import 'package:menfashionnepal/ViewMorePage.dart';
+import 'package:menfashionnepal/inAppbrowser.dart';
 import 'package:menfashionnepal/navigation_Page.dart';
 import 'dart:ui';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
-import 'package:menfashionnepal/ViewDetails.dart';
 
 
 
@@ -258,12 +258,7 @@ class Homepage extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ViewDetails(
-                                                      Section: "Trends",
-                                                      postid: snapshot
-                                                              .data!.docs[index]
-                                                          ["postid"],
-                                                    )));
+                                                    inAppbrowewr()));
                                       },
                                       child: Container(
                                         height:
@@ -302,7 +297,7 @@ class Homepage extends StatelessWidget {
                                         Row(
                                           children: [
                                             Text(
-                                              "Rs." +
+                                              r"$" +
                                                   snapshot.data!.docs[index]
                                                       ["actualprize"],
                                               style: TextStyle(
@@ -315,7 +310,7 @@ class Homepage extends StatelessWidget {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
-                                                "Rs." +
+                                                r"$" +
                                                     snapshot.data!.docs[index]
                                                         ["discountprize"],
                                                 style: TextStyle(
@@ -365,12 +360,7 @@ class Homepage extends StatelessWidget {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        ViewDetails(
-                                                          Section: "Trends",
-                                                          postid: snapshot.data!
-                                                                  .docs[index]
-                                                              ["postid"],
-                                                        )));
+                                                        inAppbrowewr()));
                                           },
                                           child: Container(
                                             height: MediaQuery.of(context)
@@ -410,12 +400,7 @@ class Homepage extends StatelessWidget {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        ViewDetails(
-                                                          Section: "Trends",
-                                                          postid: snapshot.data!
-                                                                  .docs[index]
-                                                              ["postid"],
-                                                        )));
+                                                        inAppbrowewr()));
                                           },
                                           child: Container(
                                             height: MediaQuery.of(context)
@@ -571,10 +556,8 @@ class Homepage extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => ViewDetails(
-                                                  Section: "New",
-                                                  postid: snapshot.data!
-                                                      .docs[index]["postid"],
+                                            builder: (context) => inAppbrowewr(
+
                                                 )));
                                   },
                                   child: Container(
@@ -610,7 +593,7 @@ class Homepage extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "Rs." +
+                                          r"$"+
                                               snapshot.data!.docs[index]
                                                   ["actualprize"],
                                           style: TextStyle(
@@ -622,7 +605,7 @@ class Homepage extends StatelessWidget {
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Text(
-                                            "Rs." +
+                                            r"$" +
                                                 snapshot.data!.docs[index]
                                                     ["discountprize"],
                                             style: TextStyle(
@@ -668,11 +651,8 @@ class Homepage extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ViewDetails(
-                                                      Section: "New",
-                                                      postid: snapshot
-                                                              .data!.docs[index]
-                                                          ["postid"],
+                                                    inAppbrowewr(
+
                                                     )));
                                       },
                                       child: Container(
@@ -706,16 +686,16 @@ class Homepage extends StatelessWidget {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ViewDetails(
-                                                      Section: "New",
-                                                      postid: snapshot
-                                                              .data!.docs[index]
-                                                          ["postid"],
-                                                    )));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             ViewDetails(
+                                        //               Section: "New",
+                                        //               postid: snapshot
+                                        //                       .data!.docs[index]
+                                        //                   ["postid"],
+                                        //             )));
                                       },
                                       child: Container(
                                         height:
@@ -869,14 +849,14 @@ class Homepage extends StatelessWidget {
                                                 )));
                                   },
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ViewDetails(
-                                                  Section: "All categories",
-                                                  postid: snapshot.data!
-                                                      .docs[index]["postid"],
-                                                )));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => ViewDetails(
+                                    //               Section: "All categories",
+                                    //               postid: snapshot.data!
+                                    //                   .docs[index]["postid"],
+                                    //             )));
                                   },
                                   child: Center(
                                     child: Container(
@@ -917,7 +897,7 @@ class Homepage extends StatelessWidget {
                                       Row(
                                         children: [
                                           Text(
-                                            "Rs." +
+                                            r"$"+
                                                 snapshot.data!.docs[index]
                                                     ["actualprize"],
                                             style: TextStyle(
@@ -927,7 +907,7 @@ class Homepage extends StatelessWidget {
                                                     TextDecoration.lineThrough),
                                           ),
                                           Text(
-                                            "Rs." +
+                                            r" $" +
                                                 snapshot.data!.docs[index]
                                                     ["discountprize"],
                                             style: TextStyle(
@@ -977,16 +957,16 @@ class Homepage extends StatelessWidget {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ViewDetails(
-                                                      Section: "All categories",
-                                                      postid: snapshot
-                                                              .data!.docs[index]
-                                                          ["postid"],
-                                                    )));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             ViewDetails(
+                                        //               Section: "All categories",
+                                        //               postid: snapshot
+                                        //                       .data!.docs[index]
+                                        //                   ["postid"],
+                                        //             )));
                                       },
                                       child: Container(
                                         height:
@@ -1019,16 +999,16 @@ class Homepage extends StatelessWidget {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ViewDetails(
-                                                      Section: "All categories",
-                                                      postid: snapshot
-                                                              .data!.docs[index]
-                                                          ["postid"],
-                                                    )));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             ViewDetails(
+                                        //               Section: "All categories",
+                                        //               postid: snapshot
+                                        //                       .data!.docs[index]
+                                        //                   ["postid"],
+                                        //             )));
                                       },
                                       child: Container(
                                         height:

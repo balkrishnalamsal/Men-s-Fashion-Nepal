@@ -51,13 +51,13 @@ class _ContinuewithState extends State<Continuewith> {
 
                               (to.name==null)? Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: Text("Name",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                                child: Text("Name",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),),
                               ):Padding(
                                 padding: const EdgeInsets.all(5.0),
                                 child: Text(to.name.toString(),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
                               ),
 
-                              (to.email==null)? Text("Email Address",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),):Padding(
+                              (to.email==null)? Text("Email Address",style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold),):Padding(
                                 padding: const EdgeInsets.all(5.0),
                                 child: Text(to.email.toString(),style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
                               ),

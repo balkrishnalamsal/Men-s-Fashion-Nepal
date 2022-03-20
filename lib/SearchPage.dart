@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:menfashionnepal/inAppbrowser.dart';
 import 'package:provider/provider.dart';
 
 import 'AddDetailsPage.dart';
 import 'ProviderFile/Provider_Data.dart';
-import 'ViewDetails.dart';
 import 'navigation_Page.dart';
 
 class SearchPage extends StatefulWidget {
@@ -285,13 +285,7 @@ class _SearchPageState extends State<SearchPage> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ViewDetails(
-                                                        Section:
-                                                            "All categories",
-                                                        postid: snapshot.data!
-                                                                .docs[index]
-                                                            ["postid"],
-                                                      )));
+                                                      inAppbrowewr()));
                                         },
                                         child: Container(
                                           height: MediaQuery.of(context)

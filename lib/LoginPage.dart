@@ -40,8 +40,9 @@ class _ContinuewithState extends State<Continuewith> {
                                 height: MediaQuery.of(context).size.height * 0.13,
                                 width: MediaQuery.of(context).size.width * 0.25,
                                 decoration: BoxDecoration(
+
                                   shape: BoxShape.circle,
-                                  border: Border.all(width: 2,color: Colors.white),
+                                  border: Border.all(width: 2,color: Colors.red),
                                   image: DecorationImage(
                                     image:((to.photourl == null)
                                         ? AssetImage('Assets/profile.png')

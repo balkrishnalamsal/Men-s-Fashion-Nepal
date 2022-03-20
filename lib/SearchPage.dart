@@ -79,15 +79,17 @@ class _SearchPageState extends State<SearchPage> {
             Padding(
               padding: const EdgeInsets.only(left: 10.0, right: 10, bottom: 10),
               child: Container(
+                color: Colors.white,
                 height: MediaQuery.of(context).size.height * 0.04,
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: CupertinoTextField(
                   autofocus: true,
                   decoration: BoxDecoration(
+                    color: Colors.white,
                       border: Border.all(width: 0.2, color: Colors.grey),
                       borderRadius: BorderRadius.circular(15)),
                   placeholder: "Search",
-
+                  style: TextStyle(color: Colors.black),
                   placeholderStyle: TextStyle(color: Colors.grey),
                   prefix: Padding(
                     padding: const EdgeInsets.all(2.0),

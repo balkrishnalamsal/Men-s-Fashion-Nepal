@@ -42,7 +42,7 @@ class _Navigation_PageState extends State<Navigation_Page> {
   List<Widget> tabItems = [
     Homepage(),
     SearchPage(),
-    Continuewith(),
+    // Continuewith(),
   ];
 
   int selectedindex;
@@ -148,10 +148,6 @@ class _Navigation_PageState extends State<Navigation_Page> {
               title: Text('Search'),
             ),
 
-            FlashyTabBarItem(
-              icon: Icon(CupertinoIcons.profile_circled),
-              title: Text('Profile'),
-            ),
           ],
         ),
         body: Container(

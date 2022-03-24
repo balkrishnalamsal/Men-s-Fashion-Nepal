@@ -86,7 +86,7 @@ class Calculation with ChangeNotifier {
   getImage(String Section) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      crop = (await ImageCropper().cropImage(
+      crop = (await ImageCropper.cropImage(
           sourcePath: pickedFile.path,
           aspectRatio: CropAspectRatio(ratioX: 5, ratioY: 4),
           compressQuality: 50,
@@ -226,7 +226,7 @@ class Calculation with ChangeNotifier {
   PageSlidergetImage(String Section,String postid) async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      crop = (await ImageCropper().cropImage(
+      crop = (await ImageCropper.cropImage(
           sourcePath: pickedFile.path,
           aspectRatio: CropAspectRatio(ratioX: 5, ratioY: 4),
           compressQuality: 50,

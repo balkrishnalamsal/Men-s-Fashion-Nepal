@@ -21,7 +21,6 @@ class _ViewMoreState extends State<ViewMore> {
 
   @override
   Widget build(BuildContext context) {
-    print("hello");
     return  Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -120,7 +119,7 @@ class _ViewMoreState extends State<ViewMore> {
                                       Row(
                                         children: [
                                           Text(
-                                            "Rs."+ snapshot.data!.docs[index]["actualprize"],
+                                            r"$"+ snapshot.data!.docs[index]["actualprize"],
                                             style: TextStyle(
                                                 color: Colors.red,fontSize: 15,decoration: TextDecoration.lineThrough),
                                           ),
@@ -128,7 +127,7 @@ class _ViewMoreState extends State<ViewMore> {
                                           Padding(
                                             padding: const EdgeInsets.only(left: 5.0),
                                             child: Text(
-                                              "Rs."+ snapshot.data!.docs[index]["discountprize"],
+                                              r"$"+ snapshot.data!.docs[index]["discountprize"],
                                               style: TextStyle(
                                                 color: Colors.red,fontSize: 15,),
                                             ),

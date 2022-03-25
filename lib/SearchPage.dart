@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'AddDetailsPage.dart';
 import 'ProviderFile/Provider_Data.dart';
-import 'navigation_Page.dart';
+import 'main.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -168,8 +168,11 @@ class _SearchPageState extends State<SearchPage> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 2.0),
-                                    child: Text(
-                                        snapshot.data!.docs[index]["name"]),
+                                    child: SingleChildScrollView(
+                                      scrollDirection:Axis.horizontal,
+                                      child: Text(
+                                          snapshot.data!.docs[index]["name"]),
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(2.0),

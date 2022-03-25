@@ -21,7 +21,6 @@ class _ViewMoreState extends State<ViewMore> {
 
   @override
   Widget build(BuildContext context) {
-    print("hello");
     return  Scaffold(
       backgroundColor: Colors.white,
       body: Container(

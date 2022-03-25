@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:menfashionnepal/LoginPage.dart';
 import 'package:menfashionnepal/SearchPage.dart';
 import 'package:menfashionnepal/homepage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,7 +41,6 @@ class _Navigation_PageState extends State<Navigation_Page> {
   List<Widget> tabItems = [
     Homepage(),
     SearchPage(),
-    Continuewith(),
   ];
 
   int selectedindex;
@@ -146,11 +144,6 @@ class _Navigation_PageState extends State<Navigation_Page> {
             FlashyTabBarItem(
               icon: Icon(Icons.search,),
               title: Text('Search'),
-            ),
-
-            FlashyTabBarItem(
-              icon: Icon(CupertinoIcons.profile_circled),
-              title: Text('Profile'),
             ),
           ],
         ),

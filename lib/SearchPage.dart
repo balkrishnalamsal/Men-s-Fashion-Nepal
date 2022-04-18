@@ -150,22 +150,33 @@ class _SearchPageState extends State<SearchPage> {
                                             ),
                                           ));
                                     },
-                                    child: Container(
-                                      height:
-                                      MediaQuery.of(context).size.height *
-                                          0.14,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.47,
-                                      decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          borderRadius:
-                                          BorderRadius.circular(10),
-                                          border: Border.all(
-                                              width: 0.2, color: Colors.grey),
-                                          image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: NetworkImage(snapshot.data!
-                                                  .docs[index]["image"]))),
+                                    child: GestureDetector(
+                                      onTap: (){
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    inAppbrowewr(snapshot
+                                                        .data!
+                                                        .docs[index]["model"])));
+                                      },
+                                      child: Container(
+                                        height:
+                                        MediaQuery.of(context).size.height *
+                                            0.14,
+                                        width: MediaQuery.of(context).size.width *
+                                            0.47,
+                                        decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            border: Border.all(
+                                                width: 0.2, color: Colors.grey),
+                                            image: DecorationImage(
+                                                fit: BoxFit.fill,
+                                                image: NetworkImage(snapshot.data!
+                                                    .docs[index]["image"]))),
+                                      ),
                                     ),
                                   ),
                                   Padding(

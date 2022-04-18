@@ -232,23 +232,34 @@ class Homepage extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.19,
-                                      width:
-                                          MediaQuery.of(context).size.width *
-                                              0.52,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          border: Border.all(
-                                              width: 0.2, color: Colors.grey),
-                                          image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: NetworkImage(snapshot
-                                                  .data!
-                                                  .docs[index]["image"]))),
+                                    GestureDetector(
+                                      onTap: (){
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    inAppbrowewr(snapshot
+                                                        .data!
+                                                        .docs[index]["model"])));
+                                      },
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.19,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.52,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
+                                                width: 0.2, color: Colors.grey),
+                                            image: DecorationImage(
+                                                fit: BoxFit.fill,
+                                                image: NetworkImage(snapshot
+                                                    .data!
+                                                    .docs[index]["image"]))),
+                                      ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
@@ -534,19 +545,30 @@ class Homepage extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.19,
-                                  width: MediaQuery.of(context).size.width *
-                                      0.52,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                          width: 0.2, color: Colors.grey),
-                                      image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: NetworkImage(snapshot
-                                              .data!.docs[index]["image"]))),
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                inAppbrowewr(snapshot
+                                                    .data!
+                                                    .docs[index]["model"])));
+                                  },
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.19,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.52,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                            width: 0.2, color: Colors.grey),
+                                        image: DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: NetworkImage(snapshot
+                                                .data!.docs[index]["image"]))),
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5.0),
@@ -831,21 +853,32 @@ class Homepage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Center(
-                                  child: Container(
-                                    height:
-                                        MediaQuery.of(context).size.height *
-                                            0.19,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.52,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10),
-                                        border: Border.all(
-                                            width: 0.2, color: Colors.grey),
-                                        image: DecorationImage(
-                                            fit: BoxFit.fill,
-                                            image: NetworkImage(snapshot.data!
-                                                .docs[index]["image"]))),
+                                  child: GestureDetector(
+                                    onTap: (){
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  inAppbrowewr(snapshot
+                                                      .data!
+                                                      .docs[index]["model"])));
+                                    },
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.19,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.52,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          border: Border.all(
+                                              width: 0.2, color: Colors.grey),
+                                          image: DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: NetworkImage(snapshot.data!
+                                                  .docs[index]["image"]))),
+                                    ),
                                   ),
                                 ),
                                 Padding(

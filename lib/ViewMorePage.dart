@@ -143,9 +143,36 @@ class _ViewMoreState extends State<ViewMore> {
                                           Provider.of<Calculation>(context,listen: false).InStocks(section!, snapshot.data!.docs[index]["postid"]);
                                         },
 
-                                        child: Text(snapshot.data!.docs[index]["stocks"],
-                                          style: TextStyle(
-                                            color: Colors.green,fontSize: 8,),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              right: 8.0),
+                                          child:(snapshot.data!.docs[index]["rating"]=="")? Text(
+                                            "",
+                                            style: TextStyle(
+                                              color: Colors.green,
+                                              fontSize: 11,
+                                            ),
+                                          ):Row(
+                                            children: [
+                                              Container(height:20,
+                                                width:50,
+                                                decoration: BoxDecoration(
+
+                                                    image: DecorationImage(
+                                                        fit: BoxFit.fill,
+                                                        image:AssetImage("Assets/ratinh.jpg")
+                                                    )
+                                                ),
+                                              ),
+
+                                              Align(
+                                                  alignment: Alignment.centerRight,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(left: 2,top:2.0),
+                                                    child: Text(snapshot.data!.docs[index]["rating"],style: TextStyle(fontSize: 10),),
+                                                  ))
+                                            ],
+                                          ),
                                         ),
                                       ),
 
